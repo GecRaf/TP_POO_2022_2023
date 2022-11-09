@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Reserva.h"
 
 int main() {
     int NL, NC;
@@ -31,6 +32,8 @@ int main() {
 
     std::cout << "\n";
 
+    Reserva r(NL, NC);
+    r.commandReader();
 
     return 0;
 }

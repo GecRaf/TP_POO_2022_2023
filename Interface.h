@@ -1,0 +1,8 @@
+//
+// Created by olive on 09/11/2022.
+//
+
+#ifndef TP_POO_2022_2023_INTERFACE_H
+#define TP_POO_2022_2023_INTERFACE_H
+
+#endif //TP_POO_2022_2023_INTERFACE_H

@@ -15,17 +15,20 @@
 #include "Alimentos.h"
 #include "Reserva.h"
 
+using std::vector;
+
 class Cell {
     private:
         int areaLin;
         int areaCol;
         Animais* animal;
+        Alimentos* food;
     public:
         Cell(int areaLin, int areaCol);
         ~Cell();
         void getAnimal();
         void getAnimalSpecie();
-        <std::vector<Alimentos>> getFood();
+        vector<Alimentos> getFood();
         void setAnimal(Animais* a);
         void addFood(Alimentos);
 };

@@ -21,14 +21,14 @@ class Reserva {
     private:
         int NL, NC;
         int areaLinMax, areaLinMin, areaColMax, areaColMin;
-        vector<vector<Cell*>> areaTotal;
+        //vector< vector<Cell*>> areaTotal;
     public:
         Reserva(); // Default constructor, applies predefined size
         Reserva(int NL, int NC);
         void commandReader();
         void initMatrix(int NL, int NC);
-        Cell* getCell(int x, int y);
-        void setCell(int x, int y, Cell* c);
+        //Cell* getCell(int x, int y);
+        //void setCell(int x, int y, Cell* c);
 };
 
 

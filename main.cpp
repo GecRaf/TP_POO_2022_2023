@@ -1,36 +1,48 @@
 #include <iostream>
 #include "Reserva.h"
 
+using std::cout;
+using std::endl;
+using std::string;
+
 int main() {
     int NL, NC;
-    std::string command;
+    string command;
 
-    std::cout << "Welcome to Natural Reserve Simulator!" << std::endl;
-    std::cout << "    _   __        __               _____  _          \n"
+    cout << "[*] Welcome to Natural Reserve Simulator!" << std::endl;
+    cout << "    _   __        __               _____  _          \n"
                  "   / | / /____ _ / /_ __  __ _____/ ___/ (_)____ ___ \n"
                  "  /  |/ // __ `// __// / / // ___/\\__ \\ / // __ `__ \\\n"
                  " / /|  // /_/ // /_ / /_/ // /   ___/ // // / / / / /\n"
                  "/_/ |_/ \\__,_/ \\__/ \\__,_//_/   /____//_//_/ /_/ /_/ \n" << std::endl;
 
     while(1){
-        std::cout << "Insert number of lines: ";
-        std::cin >> NL;
+        cout << "[~] Insert number of lines:  ";
+        cin >> NL; // TODO: Verify if input is an integer
 
-        if(NL < 16 || NL > 500)
+        if(NL < 16 || NL > 500){
+            cout << "\n\t[!] Invalid number of lines." << endl;
+            cout << "\n\t[!] Please insert a number between 16 and 500.\n" << endl;
+        } else {
             break;
+        }
     }
 
-    std::cout << "\n";
+    cout << "\n";
 
     while(1){
-        std::cout << "Insert number of columns: ";
-        std::cin >> NC;
+        cout << "[~] Insert number of columns:  ";
+        cin >> NC; // TODO: Verify if input is an integer
 
-        if(NC < 16 || NC > 500)
+        if(NC < 16 || NC > 500){
+            cout << "\n\t[!] Invalid number of columns." << endl;
+            cout << "\n\t[!] Please insert a number between 16 and 500.\n" << endl;
+        } else {
             break;
+        }
     }
 
-    std::cout << "\n";
+    cout << "\n";
 
     Reserva r(NL, NC);
     r.commandReader();

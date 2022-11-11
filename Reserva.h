@@ -17,14 +17,19 @@
 #include <string>
 #include "Cell.h"
 
+
 class Reserva {
     private:
         int NL, NC;
         int areaLinMax, areaLinMin, areaColMax, areaColMin;
+        int id;
+
         //vector< vector<Cell*>> areaTotal;
     public:
         Reserva(); // Default constructor, applies predefined size
+        Reserva(int Id=0):id(Id){}
         Reserva(int NL, int NC);
+        int getId(){id++; return id;}
         void commandReader();
         void initMatrix(int NL, int NC);
         //Cell* getCell(int x, int y);

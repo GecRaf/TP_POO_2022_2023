@@ -24,5 +24,40 @@ public:
     void diminuiSaude(int saude);
 };
 
+class Coelho : public Animais {
+private:
+    // TODO: Specific attributes
+public:
+    Coelho(string n, int v, float p, int s, int f,int Id);
+};
+
+class Ovelha : public Animais {
+private:
+    // TODO: Specific attributes
+public:
+    Ovelha(string n, int v, float p, int s, int f,int Id);
+};
+
+class Lobo : public Animais {
+private:
+    // TODO: Specific attributes
+public:
+    Lobo(string n, int v, float p, int s, int f,int Id);
+};
+
+class Caranguejo : public Animais {
+private:
+    // TODO: Specific attributes
+public:
+    Caranguejo(string n, int v, float p, int s, int f,int Id);
+};
+
+class Preguiça : public Animais {
+private:
+    // TODO: Specific attributes
+public:
+    Preguiça(string n, int v, float p, int s, int f,int Id);
+};
+
 
 #endif //TP_POO_2022_2023_ANIMAIS_H

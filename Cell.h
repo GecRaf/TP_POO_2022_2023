@@ -15,7 +15,7 @@
 #include "Alimentos.h"
 #include "Reserva.h"
 
-using std::vector;
+class Reserva;
 
 class Cell {
     private:
@@ -25,12 +25,12 @@ class Cell {
         Alimentos* food;
     public:
         Cell(int areaLin, int areaCol);
-        ~Cell();
         void getAnimal();
         void getAnimalSpecie();
         vector<Alimentos> getFood();
         void setAnimal(Animais* a);
         void addFood(Alimentos);
+        ~Cell();
 };
 
 

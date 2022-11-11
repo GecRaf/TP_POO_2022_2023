@@ -21,14 +21,15 @@ class Reserva {
     private:
         int NL, NC;
         int areaLinMax, areaLinMin, areaColMax, areaColMin;
-        //vector< vector<Cell*>> areaTotal;
+        vector<Reserva *> reservas; // Vector to store game states
     public:
         Reserva(); // Default constructor, applies predefined size
-        Reserva(int NL, int NC);
-        void commandReader();
-        void initMatrix(int NL, int NC);
+        Reserva(int NL, int NC, string filename); // Constructor with size and filename
+        Reserva(Reserva *Reserva); // Copy constructor
+        void commandReader(string fileCommand);
         //Cell* getCell(int x, int y);
         //void setCell(int x, int y, Cell* c);
+        ~Reserva(); // Destructor
 };
 
 

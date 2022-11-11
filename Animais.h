@@ -6,7 +6,6 @@
 
 class Animais {
 private:
-    int id;
     string nome;
     string especie;
     int vida;

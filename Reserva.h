@@ -17,6 +17,7 @@
 #include <string>
 #include "Cell.h"
 
+
 class Reserva {
     private:
         int NL, NC;
@@ -24,11 +25,11 @@ class Reserva {
         vector<Reserva *> reservas; // Vector to store game states
     public:
         Reserva(); // Default constructor, applies predefined size
-        Reserva(int NL, int NC, string filename); // Constructor with size and filename
+        Reserva(int Id=0):id(Id){}
         Reserva(Reserva *Reserva); // Copy constructor
+        Reserva(int NL, int NC, string filename); // Constructor with size and filename
+        int getId(){id++; return id;}
         void commandReader(string fileCommand);
-        //Cell* getCell(int x, int y);
-        //void setCell(int x, int y, Cell* c);
         ~Reserva(); // Destructor
 };
 

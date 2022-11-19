@@ -2,7 +2,6 @@
 #ifndef TP_POO_2022_2023_ALIMENTOS_H
 #define TP_POO_2022_2023_ALIMENTOS_H
 
-#include "utils.h"
 #include "Animais.h"
 #include "Reserva.h"
 
@@ -21,8 +20,6 @@ public:
     string getCheiro(){return cheiro;}
     void aumentaToxicidade(int toxicidade);
     void diminuiValorNutritivo(int valorNutritivo);
-
-
 };
 
 

@@ -29,7 +29,11 @@ Reserva::Reserva(int nLin, int nCol, string filename) {
         tmp.clear();
     }
 
-    commandReader(filename);
+    if(!filename.empty()){
+
+    }
+
+    commandReader();
 }
 
 Reserva::Reserva(Reserva *Reserva) {}
@@ -38,7 +42,7 @@ void Reserva::commandReader(string fileCommand) {
     fflush(stdin);
     bool readingFile = false;
     do {
-        srand(time(NULL));
+        srand(time(nullptr));
         string command;
         string commandType;
         string source;
@@ -53,7 +57,7 @@ void Reserva::commandReader(string fileCommand) {
             source = fileCommand;
             readingFile = true;
         }
-        istringstream iss(source);
+        std::istringstream iss(source);
         iss >> commandType;
         cout << "\t[*] Command type: " << commandType << endl;
         iss.clear();
@@ -454,7 +458,7 @@ void Reserva::commandReader(string fileCommand) {
             } else {
                 // Load commands from file
                 // Basically read the file and execute the commands
-                ifstream file(fileName);
+                std::ifstream file(fileName);
                 if (file) {
                     string line;
                     while (getline(file, line)) {
@@ -560,4 +564,27 @@ void Reserva::commandReader(string fileCommand) {
 }
 
 Reserva::~Reserva() {}
+
+int Reserva::getNl() const {
+    return NL;
+}
+
+int Reserva::getNc() const {
+    return NC;
+}
+
+int Reserva::getSimulatedTime() const {
+    return simulatedTime;
+}
+
+string Reserva::getCellInfo(int lin, int col) {
+    std::ostringstream oss;
+
+    for(int i = 0; i < lin; i++){
+        for(int j = 0; j < col; j++){
+            oss << area[i][j]->getInfo() << endl;
+        }
+    }
+    return oss.str();
+}
 

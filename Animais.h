@@ -2,7 +2,10 @@
 #ifndef TP_POO_2022_2023_ANIMAIS_H
 #define TP_POO_2022_2023_ANIMAIS_H
 
-#include "utils.h"
+#include "Reserva.h"
+#include "Animais.h"
+
+using std::string;
 
 class Animais {
 private:

@@ -19,17 +19,17 @@ class Reserva;
 
 class Cell {
     private:
-        int areaLin;
-        int areaCol;
-        Animais* animal;
+        int Lin, Col;
+        vector<Animais*> animais;
         Alimentos* food;
     public:
-        Cell(int areaLin, int areaCol);
-        void getAnimal();
+        Cell(int Lin, int Col);
+        string getInfo();
         void getAnimalSpecie();
-        vector<Alimentos> getFood();
+        vector<Animais> getAnimais();
         void setAnimal(Animais* a);
-        void addFood(Alimentos);
+        void getFood();
+        void setFood(Alimentos);
         ~Cell();
 };
 

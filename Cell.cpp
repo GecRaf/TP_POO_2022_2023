@@ -5,6 +5,7 @@
 #include "Cell.h"
 
 using std::cout;
+using std::vector;
 using std::endl;
 
 Cell::Cell(int areaLin, int areaCol) {
@@ -14,27 +15,31 @@ Cell::Cell(int areaLin, int areaCol) {
     this->food = nullptr;
 }
 
-void Cell::getAnimal() {
+void Cell::getFood() {
 
 }
 
 void Cell::setAnimal(Animais* a) {
     //cout << "Animal " << a.getSpecie() << " added to the cell" << endl;
-    this->animal = a;
+    //this->animais = a;
 }
 
 void Cell::getAnimalSpecie() {
 
 }
 
-vector<Alimentos> Cell::getFood() {
-    return vector<Alimentos>();
+vector<Animais> Cell::getAnimais() {
+    return vector<Animais>();
 }
 
-void Cell::addFood(Alimentos) {
+void Cell::setFood(Alimentos) {
 
 }
 
 Cell::~Cell() {
 
+}
+
+string Cell::getInfo() {
+    return std::string();
 }

@@ -14,15 +14,13 @@ int Animais::getId() {
     return id++;
 }
 void Animais::aumentaFome(int fome) {
-
 }
 
 void Animais::diminuiFome(int fome) {
-
 }
+
 void Animais::aumentaSaude(int saude) {
-
 }
-void Animais::diminuiSaude(int saude) {
 
+void Animais::diminuiSaude(int saude) {
 }

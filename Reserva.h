@@ -22,14 +22,24 @@ class Reserva {
     private:
         int NL, NC;
         int areaLinMax, areaLinMin, areaColMax, areaColMin;
+        int id = 1;
+        int simulatedTime;
         vector<Reserva *> reservas; // Vector to store game states
+        vector< vector<Cell*>> area; // Vector to store the cells
     public:
         Reserva(); // Default constructor, applies predefined size
         Reserva(int Id=0):id(Id){}
         Reserva(Reserva *Reserva); // Copy constructor
-        Reserva(int NL, int NC, string filename); // Constructor with size and filename
+        Reserva(int NL, int NC, string filename = ""); // Constructor with size and filename
+
+        int getNl() const;
+        int getNc() const;
         int getId(){id++; return id;}
-        void commandReader(string fileCommand);
+        int getSimulatedTime() const;
+        void commandReader(string fileCommand = " ");
+
+        string getCellInfo(int lin, int col);
+
         ~Reserva(); // Destructor
 };
 

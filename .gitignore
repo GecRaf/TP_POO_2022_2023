@@ -152,3 +152,4 @@ cmake-build-debug/CMakeFiles/CMakeOutput.log
 cmake-build-debug/CMakeFiles/TargetDirectories.txt
 cmake-build-debug/Testing/Temporary/LastTest.log
 cmake-build-debug/TP_POO_2022_2023
+*.cmake

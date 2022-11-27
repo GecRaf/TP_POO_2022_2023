@@ -1,4 +1,4 @@
-# Install script for directory: /Users/rafaelcouto/Documents/TP_POO_Animals
+# Install script for directory: /Users/rafaelcouto/Documents/POO - TP
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/rafaelcouto/Documents/TP_POO_Animals/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/rafaelcouto/Documents/POO - TP/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

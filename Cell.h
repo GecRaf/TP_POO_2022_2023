@@ -1,37 +1,27 @@
-//
-// Created by Rafac on 09/11/2022.
-//
 
-#ifndef TP_POO_2022_2023_CELL_H
-#define TP_POO_2022_2023_CELL_H
+#ifndef TPPOO2223_CELL_H
+#define TPPOO2223_CELL_H
 
-#include <iostream>
-#include <vector>
-#include <string>
-#include <fstream>
-#include <sstream>
-
+#include "Utils.h"
 #include "Animais.h"
 #include "Alimentos.h"
-#include "Reserva.h"
-
-class Reserva;
 
 class Cell {
-    private:
-        int Lin, Col;
-        vector<Animais*> animais;
-        Alimentos* food;
-    public:
-        Cell(int Lin, int Col);
-        string getInfo();
-        void getAnimalSpecie();
-        vector<Animais> getAnimais();
-        void setAnimal(Animais* a);
-        void getFood();
-        void setFood(Alimentos);
-        ~Cell();
+private:
+    int Lin, Col;
+    vector<Animais*> animais;
+    Alimentos* food;
+public:
+    Cell(int Lin, int Col);
+    static string getInfo(Cell *c);
+    void getAnimalSpecie();
+    void setAnimal(string specie);
+    string getFood(Cell *c);
+    void setFood(string type);
+    int test = 3;
+    ~Cell();
+    string getAnimais(Cell *c);
 };
 
 
-#endif //TP_POO_2022_2023_CELL_H
+#endif //TPPOO2223_CELL_H

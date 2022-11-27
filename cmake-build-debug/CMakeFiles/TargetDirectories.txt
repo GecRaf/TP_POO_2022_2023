@@ -1,3 +1,3 @@
-C:/Users/olive/OneDrive/Documentos/TPPOO20222023/cmake-build-debug/CMakeFiles/TP_POO_2022_2023.dir
-C:/Users/olive/OneDrive/Documentos/TPPOO20222023/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/olive/OneDrive/Documentos/TPPOO20222023/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/rafaelcouto/Documents/TP_POO_Animals/cmake-build-debug/CMakeFiles/TPPOO2223.dir
+/Users/rafaelcouto/Documents/TP_POO_Animals/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/rafaelcouto/Documents/TP_POO_Animals/cmake-build-debug/CMakeFiles/rebuild_cache.dir

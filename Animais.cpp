@@ -1,26 +1,29 @@
-//
-// Created by Rafael Couto on 06/11/2022.
-//
-
 #include "Animais.h"
 
-bool Animais::vivo(int saude)
-{
-    if(saude > 0)
-        return true;
-    return false;
-}
-int Animais::getId() {
-    return id++;
-}
-void Animais::aumentaFome(int fome) {
+bool Animais::vivo() {
+  if(getSaude() < 0)
+      return false;
+  return true;
 }
 
-void Animais::diminuiFome(int fome) {
+void Animais::aumentaFome() {}
+void Animais::diminuiFome() {}
+void Animais::aumentaSaude() {}
+void Animais::diminuiSaude() {}
+
+void Animais::setVida(int vida) {
+    Animais::vida = vida;
 }
 
-void Animais::aumentaSaude(int saude) {
+void Animais::setSaude(int saude) {
+    Animais::saude = saude;
 }
 
-void Animais::diminuiSaude(int saude) {
+void Animais::setFome(int fome) {
+    Animais::fome = fome;
 }
+
+void Animais::setPeso(float peso) {
+    Animais::peso = peso;
+}
+

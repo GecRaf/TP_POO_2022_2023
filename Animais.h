@@ -1,29 +1,37 @@
 
-#ifndef TP_POO_2022_2023_ANIMAIS_H
-#define TP_POO_2022_2023_ANIMAIS_H
+#ifndef TPPOO2223_ANIMAIS_H
+#define TPPOO2223_ANIMAIS_H
 
-#include "Reserva.h"
-#include "Animais.h"
-
-using std::string;
+#include "Utils.h"
 
 class Animais {
 private:
-    string nome;
-    string especie;
+    string const especie;
     int vida;
     int saude;
     int fome;
     float peso;
 public:
-    Animais(string n,string e, int v,float p, int s, int f=1,int Id = 1):id(Id),nome(n),especie(e),vida(v),saude(s),fome(f),peso(p){}
-    int getId();
+    Animais(string e,int v,float p,int s,int f=1):especie(e),vida(v),saude(s),fome(f),peso(p){}
+    int getVida() const {return vida;}
+    int getSaude() const {return saude;}
+    int getFome() const {return fome;}
     float getPeso() const {return peso;}
-    bool vivo(int saude);
-    void aumentaFome(int fome);
-    void diminuiFome(int fome);
-    void aumentaSaude(int saude);
-    void diminuiSaude(int saude);
+    string getEspecie() const{return especie;}
+
+    void setVida(int vida);
+
+    void setSaude(int saude);
+
+    void setFome(int fome);
+
+    void setPeso(float peso);
+
+    bool vivo();
+    void aumentaFome();
+    void diminuiFome();
+    void aumentaSaude();
+    void diminuiSaude();
 };
 
 class Coelho : public Animais {
@@ -54,12 +62,12 @@ public:
     Caranguejo(string n, int v, float p, int s, int f,int Id);
 };
 
-class Preguiça : public Animais {
+class Preguica : public Animais {
 private:
     // TODO: Specific attributes
 public:
-    Preguiça(string n, int v, float p, int s, int f,int Id);
+    Preguica(string n, int v, float p, int s, int f,int Id);
 };
 
 
-#endif //TP_POO_2022_2023_ANIMAIS_H
+#endif //TPPOO2223_ANIMAIS_H

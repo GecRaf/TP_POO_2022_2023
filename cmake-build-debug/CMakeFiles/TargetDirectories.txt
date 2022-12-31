@@ -1,3 +1,0 @@
-/Users/rafaelcouto/Documents/TP_POO_Animals/cmake-build-debug/CMakeFiles/TPPOO2223.dir
-/Users/rafaelcouto/Documents/TP_POO_Animals/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/rafaelcouto/Documents/TP_POO_Animals/cmake-build-debug/CMakeFiles/rebuild_cache.dir

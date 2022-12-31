@@ -37,7 +37,7 @@ public:
     void aumentaSaude();
     void diminuiSaude(int simulatedTime);
     void aumentaPeso(int simulatedTime);
-    void feed(string foodType, int nutritionPoints, int toxicityPoints);
+    void feed(int id, string foodType, int nutritionPoints, int toxicityPoints);
     int getBirthInstant() const;
     int getId() const;
     string getInfo();

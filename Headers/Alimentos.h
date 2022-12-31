@@ -15,7 +15,6 @@ private:
     int valorNutritivo;
     int toxicidade;
     string cheiro;
-    vector<string>AnimaisMortos; // To see
 public:
     Alimentos(int id,string n,int d,int vn,int t,string c):id(id),nome(n),duracao(d),valorNutritivo(vn),toxicidade(t),cheiro(c){}
     Alimentos(Alimentos &alimentos);

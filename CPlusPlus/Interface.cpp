@@ -451,7 +451,7 @@ void Interface::commandReader(Reserva &r, string fileCommand) {
                                         t << "\t[!] Usage: feed <line> <column> <nutrition points> <toxicity points>"
                                           << "\n";
                                     } else {
-                                        feedAnimal(r, line, column, nutritionPoints, toxicityPoints);
+                                        feedAnimal(r, line, column, "user", nutritionPoints, toxicityPoints);
                                         t << "\n\t[~] Successfully fed animal in:" << "\n";
                                         t << "\t[*] Line: " << line << "\n";
                                         t << "\t[*] Column: " << column << "\n";
@@ -493,7 +493,7 @@ void Interface::commandReader(Reserva &r, string fileCommand) {
                                 t << "\t[!] Toxicity points must be between 0 and 100" << "\n";
                                 t << "\t[!] Usage: feedid <id> <nutrition points> <toxicity points>" << "\n";
                             } else {
-                                feedAnimalById(r, id, nutritionPoints, toxicityPoints);
+                                feedAnimalById(r, id, "user", nutritionPoints, toxicityPoints);
                                 t << "\n\t[~] Successfully fed animal with: " << "\n";
                                 t << "\t[*] Id: " << id << "\n";
                                 t << "\t[~] With the following: " << "\n";
@@ -945,7 +945,6 @@ int Interface::checkID(Reserva &r, int id) {
 
 void Interface::createAnimal(Reserva &r, string specie, int line, int column) {
     r.getArea()[line][column]->setAnimal(specie, r.getSimulatedTime(), r.getId());
-    increaseSimulatedTime(r);
 }
 
 void Interface::killAnimal(Reserva &r, int lin, int col) {
@@ -954,7 +953,7 @@ void Interface::killAnimal(Reserva &r, int lin, int col) {
         if((r.getArea()[lin][col]->getAnimals()[i]->getBirthInstant() - r.getSimulatedTime()) > r.getArea()[lin][col]->getAnimals()[oldestAnimal]->getBirthInstant() - r.getSimulatedTime())
             oldestAnimal = i;
     }
-    r.getArea()[lin][col]->getAnimals()[oldestAnimal]->vivo(r.getSimulatedTime());
+    r.getArea()[lin][col]->getAnimals()[oldestAnimal]->vivo(r.getSimulatedTime()); // TODO: Kill the animal
 }
 
 void Interface::killAnimalById(Reserva &r, int id){
@@ -982,12 +981,11 @@ void Interface::createFood(Reserva &r, string type, int line, int column) {
 }
 
 void Interface::feedAnimal(Reserva &r, int lin, int col, string foodType, int nutritionPoints, int toxicityPoints) {
-    int oldestAnimal = 0;
     for(int i = 0; i < r.getArea()[lin][col]->getAnimals().size(); i++){
-        if((r.getArea()[lin][col]->getAnimals()[i]->getBirthInstant() - r.getSimulatedTime()) > r.getArea()[lin][col]->getAnimals()[oldestAnimal]->getBirthInstant() - r.getSimulatedTime())
-            oldestAnimal = i;
+        if(r.getArea()[lin][col]->getAnimals()[i] != nullptr){
+            r.getArea()[lin][col]->getAnimals()[i]->feed(r.getId(),foodType, nutritionPoints, toxicityPoints);
+        }
     }
-    r.getArea()[lin][col]->getAnimals()[oldestAnimal]->feed(foodType, nutritionPoints, toxicityPoints);
 }
 
 void Interface::feedAnimalById(Reserva &r, int id, string foodType, int nutritionPoints, int toxicityPoints) {
@@ -1004,7 +1002,7 @@ void Interface::feedAnimalById(Reserva &r, int id, string foodType, int nutritio
     }
     for(int i = 0; i < r.getArea()[lin][col]->getAnimals().size(); i++){
         if(r.getArea()[lin][col]->getAnimals()[i] != nullptr && r.getArea()[lin][col]->getAnimals()[i]->getId() == id){
-            r.getArea()[lin][col]->getAnimals()[i]->feed(foodType, nutritionPoints, toxicityPoints);
+            r.getArea()[lin][col]->getAnimals()[i]->feed(r.getId(),foodType, nutritionPoints, toxicityPoints);
         }
     }
 }

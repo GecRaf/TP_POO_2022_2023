@@ -137,8 +137,10 @@ string Animais::getInfo() {
     return info;
 }
 
-void Animais::feed(string foodType, int nutritionPoints, int toxicityPoints){
-    // TODO: To be implemented
-    // Basically feeds the animal directly
-    // Increases the animal's health, decreases its hunger and adds the food to the food history
+void Animais::feed(int id,string foodType, int nutritionPoints, int toxicityPoints){
+    Alimentos* tmp = new Alimentos(id, foodType, 30, nutritionPoints, toxicityPoints, "User");
+    addFoodHistory(*tmp);
+    setSaude(getSaude() + nutritionPoints - toxicityPoints);
+    setFome(getFome() - nutritionPoints);
+    // TODO: Test this later
 }

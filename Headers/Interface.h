@@ -16,16 +16,16 @@ public:
     static void showMatrix(Reserva &r);
     static void commandReader(Reserva &r, string fileCommand = "");
     static void increaseSimulatedTime(Reserva &r, int instances = 1, int interval = 1);
-    static int checkID(Reserva &r, int id); // Checks if the ID is valid and returns 0 if ID exists
+    static int checkID(Reserva &r, int id);
     static void createAnimal(Reserva &r, string specie, int lin, int col);
     static void killAnimal(Reserva &r,int lin, int col);
     static void killAnimalById(Reserva &r, int id);
     static void createFood(Reserva &r, string type, int lin, int col);
-    static void feedAnimal(Reserva &r, int lin, int col, int nutritionPoints, int toxicityPoints);
-    static void feedAnimalById(Reserva &r, int id, int nutritionPoints, int toxicityPoints);
-    static void noFood(Reserva &r, int lin, int col); // If column is -1, removes food by ID, being the ID the line
-    static void empty(Reserva &r, int lin, int col); // This function erases the animal completely, doesn't goes through the death process or corpse process
-    static void showIdInfo(Reserva &r, int id); // Shows the info of the simulator element (animal or food) with the given ID
+    static void feedAnimal(Reserva &r, int lin, int col, string foodType, int nutritionPoints, int toxicityPoints);
+    static void feedAnimalById(Reserva &r, int id, string foodType,  int nutritionPoints, int toxicityPoints);
+    static void noFood(Reserva &r, int lin, int col);
+    static void empty(Reserva &r, int lin, int col);
+    static void showIdInfo(Reserva &r, int id);
 };
 
 

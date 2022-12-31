@@ -981,16 +981,51 @@ void Interface::createFood(Reserva &r, string type, int line, int column) {
     increaseSimulatedTime(r);
 }
 
-void Interface::feedAnimal(Reserva &r, int lin, int col, int nutritionPoints, int toxicityPoints) {
+void Interface::feedAnimal(Reserva &r, int lin, int col, string foodType, int nutritionPoints, int toxicityPoints) {
+    int oldestAnimal = 0;
+    for(int i = 0; i < r.getArea()[lin][col]->getAnimals().size(); i++){
+        if((r.getArea()[lin][col]->getAnimals()[i]->getBirthInstant() - r.getSimulatedTime()) > r.getArea()[lin][col]->getAnimals()[oldestAnimal]->getBirthInstant() - r.getSimulatedTime())
+            oldestAnimal = i;
+    }
+    r.getArea()[lin][col]->getAnimals()[oldestAnimal]->feed(foodType, nutritionPoints, toxicityPoints);
 }
 
-void Interface::feedAnimalById(Reserva &r, int id, int nutritionPoints, int toxicityPoints) {
+void Interface::feedAnimalById(Reserva &r, int id, string foodType, int nutritionPoints, int toxicityPoints) {
+    int lin = 0, col = 0;
+    for(int i = 0; i < r.getNL(); i++){
+        for(int j = 0; j < r.getNC(); j++){
+            for(int k = 0; k < r.getArea()[i][j]->getAnimals().size(); k++){
+                if(r.getArea()[i][j]->getAnimals()[k] != nullptr && r.getArea()[i][j]->getAnimals()[k]->getId() == id){
+                    lin = i;
+                    col = j;
+                }
+            }
+        }
+    }
+    for(int i = 0; i < r.getArea()[lin][col]->getAnimals().size(); i++){
+        if(r.getArea()[lin][col]->getAnimals()[i] != nullptr && r.getArea()[lin][col]->getAnimals()[i]->getId() == id){
+            r.getArea()[lin][col]->getAnimals()[i]->feed(foodType, nutritionPoints, toxicityPoints);
+        }
+    }
 }
 
 void Interface::noFood(Reserva &r, int lin, int col) {
+    if(lin != -1 && col != -1){
+        r.getArea()[lin][col]->setFood("none", 0);
+    }
+    else if(lin != -1){
+        for(int i = 0; i < r.getNL(); i++){
+            for(int j = 0; j < r.getNC(); j++){
+                if(r.getArea()[i][j]->getFood() != nullptr && r.getArea()[i][j]->getFood()->getId() == lin){
+                    r.getArea()[i][j]->setFood("none", 0);
+                }
+            }
+        }
+    }
 }
 
 void Interface::empty(Reserva &r, int lin, int col) {
+    r.getArea()[lin][col]->removeAllEntities();
 }
 
 void Interface::showIdInfo(Reserva &r, int id) {

@@ -8,7 +8,7 @@
 
 bool Animais::vivo(int simulatedTime) {
     if (getEspecie() == "C"){
-        if(getSaude()<=0 || birthInstant - simulatedTime == 30){ // TODO: Corrigir isto, visto que o animal morre quando chega às suas 30 instâncias de vida e não às 30 instâncias de JOGO
+        if(getSaude()<=0 || birthInstant - simulatedTime == 30){
             setVida(0);
             return false;
         }
@@ -135,4 +135,10 @@ string Animais::getInfo() {
     info += "\t[~] Life: " + to_string(vida) + "\n";
     info += "\t[~] Hunger: " + to_string(fome) + "\n";
     return info;
+}
+
+void Animais::feed(string foodType, int nutritionPoints, int toxicityPoints){
+    // TODO: To be implemented
+    // Basically feeds the animal directly
+    // Increases the animal's health, decreases its hunger and adds the food to the food history
 }

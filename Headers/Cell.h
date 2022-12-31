@@ -17,8 +17,8 @@ private:
 public:
     Cell(int Lin, int Col);
     static string getInfo(Cell *c);
-    void getAnimalSpecie();
     void setAnimal(string specie, int instant, int id);
+    void removeAllEntities();
     string getFoodString(Cell *c);
     void setFood(string type, int id);
     ~Cell();

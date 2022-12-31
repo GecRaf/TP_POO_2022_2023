@@ -15,7 +15,7 @@ Cell::Cell(int Lin, int Col) {
     this->food = nullptr;
 }
 
-void Cell::setAnimal(string specie, int instant, int id) {
+void Cell::setAnimal(string specie, int instant, int id) { //TODO: Apply default values for animals
     if(specie == "c"){
         animais.push_back(new Coelho(id,instant,100, 0));
     }else if(specie == "o"){
@@ -29,6 +29,11 @@ void Cell::setAnimal(string specie, int instant, int id) {
     }
 }
 
+void Cell::removeAllEntities() {
+    animais.clear();
+    food = nullptr;
+}
+
 void Cell::setFood(string type, int id) {
     if(type == "r"){
         this->food = new Relva(id);
@@ -40,6 +45,8 @@ void Cell::setFood(string type, int id) {
         this->food = new Bife(id);
     }else if(type == "f"){
         this->food = new Fruta(id);
+    }else if(type == "none"){
+        this->food = nullptr;
     }
 }
 
@@ -93,7 +100,7 @@ string Cell::getAnimais(Cell *c){
     }
     for (int i = 0; i < animais.size(); i++) {
         info += "\t\t[~] Specie: " + animais[i]->getEspecie() + "\n";
-        info += "\t[~] Weight" + to_string(animais[i]->getPeso()) + "\n";
+        info += "\t[~] Weight: " + to_string(animais[i]->getPeso()) + "\n";
         info += "\t[~] Health: " + to_string(animais[i]->getSaude()) + "\n",
         info += "\t[~] Life: " + to_string(animais[i]->getSaude()) + "\n";
         info += "\t[~] Hunger: " + to_string(animais[i]->getFome()) + "\n";

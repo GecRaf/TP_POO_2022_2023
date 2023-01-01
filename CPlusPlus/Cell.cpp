@@ -50,6 +50,7 @@ void Cell::setFood(string type, int id) {
     }
 }
 
+
 Cell::~Cell() {
 
 }

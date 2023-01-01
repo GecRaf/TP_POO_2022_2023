@@ -17,14 +17,16 @@ private:
 public:
     Cell(int Lin, int Col);
     static string getInfo(Cell *c);
-    void setAnimal(string specie, int instant, int id);
     void removeAllEntities();
     string getFoodString(Cell *c);
-    void setFood(string type, int id);
     ~Cell();
     string getAnimais(Cell *c);
     const vector<Animais *> &getAnimals() const;
     Alimentos *getFood() const;
+    void setFood(string type, int id);
+    void setAnimal(string specie, int instant, int id);
+
+
 };
 
 

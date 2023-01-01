@@ -19,19 +19,16 @@ private:
     Alimentos* foodHistory = nullptr;
     int foodHistorySize = 0;
     int birthInstant;
+    bool vivo;
 public:
-    Animais(int id,int b,int v,int f,float p=0, string e= " ",int s=0): id(id),vida(v),peso(p),especie(e), saude(s), fome(f){}
+    Animais(int id,int b,int v,int f,float p=0, string e= " ",int s=0, bool vivo = true): id(id),vida(v),peso(p),especie(e), saude(s), fome(f),vivo(vivo){}
     int getVida() const {return vida;}
     int getSaude() const {return saude;}
     int getFome() const {return fome;}
     float getPeso() const {return peso;}
     string getEspecie() const{return especie;}
     void addFoodHistory(Alimentos &food);
-    void setVida(int vida);
-    void setSaude(int saude);
-    void setFome(int fome);
-    void setPeso(float peso);
-    bool vivo(int simulatedTime);
+    bool FicaVivo(int simulatedTime);
     void aumentaFome(int simulatedTime);
     void diminuiFome(int simulatedTime);
     void aumentaSaude();
@@ -41,6 +38,12 @@ public:
     int getBirthInstant() const;
     int getId() const;
     string getInfo();
+    bool getVivo(){return true;}
+    void setVida(int vida);
+    void setSaude(int saude);
+    void setFome(int fome);
+    void setPeso(float peso);
+    void setVivo(bool Vivo);
 };
 
 class Coelho : public Animais {

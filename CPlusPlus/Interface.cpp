@@ -953,7 +953,7 @@ void Interface::killAnimal(Reserva &r, int lin, int col) {
         if((r.getArea()[lin][col]->getAnimals()[i]->getBirthInstant() - r.getSimulatedTime()) > r.getArea()[lin][col]->getAnimals()[oldestAnimal]->getBirthInstant() - r.getSimulatedTime())
             oldestAnimal = i;
     }
-    r.getArea()[lin][col]->getAnimals()[oldestAnimal]->vivo(r.getSimulatedTime()); // TODO: Kill the animal
+    r.getArea()[lin][col]->getAnimals()[oldestAnimal]->FicaVivo(r.getSimulatedTime()); // TODO: Kill the animal
 }
 
 void Interface::killAnimalById(Reserva &r, int id){
@@ -970,7 +970,7 @@ void Interface::killAnimalById(Reserva &r, int id){
     }
     for(int i = 0; i < r.getArea()[lin][col]->getAnimals().size(); i++){
         if(r.getArea()[lin][col]->getAnimals()[i] != nullptr && r.getArea()[lin][col]->getAnimals()[i]->getId() == id){
-            r.getArea()[lin][col]->getAnimals()[i]->vivo(r.getSimulatedTime());
+            r.getArea()[lin][col]->getAnimals()[i]->FicaVivo(r.getSimulatedTime());
         }
     }
 }

@@ -6,7 +6,7 @@
 
 
 
-bool Animais::vivo(int simulatedTime) {
+bool Animais::FicaVivo(int simulatedTime) {
     if (getEspecie() == "C"){
         if(getSaude()<=0 || birthInstant - simulatedTime == 30){
             setVida(0);
@@ -32,7 +32,10 @@ bool Animais::vivo(int simulatedTime) {
         }
     }
     else if(getEspecie() =="P"){
-        //morre quando
+        if(getSaude() <= 0){
+            setVida(0);
+            return false;
+        }
     }
     return true;
 }
@@ -82,7 +85,7 @@ void Animais::diminuiSaude(int simulatedTime) {
         }
     }
     else if(getEspecie() == "G"){
-        if (!vivo(simulatedTime)){
+        if (!FicaVivo(simulatedTime)){
             setSaude(0);
         }
     }
@@ -143,4 +146,9 @@ void Animais::feed(int id,string foodType, int nutritionPoints, int toxicityPoin
     setSaude(getSaude() + nutritionPoints - toxicityPoints);
     setFome(getFome() - nutritionPoints);
     // TODO: Test this later
+}
+
+void Animais::setVivo(bool Vivo) {
+    Animais::vivo = Vivo;
+
 }

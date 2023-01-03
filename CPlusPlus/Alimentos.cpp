@@ -26,8 +26,18 @@ int Alimentos::getId() const {
     return id;
 }
 
+/*void Alimentos::elimina(Alimentos &alimento){
+    // Verificar se o nome do alimento atual é "b"
+    if (getNome() == "b") {
+        // Verificar se a duração do alimento atual é maior ou igual a 30
+        if (getDuracao() >= 30) {
+            //eliminar a relva
+        }
+    }
+}*/
+
 //apos 75% da sua vida gera uma relva nova
-void Alimentos::AddRelva(string type,Cell c) const{
+void Alimentos::AddRelva(string &type,Reserva &r){
     if(type == "r") {
         if (getDuracao() % 75) {
 

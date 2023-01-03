@@ -31,9 +31,10 @@ public:
     void operator= (Alimentos &alimentos);
     Alimentos(Alimentos *pAlimentos);
     int getId() const;
-    void AddRelva(string type,Cell c) const;
+    void AddRelva(string &type,Reserva &r);
     void setToxicidade(int toxicidade);
     void setValotNutritivo(int vn);
+    void elimina(Alimentos &alimento);
 };
 
 class Relva : public Alimentos {

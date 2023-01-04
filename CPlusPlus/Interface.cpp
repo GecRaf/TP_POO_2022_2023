@@ -648,26 +648,27 @@ void Interface::commandReader(Reserva &r, string fileCommand) {
             }
         } else if (commandType == "anim") {
             // Show the list of animals with ID, Species and Health
-            t << "\n\t[~] List of animals:" << "\n";
+            t << "\n\t[~] List of animals:" << "\n\n";
+            // List all animals in the area
             for(int i = 0; i < r.getNL(); i++){
                 for(int j = 0; j < r.getNC(); j++){
-                    if(r.getArea()[i][j]->getAnimais(r.getArea()[i][j]) == "Empty")
-                        break;
-                    else
+                    if(r.getArea()[i][j]->getAnimais(r.getArea()[i][j]) != "Empty"){
                         t << r.getArea()[i][j]->getAnimais(r.getArea()[i][j]);
+                    }
                 }
             }
         } else if (commandType == "visanim") {
             // Show the list of animals with ID, Species and Health in the visible area
-            t << "\n\t[~] List of animals:" << "\n";
-            for(int i = 0; i < r.getTopLeftCornerX(); i++){
-                for(int j = 0; j < r.getTopLeftCornerY(); j++){
-                    if(r.getArea()[i][j]->getAnimais(r.getArea()[i][j]) == "Empty")
-                        break;
-                    else
+            t << "\n\t[~] List of animals:" << "\n\n";
+            // Based on the topLeftCorner X and Y and viewWindow, calculate the visible area and print the animals in that area
+            for(int i = r.getTopLeftCornerX(); i < r.getTopLeftCornerX() + r.getViewWindow(); i++){
+                for(int j = r.getTopLeftCornerY(); j < r.getTopLeftCornerY() + r.getViewWindow(); j++){
+                    if(r.getArea()[i][j]->getAnimais(r.getArea()[i][j]) != "Empty"){
                         t << r.getArea()[i][j]->getAnimais(r.getArea()[i][j]);
+                    }
                 }
             }
+
         } else if (commandType == "store") {
             string name;
             iss >> name;

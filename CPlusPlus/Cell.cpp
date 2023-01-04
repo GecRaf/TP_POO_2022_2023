@@ -100,7 +100,7 @@ string Cell::getInfo(Cell *c) {
 string Cell::getAnimais(Cell *c){
     string info;
     if(c->animais.size() == 0) {
-        return info = "Empty\n";
+        return info = "Empty";
     }
     for (int i = 0; i < animais.size(); i++) {
         info += "\t\t[~] Specie: " + animais[i]->getEspecie() + "\n";

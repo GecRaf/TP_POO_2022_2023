@@ -290,7 +290,7 @@ void Interface::commandReader(Reserva &r, string fileCommand) {
             int line = -1;
             int column = -1;
             iss >> specie;
-            if (specie == "c" || specie == "o" || specie == "l" || specie == "g" || specie == "p") {
+            if (specie == "c" || specie == "o" || specie == "l" || specie == "g" || specie == "m") {
                 iss >> line;
                 if (line == -1) {
                     // No line argument was given, so places animal in a random coordinates
@@ -370,7 +370,7 @@ void Interface::commandReader(Reserva &r, string fileCommand) {
             int column = -1;
             iss >> type;
 
-            if (type == "r" || type == "c" || type == "b" || type == "f") {
+            if (type == "r" || type == "t" || type == "p" || type == "b" || type == "f") {
                 iss >> line;
                 if (line == -1) {
                     // No line argument was given, so places food in a random coordinates
@@ -914,24 +914,21 @@ void Interface::commandReader(Reserva &r, string fileCommand) {
 void Interface::increaseSimulatedTime(Reserva &r, int instances, int interval) {
     if(instances == 1){
         r.setSimulatedTime(r.getSimulatedTime() + 1);
-        clear();
-        ASCII();
+        r.animalActions(r);
         showMatrix(r);
     }
     else {
         if(interval == 0){
             for(int i = 0; i < instances; i++){
                 r.setSimulatedTime(r.getSimulatedTime() + 1);
-                clear();
-                ASCII();
+                r.animalActions(r);
                 showMatrix(r);
             }
         }
         else {
             for(int i = 0; i < instances; i++){
                 r.setSimulatedTime(r.getSimulatedTime() + 1);
-                clear();
-                ASCII();
+                r.animalActions(r);
                 showMatrix(r);
                 sleep(interval);
             }
@@ -1043,3 +1040,5 @@ void Interface::showIdInfo(Reserva &r, int id) {
         }
     }
 }
+
+

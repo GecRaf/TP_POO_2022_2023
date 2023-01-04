@@ -212,3 +212,62 @@ void Reserva::addHistory(Reserva *r) {
 void Reserva::setName(const string &name) {
     Reserva::name = name;
 }
+
+void Reserva::animalActions(Reserva &r) {
+    // Start by increasing the fome of all animals
+    for (int i = 0; i < r.getNL(); i++) {
+        for (int j = 0; j < r.getNC(); j++) {
+            for (int k = 0; k < r.getArea()[i][j]->getAnimals().size(); k++) {
+                if(r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "C" || r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "O" ||
+                   r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "M"){
+                    r.getArea()[i][j]->getAnimals()[k]->setFome(r.getArea()[i][j]->getAnimals()[k]->getFome() + 1);
+                }
+                else if(r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "L"){
+                    r.getArea()[i][j]->getAnimals()[k]->setFome(r.getArea()[i][j]->getAnimals()[k]->getFome() + 2);
+                }
+            }
+        }
+    }
+
+
+    // Now, check again all animals and see how much fome they have
+    for (int i = 0; i < r.getNL(); i++) {
+        for (int j = 0; j < r.getNC(); j++) {
+            for (int k = 0; k < r.getArea()[i][j]->getAnimals().size(); k++) {
+                if(r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "C"){
+                    if(r.getArea()[i][j]->getAnimals()[k]->getFome() > 10){
+                        r.getArea()[i][j]->getAnimals()[k]->setVelocidade(random() % 3 + 1);
+                        r.getArea()[i][j]->getAnimals()[k]->setVida(r.getArea()[i][j]->getAnimals()[k]->getVida() - 1);
+                    }else if(r.getArea()[i][j]->getAnimals()[k]->getFome() > 20){
+                        r.getArea()[i][j]->getAnimals()[k]->setVelocidade(random() % 4 + 1);
+                        r.getArea()[i][j]->getAnimals()[k]->setVida(r.getArea()[i][j]->getAnimals()[k]->getVida() - 2);
+                    }
+                }
+                else if(r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "O"){
+                    if(r.getArea()[i][j]->getAnimals()[k]->getFome() > 15){
+                        r.getArea()[i][j]->getAnimals()[k]->setVelocidade(random() % 2 + 1);
+                        r.getArea()[i][j]->getAnimals()[k]->setVida(r.getArea()[i][j]->getAnimals()[k]->getVida() - 1);
+                    }else if(r.getArea()[i][j]->getAnimals()[k]->getFome() > 20){
+                        r.getArea()[i][j]->getAnimals()[k]->setVida(r.getArea()[i][j]->getAnimals()[k]->getVida() - 2);
+                    }
+                }
+                else if(r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "L"){
+                    if(r.getArea()[i][j]->getAnimals()[k]->getFome() > 15){
+                        r.getArea()[i][j]->getAnimals()[k]->setVelocidade(2);
+                        r.getArea()[i][j]->getAnimals()[k]->setVida(r.getArea()[i][j]->getAnimals()[k]->getVida() - 1);
+                    }else if(r.getArea()[i][j]->getAnimals()[k]->getFome() > 25){
+                        r.getArea()[i][j]->getAnimals()[k]->setVida(r.getArea()[i][j]->getAnimals()[k]->getVida() - 2);
+                    }
+                }
+                else if(r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "G"){
+                    if(r.getArea()[i][j]->getAnimals()[k]->getFome() > 15){
+                        r.getArea()[i][j]->getAnimals()[k]->setVelocidade(2);
+                        r.getArea()[i][j]->getAnimals()[k]->setVida(r.getArea()[i][j]->getAnimals()[k]->getVida() - 1);
+                    }else if(r.getArea()[i][j]->getAnimals()[k]->getFome() > 25){
+                        r.getArea()[i][j]->getAnimals()[k]->setVida(r.getArea()[i][j]->getAnimals()[k]->getVida() - 2);
+                    }
+                }
+            }
+        }
+    }
+}

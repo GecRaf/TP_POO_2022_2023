@@ -4,7 +4,7 @@
 
 #include "../Headers/Animais.h"
 
-
+Animais::Animais(Animais &a) : id(a.id), vida(a.vida), peso(a.peso), especie(a.especie), saude(a.saude), fome(a.fome), vivo(a.vivo){}
 
 bool Animais::FicaVivo(int simulatedTime) {
     if (getEspecie() == "C"){
@@ -59,6 +59,7 @@ void Animais::aumentaFome(int simulatedTime) {
 }
 
 void Animais::aumentaSaude() {}
+
 void Animais::diminuiSaude(int simulatedTime) {
     if (getEspecie() == "C"){
         if(getFome() > 10){
@@ -90,6 +91,7 @@ void Animais::diminuiSaude(int simulatedTime) {
         }
     }
 }
+
 void Animais::aumentaPeso(int simulatedTime) {
     if(getEspecie() == "G"){
         if (simulatedTime >= 20)
@@ -151,4 +153,20 @@ void Animais::feed(int id,string foodType, int nutritionPoints, int toxicityPoin
 void Animais::setVivo(bool Vivo) {
     Animais::vivo = Vivo;
 
+}
+
+int Animais::getVisaoPeriferica() const {
+    return visaoPeriferica;
+}
+
+void Animais::setVisaoPeriferica(int visaoPeriferica) {
+    Animais::visaoPeriferica = visaoPeriferica;
+}
+
+int Animais::getVelocidade() const {
+    return velocidade;
+}
+
+void Animais::setVelocidade(int velocidade) {
+    Animais::velocidade = velocidade;
 }

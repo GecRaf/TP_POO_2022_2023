@@ -24,9 +24,13 @@ void Cell::setAnimal(string specie, int instant, int id) { //TODO: Apply default
         animais.push_back(new Lobo(id,instant,100, 0));
     }else if(specie == "g") {
         animais.push_back(new Canguru(id,instant,100, 0));
-    }else if(specie == "p"){
+    }else if(specie == "m"){
         animais.push_back(new Preguica(id,instant,100, 0));
     }
+}
+
+void Cell::copyNewAnimal(Animais *a) {
+    animais.push_back(a);
 }
 
 void Cell::removeAllEntities() {
@@ -49,7 +53,6 @@ void Cell::setFood(string type, int id) {
         this->food = nullptr;
     }
 }
-
 
 Cell::~Cell() {
 
@@ -129,4 +132,12 @@ const vector<Animais *> &Cell::getAnimals() const {
 
 Alimentos *Cell::getFood() const {
     return food;
+}
+
+void Cell::removeAnimal(int id) {
+    for (int i = 0; i < animais.size(); i++) {
+        if(animais[i]->getId() == id){
+            animais.erase(animais.begin() + i);
+        }
+    }
 }

@@ -10,20 +10,20 @@
 
 class Reserva {
 private:
-    int NL,NC;
-    int viewWindow = 5;
-    int topLeftCornerX = 0, topLeftCornerY = 0;
-    int id = 0;
-    int simulatedTime = 0;
-    string name;
-    vector<Reserva *> history;  // Vector to store game states
-    vector< vector<Cell*>> area; // Vector to store the cells
+    int NL,NC;                                                  //Number of lines and columns
+    int viewWindow = 5;                                         //Terminal View window
+    int topLeftCornerX = 0, topLeftCornerY = 0;                 //Top left corner of the view window start position
+    int id = 0;                                                 //ID of the elements in the reserve
+    int simulatedTime = 0;                                      //Simulated time
+    string name;                                                //Name of the reserve [Storage Name]
+    vector<Reserva *> history;                                  // Vector to store game states
+    vector< vector<Cell*>> area;                                // Vector to store the cells
 public:
 
-    Reserva()=default; // Default constructor, applies predefined size
+    Reserva()=default;                                          // Default constructor, applies predefined size
     Reserva(int Id=0):id(Id){}
-    Reserva(Reserva &Reserva); // Copy constructor
-    Reserva(int NL, int NC, string filename = ""); // Constructor with size and filename
+    Reserva(Reserva &Reserva);                                  // Copy constructor
+    Reserva(int NL, int NC, string filename = "");              // Constructor with size and filename
 
     int getNL() const;
     int getNC() const;
@@ -42,7 +42,7 @@ public:
     void addHistory(Reserva *r);
     const vector<Reserva *> &getHistory() const;
     const vector<vector<Cell *>> &getArea() const;
-
+    void animalActions(Reserva &r);
 
     ~Reserva(); // Destructor
 };

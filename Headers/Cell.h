@@ -25,9 +25,8 @@ public:
     Alimentos *getFood() const;
     void setFood(string type, int id);
     void setAnimal(string specie, int instant, int id);
-
-
+    void removeAnimal(int id);
+    void copyNewAnimal(Animais *a);
 };
-
 
 #endif //TPPOO2223_CELL_H

@@ -20,8 +20,11 @@ private:
     int foodHistorySize = 0;
     int birthInstant;
     bool vivo;
+    int visaoPeriferica;
+    int velocidade;
 public:
     Animais(int id,int b,int v,int f,float p=0, string e= " ",int s=0, bool vivo = true): id(id),vida(v),peso(p),especie(e), saude(s), fome(f),vivo(vivo){}
+    Animais(Animais &a);
     int getVida() const {return vida;}
     int getSaude() const {return saude;}
     int getFome() const {return fome;}
@@ -44,12 +47,16 @@ public:
     void setFome(int fome);
     void setPeso(float peso);
     void setVivo(bool Vivo);
+    int getVisaoPeriferica() const;
+    void setVisaoPeriferica(int visaoPeriferica);
+    int getVelocidade() const;
+    void setVelocidade(int velocidade);
 };
 
 class Coelho : public Animais {
 private:
-    int const visaoPeriferica = 4; // Perceciona 4 celulas a sua volta
-    int const velocidade = random() % 2 + 1; // Move-se 1 ou 2 celulas por instancia de tempo
+    int visaoPeriferica = 4; // Perceciona 4 celulas a sua volta
+    int velocidade = random() % 2 + 1; // Move-se 1 ou 2 celulas por instancia de tempo
     // A cada instante aumenta a fome em 1.
     // Se fome > 10, perde 1 de saude e move-se de 1 a 3 celulas.
     // Se fome > 20, perde 2 de saude e move-se de 1 a 4 celulas.
@@ -59,10 +66,10 @@ public:
 
 class Ovelha : public Animais {
 private:
-    int const visaoPeriferica = 3; // Perceciona 3 celulas a sua volta
-    int const velocidade = 1; // Move-se 1 celula por instancia de tempo
+    int visaoPeriferica = 3; // Perceciona 3 celulas a sua volta
+    int velocidade = 1; // Move-se 1 celula por instancia de tempo
     // A cada instante aumenta a fome em 1.
-    // Se fome > 15, perde 1 de saude e move-se de 1 a 2 celulas de cada vez (efeito coelho).
+    // Se fome > 15, perde 1 de saude e move-se de 1 a 2 celulas de cada vez.
     // Se fome > 20, perde 2 de saude a cada instante.
 public:
     Ovelha(int id,int b,int v,int f): Animais(id,b,v,f, random() % 5 + 4,"O",30){};//PESO NUMERO RAND ENTRE 4 E 8
@@ -70,8 +77,8 @@ public:
 
 class Lobo : public Animais{
 private:
-    int const visaoPeriferica = 5; // Perceciona 5 celulas a sua volta
-    int const velocidade = 1; // Move-se 1 celula por instancia de tempo (a não ser que veja algo interessante)
+    int visaoPeriferica = 5; // Perceciona 5 celulas a sua volta
+    int velocidade = 1; // Move-se 1 celula por instancia de tempo (a não ser que veja algo interessante)
     // A cada instante aumenta a fome em 2.
     // Se fome > 15, perde 1 de saude e move-se de 2 celulas de cada vez.
     // Se fome > 25, perde 2 de saude a cada instante.
@@ -81,10 +88,11 @@ public:
 
 class Canguru : public Animais {
 private:
-    int const visaoPeriferica = 7; // Perceciona 7 celulas a sua volta
-    int const velocidade = 1; // Move-se 1 celula por instancia de tempo
+    int visaoPeriferica = 7; // Perceciona 7 celulas a sua volta
+    int velocidade = 1; // Move-se 1 celula por instancia de tempo
     // Se tiver menos de 10 instantes de idade, fica sempre 4 ou menos posições de distância do canguru mãe.
-    // Se tiver menos de 10 instantes de idade e encontrar um canguru que não seja a mãe, foge a velocidade 2 para perto da mãe.
+    // Se tiver menos de 10 instantes de idade e encontrar um canguru que não seja a mãe,
+    // foge a velocidade 2 para perto da mãe.
     // Quando chega à mãe, fica 5 instantes na bolsa da mãe. (Fica parado 5 instantes, basicamente)
     // Ao fim de 20 instantes é adulto e passa a ter 20kg.
 public:
@@ -93,8 +101,8 @@ public:
 
 class Preguica : public Animais {
 private:
-    int const visaoPeriferica = 1;
-    int const velocidade = 0; // Não se move, pois é uma preguiça
+    int visaoPeriferica = 1;
+    int velocidade = 0; // Não se move, pois é uma preguiça
     // A cada instante aumenta a fome em 1.
 public:
     Preguica(int id,int b,int v, int f): Animais(id,b,v,f,5,"M",35){};

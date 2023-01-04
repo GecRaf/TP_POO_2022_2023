@@ -155,18 +155,18 @@ void Animais::setVivo(bool Vivo) {
 
 }
 
-int Animais::getVisaoPeriferica() const {
-    return visaoPeriferica;
+int Animais::getPerception() const {
+    return perception;
 }
 
-void Animais::setVisaoPeriferica(int visaoPeriferica) {
-    Animais::visaoPeriferica = visaoPeriferica;
+void Animais::setPerception(int perception) {
+    Animais::perception = perception;
 }
 
-int Animais::getVelocidade() const {
-    return velocidade;
+int Animais::getSpeed() const {
+    return speed;
 }
 
-void Animais::setVelocidade(int velocidade) {
-    Animais::velocidade = velocidade;
+void Animais::setSpeed(int speed) {
+    Animais::speed = speed;
 }

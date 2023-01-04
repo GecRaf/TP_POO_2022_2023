@@ -236,16 +236,16 @@ void Reserva::animalActions(Reserva &r) {
             for (int k = 0; k < r.getArea()[i][j]->getAnimals().size(); k++) {
                 if(r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "C"){
                     if(r.getArea()[i][j]->getAnimals()[k]->getFome() > 10){
-                        r.getArea()[i][j]->getAnimals()[k]->setVelocidade(random() % 3 + 1);
+                        r.getArea()[i][j]->getAnimals()[k]->setSpeed(random() % 3 + 1);
                         r.getArea()[i][j]->getAnimals()[k]->setVida(r.getArea()[i][j]->getAnimals()[k]->getVida() - 1);
                     }else if(r.getArea()[i][j]->getAnimals()[k]->getFome() > 20){
-                        r.getArea()[i][j]->getAnimals()[k]->setVelocidade(random() % 4 + 1);
+                        r.getArea()[i][j]->getAnimals()[k]->setSpeed(random() % 4 + 1);
                         r.getArea()[i][j]->getAnimals()[k]->setVida(r.getArea()[i][j]->getAnimals()[k]->getVida() - 2);
                     }
                 }
                 else if(r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "O"){
                     if(r.getArea()[i][j]->getAnimals()[k]->getFome() > 15){
-                        r.getArea()[i][j]->getAnimals()[k]->setVelocidade(random() % 2 + 1);
+                        r.getArea()[i][j]->getAnimals()[k]->setSpeed(random() % 2 + 1);
                         r.getArea()[i][j]->getAnimals()[k]->setVida(r.getArea()[i][j]->getAnimals()[k]->getVida() - 1);
                     }else if(r.getArea()[i][j]->getAnimals()[k]->getFome() > 20){
                         r.getArea()[i][j]->getAnimals()[k]->setVida(r.getArea()[i][j]->getAnimals()[k]->getVida() - 2);
@@ -253,7 +253,7 @@ void Reserva::animalActions(Reserva &r) {
                 }
                 else if(r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "L"){
                     if(r.getArea()[i][j]->getAnimals()[k]->getFome() > 15){
-                        r.getArea()[i][j]->getAnimals()[k]->setVelocidade(2);
+                        r.getArea()[i][j]->getAnimals()[k]->setSpeed(2);
                         r.getArea()[i][j]->getAnimals()[k]->setVida(r.getArea()[i][j]->getAnimals()[k]->getVida() - 1);
                     }else if(r.getArea()[i][j]->getAnimals()[k]->getFome() > 25){
                         r.getArea()[i][j]->getAnimals()[k]->setVida(r.getArea()[i][j]->getAnimals()[k]->getVida() - 2);
@@ -261,10 +261,47 @@ void Reserva::animalActions(Reserva &r) {
                 }
                 else if(r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "G"){
                     if(r.getArea()[i][j]->getAnimals()[k]->getFome() > 15){
-                        r.getArea()[i][j]->getAnimals()[k]->setVelocidade(2);
+                        r.getArea()[i][j]->getAnimals()[k]->setSpeed(2);
                         r.getArea()[i][j]->getAnimals()[k]->setVida(r.getArea()[i][j]->getAnimals()[k]->getVida() - 1);
                     }else if(r.getArea()[i][j]->getAnimals()[k]->getFome() > 25){
                         r.getArea()[i][j]->getAnimals()[k]->setVida(r.getArea()[i][j]->getAnimals()[k]->getVida() - 2);
+                    }
+                }
+            }
+        }
+    }
+
+    // Animal movement
+    // Every animal moves each time the function is called
+    // The animal can move to any of the adjacent cells limited by his perception
+    // But he can only move velocidade cells per time
+
+    for (int i = 0; i < r.getNL(); i++) {
+        for (int j = 0; j < r.getNC(); j++) {
+            for (int k = 0; k < r.getArea()[i][j]->getAnimals().size(); k++) {
+                // Check adjacent cells for food
+                // If there is food, move to that cell
+                // If there is no food, move to a random cell
+                int eaten = 0;
+                for (int l = i; l < r.getArea()[i][j]->getAnimals()[k]->getPerception(); l++) {
+                    for (int m = j; m < r.getArea()[i][j]->getAnimals()[k]->getPerception(); m++) {
+                        if (i + l < r.getNL() && j + m < r.getNC()) {
+                            if (r.getArea()[i + l][j + m]->getFood() != nullptr) {
+                                r.getArea()[i + l][j + m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
+                                r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
+                                r.getArea()[i + l][j + m]->getAnimals()[r.getArea()[i + l][j + m]->getAnimals().size() -
+                                                                        1]->setFome(0);
+                                r.getArea()[i + l][j + m]->getAnimals()[r.getArea()[i + l][j + m]->getAnimals().size() -
+                                                                        1]->setSpeed(1);
+                                r.getArea()[i + l][j + m]->getAnimals()[r.getArea()[i + l][j + m]->getAnimals().size() -
+                                                                        1]->setVida(
+                                        r.getArea()[i + l][j + m]->getAnimals()[
+                                                r.getArea()[i + l][j + m]->getAnimals().size() - 1]->getVida() + 1);
+                                r.getArea()[i + l][j + m]->setFood("none", 0);
+                                eaten = 1;
+                                break;
+                            }
+                        }
                     }
                 }
             }

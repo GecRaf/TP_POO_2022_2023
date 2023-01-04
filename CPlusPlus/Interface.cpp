@@ -974,7 +974,6 @@ void Interface::killAnimalById(Reserva &r, int id){
 
 void Interface::createFood(Reserva &r, string type, int line, int column) {
     r.getArea()[line][column]->setFood(type, r.getId());
-    increaseSimulatedTime(r);
 }
 
 void Interface::feedAnimal(Reserva &r, int lin, int col, string foodType, int nutritionPoints, int toxicityPoints) {

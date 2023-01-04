@@ -6,8 +6,6 @@
 #define TPPOO2223_ALIMENTOS_H
 
 #include "Utils.h"
-#include "Cell.h"
-#include "Reserva.h"
 
 class Alimentos {
 private:
@@ -26,12 +24,12 @@ public:
     int getDuracao() const{return duracao;}
     int getValorNutritivo() const{return valorNutritivo;}
     int getToxicidade() const {return toxicidade;}
-    void aumentaToxicidade(Animais a,Reserva r, int simulatedTime);
+    //void aumentaToxicidade(Animais a,Reserva r, int simulatedTime);
     void diminuiValorNutritivo();
     void operator= (Alimentos &alimentos);
     Alimentos(Alimentos *pAlimentos);
     int getId() const;
-    void AddRelva(string &type,Reserva &r);
+    //void AddRelva(string &type,Reserva &r);
     void setToxicidade(int toxicidade);
     void setValotNutritivo(int vn);
     void elimina(Alimentos &alimento);

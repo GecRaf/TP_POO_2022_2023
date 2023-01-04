@@ -3,8 +3,6 @@
 //
 
 #include "../Headers/Alimentos.h"
-#include "../Headers/Cell.h"
-#include "../Headers/Reserva.h"
 
 
 Alimentos::Alimentos(Alimentos &alimentos) : nome(alimentos.nome), duracao(alimentos.duracao),
@@ -37,16 +35,16 @@ int Alimentos::getId() const {
 }*/
 
 //apos 75% da sua vida gera uma relva nova
-void Alimentos::AddRelva(string &type,Reserva &r){
+/*void Alimentos::AddRelva(string &type,Reserva &r){
     if(type == "r") {
         if (getDuracao() % 75) {
 
             new Relva(id);
         }
     }
-}
+}*/
 
-void Alimentos::aumentaToxicidade(Animais a, Reserva r, int simulatedTime) {
+/*void Alimentos::aumentaToxicidade(Animais a, Reserva r, int simulatedTime) {
     if(getNome() == "t")
     {
        while(getToxicidade() <= 3){
@@ -57,11 +55,11 @@ void Alimentos::aumentaToxicidade(Animais a, Reserva r, int simulatedTime) {
     }
     else if(getNome() == "p")
     {
-        while(getToxicidade() == 2  /* * valor nutritivo inicial*/) {
+        while(getToxicidade() == 2   * valor nutritivo inicial) {
                 setToxicidade(getToxicidade()+1);
         }
     }
-}
+}*/
 
 void Alimentos::diminuiValorNutritivo() {
     if(getNome() == "p" || getNome() == "b")

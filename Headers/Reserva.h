@@ -43,6 +43,7 @@ public:
     const vector<Reserva *> &getHistory() const;
     const vector<vector<Cell *>> &getArea() const;
     void animalActions(Reserva &r);
+    void foodActions(Reserva &r);
 
     ~Reserva(); // Destructor
 };

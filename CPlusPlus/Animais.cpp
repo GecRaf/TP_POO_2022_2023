@@ -3,6 +3,9 @@
 //
 
 #include "../Headers/Animais.h"
+#include "../Terminal/Terminal.h"
+
+using namespace term;
 
 Animais::Animais(Animais &a) : id(a.id), vida(a.vida), peso(a.peso), especie(a.especie), saude(a.saude), fome(a.fome), vivo(a.vivo){}
 
@@ -121,11 +124,14 @@ void Animais::setPeso(float peso) {
 
 void Animais::addFoodHistory(Alimentos *food) {
     Alimentos* tmp = new Alimentos(food);
-    if(::realloc(foodHistory, sizeof(Alimentos)*foodHistorySize+1) != nullptr){
+
+    // Cast for realloc is necessary because realloc doesn't really know what type of pointer it is that is redimensioning
+    Alimentos* aux = (reinterpret_cast<Alimentos *>(std::realloc(foodHistory, sizeof(Alimentos) * (foodHistorySize + 1))));
+    if(aux != nullptr){
+        foodHistory = aux; // Buttlet proof typa shit
         foodHistorySize++;
         foodHistory[foodHistorySize-1] = tmp;
     }
-    //TODO: Test this later
 }
 
 int Animais::getBirthInstant() const {
@@ -138,6 +144,7 @@ int Animais::getId() const {
 
 string Animais::getInfo() {
     string info;
+    info += "\t\t[~] ID: " + to_string(getId()) + "\n";
     info += "\t[~] Specie: " + especie + "\n";
     info += "\t[~] Weight: " + to_string(peso) + "\n";
     info += "\t[~] Health: " + to_string(saude) + "\n",

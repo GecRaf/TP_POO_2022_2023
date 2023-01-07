@@ -3,9 +3,6 @@
 //
 
 #include "../Headers/Reserva.h"
-#include "../Terminal/Terminal.h"
-
-using namespace term;
 
 
 Reserva::Reserva(int nLin, int nCol, string filename) {
@@ -286,7 +283,7 @@ void Reserva::animalActions(Reserva &r) {
                     if(r.getArea()[i][j]->getFood() != nullptr && r.getArea()[i][j]->getAnimals()[k] != nullptr && r.getArea()[i][j]->getFood()->getCheiro() == "Verdura"){
                             r.getArea()[i][j]->getAnimals()[k]->setSaude(r.getArea()[i][j]->getAnimals()[k]->getSaude() + r.getArea()[i][j]->getFood()->getValorNutritivo() - r.getArea()[i][j]->getFood()->getToxicidade());
                             r.getArea()[i][j]->getAnimals()[k]->setFome(r.getArea()[i][j]->getAnimals()[k]->getFome() - r.getArea()[i][j]->getFood()->getValorNutritivo());
-                            //r.getArea()[i][j]->getAnimals()[k]->Animais::addFoodHistory(r.getArea()[i][j]->getFood());
+                            r.getArea()[i][j]->getAnimals()[k]->Animais::addFoodHistory(r.getArea()[i][j]->getFood());
                             r.addDeadElements(r.getArea()[i][j]->getFood()->getId());
                             r.getArea()[i][j]->setFood("none", 0);
                             eaten = 1;

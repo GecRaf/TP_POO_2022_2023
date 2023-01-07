@@ -103,7 +103,8 @@ string Cell::getAnimais(Cell *c){
         return info = "\t[~] Empty";
     }
     for (int i = 0; i < animais.size(); i++) {
-        info += "\t\t[~] Specie: " + animais[i]->getEspecie() + "\n";
+        info += "\t\t[~] ID: " + to_string(animais[i]->getId()) + "\n";
+        info += "\t[~] Specie: " + animais[i]->getEspecie() + "\n";
         info += "\t[~] Weight: " + to_string(animais[i]->getPeso()) + "\n";
         info += "\t[~] Health: " + to_string(animais[i]->getSaude()) + "\n",
         info += "\t[~] Life: " + to_string(animais[i]->getSaude()) + "\n";
@@ -115,7 +116,8 @@ string Cell::getAnimais(Cell *c){
 string Cell::getFoodString(Cell *c) {
     string info;
     if(c->food != nullptr) {
-        info += "\t\t[~] Name: " + food->getNome() + "\n";
+        info += "\t\t[~] ID: " + to_string(c->food->getId()) + "\n";
+        info += "\t[~] Name: " + food->getNome() + "\n";
         info += "\t[~] Duration: " + to_string(food->getDuracao()) + "\n";
         info += "\t[~] Nutritional value: " + to_string(food->getValorNutritivo()) + "\n";
         info += "\t[~] Toxicity: " + to_string(food->getToxicidade()) + "\n";
@@ -130,7 +132,7 @@ const vector<Animais *> &Cell::getAnimals() const {
     return animais;
 }
 
-Alimentos *Cell::getFood() const {
+Alimentos *Cell::getFood() {
     return food;
 }
 

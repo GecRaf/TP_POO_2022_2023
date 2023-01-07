@@ -16,14 +16,14 @@ private:
     int saude;
     int fome;
     float peso;
-    Alimentos* foodHistory = nullptr;
+    Alimentos* foodHistory;
     int foodHistorySize = 0;
     int birthInstant;
     bool vivo;
     int perception;
     int speed;
 public:
-    Animais(int id,int b,int v,int f,float p=0, string e= " ",int s=0, bool vivo = true, int perception = 0, int speed = 0): id(id),vida(v),peso(p),especie(e), saude(s), fome(f),vivo(vivo), perception(perception), speed(speed){}
+    Animais(int id,int b,int v,int f,float p=0, string e= " ",int s=0, bool vivo = true, int perception = 0, int speed = 0): id(id),vida(v),peso(p),especie(e), saude(s), fome(f),vivo(vivo), perception(perception), speed(speed){foodHistory = nullptr;}
     Animais(Animais &a);
     int getVida() const {return vida;}
     int getSaude() const {return saude;}

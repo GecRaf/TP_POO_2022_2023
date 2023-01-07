@@ -22,7 +22,7 @@ public:
     ~Cell();
     string getAnimais(Cell *c);
     const vector<Animais *> &getAnimals() const;
-    Alimentos *getFood() const;
+    Alimentos *getFood();
     void setFood(string type, int id);
     void setAnimal(string specie, int instant, int id);
     void removeAnimal(int id);

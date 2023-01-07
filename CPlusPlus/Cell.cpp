@@ -15,17 +15,42 @@ Cell::Cell(int Lin, int Col) {
     this->food = nullptr;
 }
 
-void Cell::setAnimal(string specie, int instant, int id) { //TODO: Apply default values for animals
+void Cell::setAnimal(string specie, int instant, int id, int saude, int vida, int fome, float peso) {
     if(specie == "c"){
-        animais.push_back(new Coelho(id,instant,100, 0));
+        if(saude != 0 && fome != 0 && vida != 0 && peso != 0.0){
+            animais.push_back(new Coelho(instant, id, saude, vida, fome, peso));
+        }
+        else{
+            animais.push_back(new Coelho(id,instant));
+        }
     }else if(specie == "o"){
-        animais.push_back(new Ovelha(id,instant,100, 0));
+        if(saude != 0 && fome != 0 && vida != 0 && peso != 0.0){
+            animais.push_back(new Ovelha(instant, id, saude, vida, fome, peso));
+        }
+        else{
+            animais.push_back(new Ovelha(id,instant));
+        }
     }else if(specie == "l") {
-        animais.push_back(new Lobo(id,instant,100, 0));
+        if(saude != 0 && fome != 0 && vida != 0 && peso != 0.0){
+            animais.push_back(new Lobo(instant, id, saude, vida, fome, peso));
+        }
+        else{
+            animais.push_back(new Lobo(id,instant));
+        }
     }else if(specie == "g") {
-        animais.push_back(new Canguru(id,instant,100, 0, 0));
+        if(saude != 0 && fome != 0 && vida != 0 && peso != 0.0){
+            animais.push_back(new Canguru(instant, id, saude, vida, fome, peso));
+        }
+        else{
+            animais.push_back(new Canguru(id,instant));
+        }
     }else if(specie == "m"){
-        animais.push_back(new Preguica(id,instant,100, 0));
+        if(saude != 0 && fome != 0 && vida != 0 && peso != 0.0){
+            animais.push_back(new Preguica(instant, id, saude, vida, fome, peso));
+        }
+        else{
+            animais.push_back(new Preguica(id,instant));
+        }
     }
 }
 
@@ -69,7 +94,7 @@ string Cell::getInfo(Cell *c) {
         animals += "Empty";
     }else{
         for (int i = 0; i < c->animais.size(); i++) {
-            if(i < 3)
+            if(i < 3 && !c->animais[i]->getInvisible())
                 animals += c->animais[i]->getEspecie();
         }
         if(c->animais.size() > 3){
@@ -121,6 +146,7 @@ string Cell::getFoodString(Cell *c) {
         info += "\t[~] Duration: " + to_string(food->getDuracao()) + "\n";
         info += "\t[~] Nutritional value: " + to_string(food->getValorNutritivo()) + "\n";
         info += "\t[~] Toxicity: " + to_string(food->getToxicidade()) + "\n";
+        // Iterate through the food smell array
         info += "\t[~] Smell: " + food->getCheiro() + "\n";
     }else{
         return info += "\t[~] Empty\n";

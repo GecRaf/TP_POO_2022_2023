@@ -10,20 +10,21 @@ using namespace term;
 Animais::Animais(Animais &a) : id(a.id), vida(a.vida), peso(a.peso), especie(a.especie), saude(a.saude), fome(a.fome), vivo(a.vivo){}
 
 bool Animais::FicaVivo(int simulatedTime) {
+    //TODO: Call this function every instant
     if (getEspecie() == "C"){
-        if(getSaude()<=0 || birthInstant - simulatedTime == 30){
+        if(getSaude() == 0 || birthInstant - simulatedTime == 30){
             setVida(0);
             return false;
         }
     }
     else if(getEspecie() == "O"){
-        if (getSaude() <= 0 || birthInstant - simulatedTime == 35){
+        if (getSaude() == 0 || birthInstant - simulatedTime == 35){
             setVida(0);
             return false;
         }
     }
     else if(getEspecie() == "L"){
-        if (getSaude() <= 0){
+        if (getSaude() == 0){
             setVida(0);
             return false;
         }
@@ -35,7 +36,7 @@ bool Animais::FicaVivo(int simulatedTime) {
         }
     }
     else if(getEspecie() =="P"){
-        if(getSaude() <= 0){
+        if(getSaude() == 0){
             setVida(0);
             return false;
         }
@@ -109,6 +110,10 @@ void Animais::setVida(int vida) {
 void Animais::setSaude(int saude) {
     if(saude > 100)
         saude = 100;
+    if(saude < 0){
+        saude = 0;
+
+    }
     Animais::saude = saude;
 }
 
@@ -163,10 +168,9 @@ string Animais::getInfo() {
 
 void Animais::feed(int idFood,string foodType, int nutritionPoints, int toxicityPoints){
     Alimentos* tmp = new Alimentos(idFood, foodType, 30, nutritionPoints, toxicityPoints, "User");
-    //addFoodHistory(*tmp); // TODO: Test this later
+    addFoodHistory(tmp);
     setSaude(getSaude() + nutritionPoints - toxicityPoints);
     setFome(getFome() - nutritionPoints);
-    // TODO: Test this later
 }
 
 void Animais::setVivo(bool Vivo) {
@@ -188,4 +192,24 @@ int Animais::getSpeed() const {
 
 void Animais::setSpeed(int speed) {
     Animais::speed = speed;
+}
+
+int Animais::getMotherID() const {
+    return 0;
+}
+
+bool Animais::getInvisible() const {
+    return false;
+}
+
+void Animais::setInvisible(bool invisible) {
+
+}
+
+int Animais::getInvisibleTime() const {
+    return 0;
+}
+
+void Animais::setInvisibleTime(int invisibleTime) {
+
 }

@@ -19,6 +19,30 @@ private:
     vector<Reserva *> history;                                  // Vector to store game states
     vector< vector<Cell*>> area;                                // Vector to store the cells
     vector<int> deadElements;                                   // Vector to store the dead elements
+
+    int SCoelho = 0;
+    int SOvelha = 0;
+    int SLobo = 0;
+    int SCanguru = 0;
+    int SPreguica = 0;
+
+    int VCoelho = 0;
+    int VOvelha = 0;
+    int VLobo = 0;
+    int VCanguru = 0;
+    int VPreguica = 0;
+
+    int FCoelho = 0;
+    int FOvelha = 0;
+    int FLobo = 0;
+    int FCanguru = 0;
+    int FPreguica = 0;
+
+    float PCoelho = 0.0;
+    float POvelha = 0.0;
+    float PLobo = 0.0;
+    float PCanguru = 0.0;
+    float PPreguica = 0.0;
 public:
 
     Reserva()=default;                                          // Default constructor, applies predefined size
@@ -47,6 +71,26 @@ public:
     void addDeadElements(int deadElement);
     void animalActions(Reserva &r);
     void foodActions(Reserva &r);
+    int getSCoelho() const;
+    int getSOvelha() const;
+    int getSLobo() const;
+    int getSCanguru() const;
+    int getSPreguica() const;
+    int getVCoelho() const;
+    int getVOvelha() const;
+    int getVLobo() const;
+    int getVCanguru() const;
+    int getVPreguica() const;
+    int getFCoelho() const;
+    int getFOvelha() const;
+    int getFLobo() const;
+    int getFCanguru() const;
+    int getFPreguica() const;
+    float getPCoelho() const;
+    float getPOvelha() const;
+    float getPLobo() const;
+    float getPCanguru() const;
+    float getPPreguica() const;
 
     ~Reserva(); // Destructor
 };

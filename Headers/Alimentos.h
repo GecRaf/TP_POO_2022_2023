@@ -38,7 +38,8 @@ public:
 
 class Relva : public Alimentos {
 public:
-    Relva(int id):Alimentos(id,"R",20,3,0,{"Erva", "Verdura"}){};
+    Relva(int id):Alimentos(id,"R",20,3,0,"Erva"){};
+    // TODO: How to implement an array of strings for both smells?
     //faz aparecer outra relva 75% numa posicao proximo entre 4 e 8, se ja estiver la algum alimento tenta again no instante seguinte
 };
 

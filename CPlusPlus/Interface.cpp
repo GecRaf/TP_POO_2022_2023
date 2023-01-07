@@ -61,19 +61,18 @@ void Interface::initInterface() {
     t << "\n";
 
     // Open file constantes.txt if it exists
-    filename = "/Users/rafaelcouto/Documents/TP_POO_Animals/constantes.txt";
+    filename = "/Users/rafaelcouto/Documents/POO_TP/constantes.txt";
     ifstream file(filename);
     if(file){
-        t << "[~] File ' constantes.txt ' found.\n";
-        t << "[~] Reading file...\n";
-        t << "[~] File constantes.txt read successfully.\n";
+        t << "\n\t[~] File ' constantes.txt ' found.\n";
+        t << "\n\t[~] Initializing reserve with values loaded from file...\n";
         sleep(2);
         Reserva r(NL, NC, filename);
         showMatrix(r);
         commandReader(r);
     } else {
-        t << "[~] File ' constantes.txt ' not found.\n";
-        t << "[~] Initializing reserve with default values...\n";
+        t << "\n\t[~] File ' constantes.txt ' not found.\n";
+        t << "\n\t[~] Initializing reserve with default values...\n";
         sleep(2);
         Reserva r(NL, NC);
         showMatrix(r);
@@ -652,7 +651,7 @@ void Interface::commandReader(Reserva &r, string fileCommand) {
             // List all animals in the area
             for(int i = 0; i < r.getNL(); i++){
                 for(int j = 0; j < r.getNC(); j++){
-                    if(r.getArea()[i][j]->getAnimais(r.getArea()[i][j]) != "Empty"){
+                    if(r.getArea()[i][j]->getAnimais(r.getArea()[i][j]) != "\t[~] Empty"){
                         t << r.getArea()[i][j]->getAnimais(r.getArea()[i][j]);
                     }
                 }
@@ -663,7 +662,7 @@ void Interface::commandReader(Reserva &r, string fileCommand) {
             // Based on the topLeftCorner X and Y and viewWindow, calculate the visible area and print the animals in that area
             for(int i = r.getTopLeftCornerX(); i < r.getTopLeftCornerX() + r.getViewWindow(); i++){
                 for(int j = r.getTopLeftCornerY(); j < r.getTopLeftCornerY() + r.getViewWindow(); j++){
-                    if(r.getArea()[i][j]->getAnimais(r.getArea()[i][j]) != "Empty"){
+                    if(r.getArea()[i][j]->getAnimais(r.getArea()[i][j]) != "\t[~] Empty"){
                         t << r.getArea()[i][j]->getAnimais(r.getArea()[i][j]);
                     }
                 }
@@ -948,7 +947,104 @@ int Interface::checkID(Reserva &r, int id) {
 }
 
 void Interface::createAnimal(Reserva &r, string specie, int line, int column) {
-    r.getArea()[line][column]->setAnimal(specie, r.getSimulatedTime(), r.getId());
+    int SCoelho = 0;
+    int SOvelha = 0;
+    int SLobo = 0;
+    int SCanguru = 0;
+    int SPreguica = 0;
+
+    int VCoelho = 0;
+    int VOvelha = 0;
+    int VLobo = 0;
+    int VCanguru = 0;
+    int VPreguica = 0;
+
+    int FCoelho = 0;
+    int FOvelha = 0;
+    int FLobo = 0;
+    int FCanguru = 0;
+    int FPreguica = 0;
+
+    float PCoelho = 0.0;
+    float POvelha = 0.0;
+    float PLobo = 0.0;
+    float PCanguru = 0.0;
+    float PPreguica = 0.0;
+
+    if(specie == "c"){
+        if(r.getFCoelho() != 0){
+            SCoelho = r.getSCoelho();
+        }
+        if(r.getVCoelho() != 0){
+            VCoelho = r.getVCoelho();
+        }
+        if(r.getFCoelho() != 0){
+            FCoelho = r.getFCoelho();
+        }
+        if(r.getPCoelho() != 0.0){
+            PCoelho = r.getPCoelho();
+        }
+        r.getArea()[line][column]->setAnimal(specie, r.getSimulatedTime(), r.getId(), SCoelho, VCoelho, FCoelho, PCoelho);
+    }else if(specie == "o"){
+        if(r.getFOvelha() != 0){
+            SOvelha = r.getSOvelha();
+        }
+        if(r.getVOvelha() != 0){
+            VOvelha = r.getVOvelha();
+        }
+        if(r.getFOvelha() != 0){
+            FOvelha = r.getFOvelha();
+        }
+        if(r.getPOvelha() != 0.0){
+            POvelha = r.getPOvelha();
+        }
+        r.getArea()[line][column]->setAnimal(specie, r.getSimulatedTime(), r.getId(), SOvelha, VOvelha, FOvelha, POvelha);
+    }
+    else if(specie == "l"){
+        if(r.getFLobo() != 0){
+            SLobo = r.getSLobo();
+        }
+        if(r.getVLobo() != 0){
+            VLobo = r.getVLobo();
+        }
+        if(r.getFLobo() != 0){
+            FLobo = r.getFLobo();
+        }
+        if(r.getPLobo() != 0.0){
+            PLobo = r.getPLobo();
+        }
+        r.getArea()[line][column]->setAnimal(specie, r.getSimulatedTime(), r.getId(), SLobo, VLobo, FLobo, PLobo);
+    }
+    else if(specie == "g"){
+        if(r.getFCanguru() != 0){
+            SCanguru = r.getSCanguru();
+        }
+        if(r.getVCanguru() != 0){
+            VCanguru = r.getVCanguru();
+        }
+        if(r.getFCanguru() != 0){
+            FCanguru = r.getFCanguru();
+        }
+        if(r.getPCanguru() != 0.0){
+            PCanguru = r.getPCanguru();
+        }
+        r.getArea()[line][column]->setAnimal(specie, r.getSimulatedTime(), r.getId(), SCanguru, VCanguru, FCanguru, PCanguru);
+    }
+    else if(specie == "m"){
+        if(r.getFPreguica() != 0){
+            SPreguica = r.getSPreguica();
+        }
+        if(r.getVPreguica() != 0){
+            VPreguica = r.getVPreguica();
+        }
+        if(r.getFPreguica() != 0){
+            FPreguica = r.getFPreguica();
+        }
+        if(r.getPPreguica() != 0.0){
+            PPreguica = r.getPPreguica();
+        }
+        r.getArea()[line][column]->setAnimal(specie, r.getSimulatedTime(), r.getId(), SPreguica, VPreguica, FPreguica, PPreguica);
+    }
 }
 
 void Interface::killAnimal(Reserva &r, int lin, int col) {

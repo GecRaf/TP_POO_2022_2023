@@ -24,7 +24,7 @@ public:
     const vector<Animais *> &getAnimals() const;
     Alimentos *getFood();
     void setFood(string type, int id);
-    void setAnimal(string specie, int instant, int id);
+    void setAnimal(string specie, int instant, int id, int saude, int vida, int fome, float peso);
     void removeAnimal(int id);
     void copyNewAnimal(Animais *a);
     void removeFood(int id);

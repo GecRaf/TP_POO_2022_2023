@@ -3,13 +3,15 @@
 //
 
 #include "../Headers/Reserva.h"
+#include "../Terminal/Terminal.h"
 
+using namespace term;
 
 Reserva::Reserva(int nLin, int nCol, string filename) {
     Terminal &t = Terminal::instance();
     NL = nLin;
     NC = nCol;
-    vector<Cell*> tmp;
+    vector<Cell *> tmp;
 
     for (int i = 0; i < NL; i++) {
         for (int j = 0; j < NC; j++) {
@@ -25,116 +27,92 @@ Reserva::Reserva(int nLin, int nCol, string filename) {
         Animais *a;
 
         readData.open(filename);
-        while(getline(readData,aux)){
-
+        while (getline(readData, aux)) {
             istringstream iss(aux);
-            t << "\nAUX: " << aux << "\n";
             int iAux;
             float fAux;
             string specie;
             iss >> specie;
-            t << "SPECIE: " << specie << "\n";
-            if(specie[0] == 'S'){
-                if(specie == "SCoelho"){
+            if (specie[0] == 'S') {
+                if (specie == "SCoelho") {
                     iss >> iAux;
-                    // TODO: Apply default health value for Coelho
-                    t << "iAux SCoelho: " << iAux << "\n";
-                }else if(specie == "SOvelha"){
+                    SCoelho = iAux;
+                } else if (specie == "SOvelha") {
                     iss >> iAux;
-                    // TODO: Apply default health value for Ovelha
-                    t << "iAux SOvelha: " << iAux << "\n";
-                }else if(specie == "SLobo"){
+                    SOvelha = iAux;
+                } else if (specie == "SLobo") {
                     iss >> iAux;
-                    // TODO: Apply default health value for Lobo
-                    t << "iAux SLobo: " << iAux << "\n";
-                }else if(specie == "SCaranguejo"){
+                    SCoelho = iAux;
+                } else if (specie == "SCaranguejo") {
                     iss >> iAux;
-                    // TODO: Apply default health value for Canguru
-                    t << "iAux SCanguru: " << iAux << "\n";
-                }else if(specie == "SPreguica"){
+                    SCanguru = iAux;
+                } else if (specie == "SPreguica") {
                     iss >> iAux;
-                    // TODO: Apply default health value for Preguica
-                    t << "iAux SPreguica: " << iAux << "\n";
+                    SPreguica = iAux;
                 }
-            }
-            else if(specie[0] == 'V') {
-                if(specie == "VCoelho"){
+            } else if (specie[0] == 'V') {
+                if (specie == "VCoelho") {
                     iss >> iAux;
-                    // TODO: Apply default life value for Coelho
-                    t << "iAux VCoelho: " << iAux << "\n";
-                }else if(specie == "VOvelha"){
+                    VCoelho = iAux;
+                } else if (specie == "VOvelha") {
                     iss >> iAux;
-                    // TODO: Apply default life value for Ovelha
-                    t << "iAux VOvelha: " << iAux << "\n";
-                }else if(specie == "VLobo"){
+                    VOvelha = iAux;
+                } else if (specie == "VLobo") {
                     iss >> iAux;
-                    // TODO: Apply default life value for Lobo
-                    t << "iAux VLobo: " << iAux << "\n";
-                }else if(specie == "VCaranguejo"){
+                    VLobo = iAux;
+                } else if (specie == "VCanguru") {
                     iss >> iAux;
-                    // TODO: Apply default life value for Canguru
-                    t << "iAux VCanguru: " << iAux << "\n";
-                }else if(specie == "VPreguica"){
+                    VCanguru = iAux;
+                } else if (specie == "VPreguica") {
                     iss >> iAux;
-                    // TODO: Apply default life value for Preguica
-                    t << "iAux VPreguica: " << iAux << "\n";
+                    VPreguica = iAux;
                 }
-            }
-            else if(specie[0] == 'F') {
-                if(specie == "FCoelho"){
+            } else if (specie[0] == 'F') {
+                if (specie == "FCoelho") {
                     iss >> iAux;
-                    // TODO: Apply default hunger value for Coelho
-                    t << "iAux FCoelho: " << iAux << "\n";
-                }else if(specie == "FOvelha"){
+                    FCoelho = iAux;
+                } else if (specie == "FOvelha") {
                     iss >> iAux;
-                    // TODO: Apply default hunger value for Ovelha
-                    t << "iAux FOvelha: " << iAux << "\n";
-                }else if(specie == "FLobo"){
+                    FOvelha = iAux;
+                } else if (specie == "FLobo") {
                     iss >> iAux;
-                    // TODO: Apply default hunger value for Lobo
-                    t << "iAux FLobo: " << iAux << "\n";
-                }else if(specie == "FCaranguejo"){
+                    FLobo = iAux;
+                } else if (specie == "FCanguru") {
                     iss >> iAux;
-                    // TODO: Apply default hunger value for Canguru
-                    t << "iAux FCanguru: " << iAux << "\n";
-                }else if(specie == "FPreguica"){
+                    FCanguru = iAux;
+                } else if (specie == "FPreguica") {
                     iss >> iAux;
-                    // TODO: Apply default hunger value for Preguica
-                    t << "iAux FPreguica: " << iAux << "\n";
+                    FPreguica = iAux;
                 }
-            }
-            else if(specie[0] == 'P') {
-                if(specie == "PCoelho"){
+            } else if (specie[0] == 'P') {
+                if (specie == "PCoelho") {
                     iss >> fAux;
-                    // TODO: Apply default weight value for Coelho
-                    t << "fAux PCoelho: " << fAux << "\n";
-                }else if(specie == "POvelha"){
+                    PCoelho = fAux;
+                } else if (specie == "POvelha") {
                     iss >> fAux;
-                    // TODO: Apply default weight value for Ovelha
-                    t << "fAux POvelha: " << fAux << "\n";
-                }else if(specie == "PLobo"){
+                    POvelha = fAux;
+                } else if (specie == "PLobo") {
                     iss >> fAux;
-                    // TODO: Apply default weight value for Lobo
-                    t << "fAux PLobo: " << fAux << "\n";
-                }else if(specie == "PCaranguejo"){
+                    PLobo = fAux;
+                } else if (specie == "PCanguru") {
                     iss >> iAux;
-                    // TODO: Apply default weight value for Canguru
-                    t << "fAux PCanguru: " << fAux << "\n";
-                }else if(specie == "PPreguica"){
+                    PCanguru = iAux;
+                } else if (specie == "PPreguica") {
                     iss >> fAux;
-                    // TODO: Apply default weight value for Preguica
-                    t << "fAux PPreguica: " << fAux << "\n";
+                    PPreguica = fAux;
                 }
             }
         }
         readData.close();
+        t << "\n\t[~] Default values loaded from file " << filename << "\n";
         sleep(5); // Just for debug
     }
 }
 
 Reserva::Reserva(Reserva &Reserva) : NL(Reserva.NL), NC(Reserva.NC), topLeftCornerX(Reserva.topLeftCornerX),
-                    topLeftCornerY(Reserva.topLeftCornerY), id(Reserva.id), simulatedTime(Reserva.simulatedTime),
-                    name(Reserva.name), history(Reserva.history) {
+                                     topLeftCornerY(Reserva.topLeftCornerY), id(Reserva.id),
+                                     simulatedTime(Reserva.simulatedTime),
+                                     name(Reserva.name), history(Reserva.history) {
     area.clear();
     for (int i = 0; i < NL; i++) {
         vector<Cell *> tmp;
@@ -215,56 +193,56 @@ void Reserva::addDeadElements(int deadElement) {
 }
 
 void Reserva::animalActions(Reserva &r) {
+    Terminal &t = Terminal::instance();
+
+    // TODO: Call function ficaVivo()?
+
     // Start by increasing the fome of all animals
     for (int i = 0; i < r.getNL(); i++) {
         for (int j = 0; j < r.getNC(); j++) {
             for (int k = 0; k < r.getArea()[i][j]->getAnimals().size(); k++) {
-                if(r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "C" || r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "O" ||
-                   r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "M"){
+                if (r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "C" ||
+                    r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "O" ||
+                    r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "M") {
                     r.getArea()[i][j]->getAnimals()[k]->setFome(r.getArea()[i][j]->getAnimals()[k]->getFome() + 1);
-                }
-                else if(r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "L"){
+                } else if (r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "L") {
                     r.getArea()[i][j]->getAnimals()[k]->setFome(r.getArea()[i][j]->getAnimals()[k]->getFome() + 2);
                 }
             }
         }
     }
 
-
     // Now, check again all animals and see how much fome they have
     for (int i = 0; i < r.getNL(); i++) {
         for (int j = 0; j < r.getNC(); j++) {
             for (int k = 0; k < r.getArea()[i][j]->getAnimals().size(); k++) {
-                if(r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "C"){
-                    if(r.getArea()[i][j]->getAnimals()[k]->getFome() > 10){
+                if (r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "C") {
+                    if (r.getArea()[i][j]->getAnimals()[k]->getFome() > 10) {
                         r.getArea()[i][j]->getAnimals()[k]->setSpeed(random() % 3 + 1);
                         r.getArea()[i][j]->getAnimals()[k]->setVida(r.getArea()[i][j]->getAnimals()[k]->getVida() - 1);
-                    }else if(r.getArea()[i][j]->getAnimals()[k]->getFome() > 20){
+                    } else if (r.getArea()[i][j]->getAnimals()[k]->getFome() > 20) {
                         r.getArea()[i][j]->getAnimals()[k]->setSpeed(random() % 4 + 1);
                         r.getArea()[i][j]->getAnimals()[k]->setVida(r.getArea()[i][j]->getAnimals()[k]->getVida() - 2);
                     }
-                }
-                else if(r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "O"){
-                    if(r.getArea()[i][j]->getAnimals()[k]->getFome() > 15){
+                } else if (r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "O") {
+                    if (r.getArea()[i][j]->getAnimals()[k]->getFome() > 15) {
                         r.getArea()[i][j]->getAnimals()[k]->setSpeed(random() % 2 + 1);
                         r.getArea()[i][j]->getAnimals()[k]->setVida(r.getArea()[i][j]->getAnimals()[k]->getVida() - 1);
-                    }else if(r.getArea()[i][j]->getAnimals()[k]->getFome() > 20){
+                    } else if (r.getArea()[i][j]->getAnimals()[k]->getFome() > 20) {
                         r.getArea()[i][j]->getAnimals()[k]->setVida(r.getArea()[i][j]->getAnimals()[k]->getVida() - 2);
                     }
-                }
-                else if(r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "L"){
-                    if(r.getArea()[i][j]->getAnimals()[k]->getFome() > 15){
+                } else if (r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "L") {
+                    if (r.getArea()[i][j]->getAnimals()[k]->getFome() > 15) {
                         r.getArea()[i][j]->getAnimals()[k]->setSpeed(2);
                         r.getArea()[i][j]->getAnimals()[k]->setVida(r.getArea()[i][j]->getAnimals()[k]->getVida() - 1);
-                    }else if(r.getArea()[i][j]->getAnimals()[k]->getFome() > 25){
+                    } else if (r.getArea()[i][j]->getAnimals()[k]->getFome() > 25) {
                         r.getArea()[i][j]->getAnimals()[k]->setVida(r.getArea()[i][j]->getAnimals()[k]->getVida() - 2);
                     }
-                }
-                else if(r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "G"){
-                    if(r.getArea()[i][j]->getAnimals()[k]->getFome() > 15){
+                } else if (r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "G") {
+                    if (r.getArea()[i][j]->getAnimals()[k]->getFome() > 15) {
                         r.getArea()[i][j]->getAnimals()[k]->setSpeed(2);
                         r.getArea()[i][j]->getAnimals()[k]->setVida(r.getArea()[i][j]->getAnimals()[k]->getVida() - 1);
-                    }else if(r.getArea()[i][j]->getAnimals()[k]->getFome() > 25){
+                    } else if (r.getArea()[i][j]->getAnimals()[k]->getFome() > 25) {
                         r.getArea()[i][j]->getAnimals()[k]->setVida(r.getArea()[i][j]->getAnimals()[k]->getVida() - 2);
                     }
                 }
@@ -275,33 +253,164 @@ void Reserva::animalActions(Reserva &r) {
     for (int i = 0; i < r.getNL(); i++) {
         for (int j = 0; j < r.getNC(); j++) {
             for (int k = 0; k < r.getArea()[i][j]->getAnimals().size(); k++) {
-                if(r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "C"){
+                if (r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "C") {
                     int perception = r.getArea()[i][j]->getAnimals()[k]->getPerception();
                     int speed = r.getArea()[i][j]->getAnimals()[k]->getSpeed();
-                    int eaten = 0;
+                    int eaten = 0, animalSpotted = 0;
 
-                    if(r.getArea()[i][j]->getFood() != nullptr && r.getArea()[i][j]->getAnimals()[k] != nullptr && r.getArea()[i][j]->getFood()->getCheiro() == "Verdura"){
-                            r.getArea()[i][j]->getAnimals()[k]->setSaude(r.getArea()[i][j]->getAnimals()[k]->getSaude() + r.getArea()[i][j]->getFood()->getValorNutritivo() - r.getArea()[i][j]->getFood()->getToxicidade());
-                            r.getArea()[i][j]->getAnimals()[k]->setFome(r.getArea()[i][j]->getAnimals()[k]->getFome() - r.getArea()[i][j]->getFood()->getValorNutritivo());
-                            r.getArea()[i][j]->getAnimals()[k]->Animais::addFoodHistory(r.getArea()[i][j]->getFood());
-                            r.addDeadElements(r.getArea()[i][j]->getFood()->getId());
-                            r.getArea()[i][j]->setFood("none", 0);
-                            eaten = 1;
+                    if (r.getArea()[i][j]->getFood() != nullptr && r.getArea()[i][j]->getAnimals()[k] != nullptr &&
+                        r.getArea()[i][j]->getFood()->getCheiro() == "Verdura") {
+                        r.getArea()[i][j]->getAnimals()[k]->setSaude(r.getArea()[i][j]->getAnimals()[k]->getSaude() +
+                                                                     r.getArea()[i][j]->getFood()->getValorNutritivo() -
+                                                                     r.getArea()[i][j]->getFood()->getToxicidade());
+                        r.getArea()[i][j]->getAnimals()[k]->setFome(r.getArea()[i][j]->getAnimals()[k]->getFome() -
+                                                                    r.getArea()[i][j]->getFood()->getValorNutritivo());
+                        r.getArea()[i][j]->getAnimals()[k]->Animais::addFoodHistory(r.getArea()[i][j]->getFood());
+                        r.addDeadElements(r.getArea()[i][j]->getFood()->getId());
+                        r.getArea()[i][j]->setFood("none", 0);
+                        eaten = 1;
                     }
 
-                    if(eaten == 0){
+                    if (eaten == 0) {
+                        // Check if there is another animal in the perception area
+                        for (int l = i - perception; l <= i + perception; l++) {
+                            for (int m = j - perception; m <= j + perception; m++) {
+                                if (l >= 0 && l < r.getNL() && m >= 0 && m < r.getNC()) {
+                                    for (int n = 0; n < r.getArea()[l][m]->getAnimals().size(); n++) {
+                                        if (r.getArea()[l][m]->getAnimals()[n]->getPeso() > 10) {
+                                            // Run away from the animal
+                                            if (l < i) {
+                                                if (m < j) {
+                                                    if (i + speed < r.getNL() && j + speed < r.getNC()) {
+                                                        t << "Estou a correr para a direita e para baixo" << "\n";
+                                                        t << "Estou na posicao " << i << " " << j << "\n";
+                                                        r.getArea()[i + speed][j + speed]->copyNewAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]);
+                                                        r.getArea()[i][j]->removeAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                        t << "Vou para a posicao " << i + speed << " " << j + speed
+                                                          << "\n";
+                                                        animalSpotted = 1;
+                                                    }
+                                                } else if (m > j) {
+                                                    if (i + speed < r.getNL() && j - speed >= 0) {
+                                                        t << "Estou a correr para a esquerda e para baixo" << "\n";
+                                                        t << "Estou na posicao " << i << " " << j << "\n";
+                                                        r.getArea()[i + speed][j - speed]->copyNewAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]);
+                                                        r.getArea()[i][j]->removeAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                        t << "Vou para a posicao " << i + speed << " " << j - speed
+                                                          << "\n";
+                                                        animalSpotted = 1;
+                                                    }
+                                                } else {
+                                                    if (i + speed < r.getNL()) {
+                                                        t << "Estou a correr para a direita" << "\n";
+                                                        t << "Estou na posicao " << i << " " << j << "\n";
+                                                        r.getArea()[i + speed][j]->copyNewAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]);
+                                                        r.getArea()[i][j]->removeAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                        t << "Vou para a posicao " << i + speed << " " << j << "\n";
+                                                        animalSpotted = 1;
+                                                    }
+                                                }
+                                            } else if (l > i) {
+                                                if (m < j) {
+                                                    if (i - speed >= 0 && j + speed < r.getNC()) {
+                                                        t << "Estou a correr para a esquerda e para baixo" << "\n";
+                                                        t << "Estou na posicao " << i << " " << j << "\n";
+                                                        r.getArea()[i - speed][j + speed]->copyNewAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]);
+                                                        r.getArea()[i][j]->removeAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                        t << "Vou para a posicao " << i - speed << " " << j + speed
+                                                          << "\n";
+                                                        animalSpotted = 1;
+                                                    }
+                                                } else if (m > j) {
+                                                    if (i - speed >= 0 && j - speed >= 0) {
+                                                        t << "Estou a correr para a esquerda e para cima" << "\n";
+                                                        t << "Estou na posicao " << i << " " << j << "\n";
+                                                        r.getArea()[i - speed][j - speed]->copyNewAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]);
+                                                        r.getArea()[i][j]->removeAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                        t << "Vou para a posicao " << i - speed << " " << j - speed
+                                                          << "\n";
+                                                        animalSpotted = 1;
+                                                    }
+                                                } else {
+                                                    if (j - speed >= 0) {
+                                                        t << "Estou a correr para a esquerda" << "\n";
+                                                        t << "Estou na posicao " << i << " " << j << "\n";
+                                                        r.getArea()[i][j - speed]->copyNewAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]);
+                                                        r.getArea()[i][j]->removeAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                        t << "Vou para a posicao " << i - speed << " " << j << "\n";
+                                                        animalSpotted = 1;
+                                                    }
+                                                }
+                                            } else {
+                                                if (m < j) {
+                                                    if (j + speed < r.getNC()) {
+                                                        t << "Estou a correr para baixo" << "\n";
+                                                        t << "Estou na posicao " << i << " " << j << "\n";
+                                                        r.getArea()[i][j + speed]->copyNewAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]);
+                                                        r.getArea()[i][j]->removeAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                        t << "Vou para a posicao " << i << " " << j + speed << "\n";
+                                                        animalSpotted = 1;
+                                                    }
+                                                } else if (m > j) {
+                                                    if (j - speed >= 0) {
+                                                        t << "Estou a correr para cima" << "\n";
+                                                        t << "Estou na posicao " << i << " " << j << "\n";
+                                                        r.getArea()[i][j - speed]->copyNewAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]);
+                                                        r.getArea()[i][j]->removeAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                        t << "Vou para a posicao " << i << " " << j - speed << "\n";
+                                                        animalSpotted = 1;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (animalSpotted == 1) {
+                                        break;
+                                    }
+                                }
+                            }
+                            if (animalSpotted == 1) {
+                                break;
+                            }
+                        }
+                    }
+
+                    if (eaten == 0 && animalSpotted == 0) {
                         for (int l = i; l < i + perception; l++) {
                             for (int m = j; m < j + perception; m++) {
-                                if(i + l < r.getNL() && j + m < r.getNC()){
-                                    if(r.getArea()[l][m]->getFood() != nullptr && r.getArea()[l][m]->getFood()->getCheiro() == "Verdura"){
+                                if (i + l < r.getNL() && j + m < r.getNC()) {
+                                    if (r.getArea()[l][m]->getFood() != nullptr &&
+                                        r.getArea()[l][m]->getFood()->getCheiro() == "Verdura") {
                                         //Check if the cell in question is within the animal's perception
-                                        if(l <= i + perception && m <= j + perception){
+                                        if (l <= i + perception && m <= j + perception) {
                                             // Check if the cell in question is within the animal's speed
-                                            if(l <= i + speed && m <= j + speed){
-                                                r.getArea()[i][j]->getAnimals()[k]->setSaude(r.getArea()[i][j]->getAnimals()[k]->getSaude() + r.getArea()[l][m]->getFood()->getValorNutritivo() - r.getArea()[l][m]->getFood()->getToxicidade());
-                                                r.getArea()[i][j]->getAnimals()[k]->setFome(r.getArea()[i][j]->getAnimals()[k]->getFome() - r.getArea()[l][m]->getFood()->getValorNutritivo());
+                                            if (l <= i + speed && m <= j + speed) {
+                                                r.getArea()[i][j]->getAnimals()[k]->setSaude(
+                                                        r.getArea()[i][j]->getAnimals()[k]->getSaude() +
+                                                        r.getArea()[l][m]->getFood()->getValorNutritivo() -
+                                                        r.getArea()[l][m]->getFood()->getToxicidade());
+                                                r.getArea()[i][j]->getAnimals()[k]->setFome(
+                                                        r.getArea()[i][j]->getAnimals()[k]->getFome() -
+                                                        r.getArea()[l][m]->getFood()->getValorNutritivo());
                                                 r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
-                                                r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                r.getArea()[i][j]->removeAnimal(
+                                                        r.getArea()[i][j]->getAnimals()[k]->getId());
                                                 //r.getArea()[i][j]->getAnimals()[k]->Animais::addFoodHistory(r.getArea()[l][m]->getFood());
                                                 r.addDeadElements(r.getArea()[l][m]->getFood()->getId());
                                                 r.getArea()[l][m]->setFood("none", 0);
@@ -312,26 +421,33 @@ void Reserva::animalActions(Reserva &r) {
                                     }
                                 }
                             }
-                            if(eaten == 1){
+                            if (eaten == 1) {
                                 break;
                             }
                         }
                     }
 
                     // for cycle to check in the inverse direction of the previous one if eaten is 0
-                    if (eaten == 0) {
-                        for(int l = i; l > i - perception; l--) {
+                    if (eaten == 0 && animalSpotted == 0) {
+                        for (int l = i; l > i - perception; l--) {
                             for (int m = j; m > j - perception; m--) {
                                 if (l >= 0 && m >= 0) {
-                                    if (r.getArea()[l][m]->getFood() != nullptr && r.getArea()[l][m]->getFood()->getCheiro() == "Verdura") {
+                                    if (r.getArea()[l][m]->getFood() != nullptr &&
+                                        r.getArea()[l][m]->getFood()->getCheiro() == "Verdura") {
                                         //Check if the cell in question is within the animal's perception
                                         if (l >= i - perception && m >= j - perception) {
                                             // Check if the cell in question is within the animal's speed
                                             if (l >= i - speed && m >= j - speed) {
-                                                r.getArea()[i][j]->getAnimals()[k]->setSaude(r.getArea()[i][j]->getAnimals()[k]->getSaude() + r.getArea()[l][m]->getFood()->getValorNutritivo() - r.getArea()[l][m]->getFood()->getToxicidade());
-                                                r.getArea()[i][j]->getAnimals()[k]->setFome(r.getArea()[i][j]->getAnimals()[k]->getFome() - r.getArea()[l][m]->getFood()->getValorNutritivo());
+                                                r.getArea()[i][j]->getAnimals()[k]->setSaude(
+                                                        r.getArea()[i][j]->getAnimals()[k]->getSaude() +
+                                                        r.getArea()[l][m]->getFood()->getValorNutritivo() -
+                                                        r.getArea()[l][m]->getFood()->getToxicidade());
+                                                r.getArea()[i][j]->getAnimals()[k]->setFome(
+                                                        r.getArea()[i][j]->getAnimals()[k]->getFome() -
+                                                        r.getArea()[l][m]->getFood()->getValorNutritivo());
                                                 r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
-                                                r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                r.getArea()[i][j]->removeAnimal(
+                                                        r.getArea()[i][j]->getAnimals()[k]->getId());
                                                 //r.getArea()[i][j]->getAnimals()[k]->Animais::addFoodHistory(r.getArea()[l][m]->getFood());
                                                 r.addDeadElements(r.getArea()[l][m]->getFood()->getId());
                                                 r.getArea()[l][m]->setFood("none", 0);
@@ -348,14 +464,14 @@ void Reserva::animalActions(Reserva &r) {
                         }
                     }
                     // If there is no food, move to a random cell limited by his perception and speed
-                    if (eaten == 0) {
+                    if (eaten == 0 && animalSpotted == 0) {
                         // Random to choose the direction
                         int direction = rand() % 2;
                         int moved = 0;
 
                         // Move to a random cell limited by his perception and speed in the positive direction
-                        do{
-                            if(direction == 0){
+                        do {
+                            if (direction == 0) {
                                 int l = i + rand() % (speed + 1);
                                 int m = j + rand() % (speed + 1);
                                 if (l < r.getNL() && m < r.getNC()) {
@@ -365,16 +481,882 @@ void Reserva::animalActions(Reserva &r) {
                                         moved = 1;
                                     }
                                 }
+                            } else {
+                                // Move to a random cell limited by his perception and speed in the negative direction
+                                int l = i - rand() % (speed + 1);
+                                int m = j - rand() % (speed + 1);
+                                if (l >= 0 && m >= 0) {
+                                    if (l >= i - perception && m >= j -
+                                                                    perception) { // Don't know if when i - perception is negative it doesn't segfault
+                                        r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
+                                        r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
+                                        moved = 1;
+                                    }
+                                }
+                            }
+                        } while (moved == 0);
+                    }
+                }
+                /*// If there is no food, move to a random cell limited by his perception and speed
+                if (eaten == 0 && animalSpotted == 0) {
+                    // Random to choose the direction
+                    int direction = rand() % 2;
+                    int moved = 0;
+
+                    // Move to a random cell limited by his perception and speed in the positive direction
+                    do{
+                        if(direction == 0){
+                            int l = i + rand() % (speed + 1);
+                            int m = j + rand() % (speed + 1);
+                                if(i + speed < r.getNL() && j + speed < r.getNC()){
+                                    r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
+                                    r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
+                                    moved = 1;
+                                }else{
+                                    direction = 1;
+                                }
+                        }else{
+                            // Move to a random cell limited by his perception and speed in the negative direction
+                            int l = i - rand() % (speed + 1);
+                            int m = j - rand() % (speed + 1);
+                            if (l >= 0 && m >= 0) {
+                                if(i - speed >= 0 && j - speed >= 0){
+                                    r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
+                                    r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
+                                    moved = 1;
+                                }
+                            }else{
+                                direction = 0;
+                            }
+                        }
+                    }while(moved == 0);
+                }
+            }*/
+                if (r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "O") {
+                    int perception = r.getArea()[i][j]->getAnimals()[k]->getPerception();
+                    int speed = r.getArea()[i][j]->getAnimals()[k]->getSpeed();
+                    int eaten = 0, animalSpotted = 0;
+
+                    if (r.getArea()[i][j]->getFood() != nullptr && r.getArea()[i][j]->getAnimals()[k] != nullptr &&
+                        r.getArea()[i][j]->getFood()->getCheiro() == "Erva") {
+                        r.getArea()[i][j]->getAnimals()[k]->setSaude(r.getArea()[i][j]->getAnimals()[k]->getSaude() +
+                                                                     r.getArea()[i][j]->getFood()->getValorNutritivo() -
+                                                                     r.getArea()[i][j]->getFood()->getToxicidade());
+                        r.getArea()[i][j]->getAnimals()[k]->setFome(r.getArea()[i][j]->getAnimals()[k]->getFome() -
+                                                                    r.getArea()[i][j]->getFood()->getValorNutritivo());
+                        r.getArea()[i][j]->getAnimals()[k]->Animais::addFoodHistory(r.getArea()[i][j]->getFood());
+                        r.addDeadElements(r.getArea()[i][j]->getFood()->getId());
+                        r.getArea()[i][j]->setFood("none", 0);
+                        eaten = 1;
+                    }
+
+                    if (eaten == 0) {
+                        // Check if there is another animal in the perception area
+                        for (int l = i - perception; l <= i + perception; l++) {
+                            for (int m = j - perception; m <= j + perception; m++) {
+                                if (l >= 0 && l < r.getNL() && m >= 0 && m < r.getNC()) {
+                                    for (int n = 0; n < r.getArea()[l][m]->getAnimals().size(); n++) {
+                                        if (r.getArea()[l][m]->getAnimals()[n]->getPeso() > 15) {
+                                            // Run away from the animal
+                                            if (l < i) {
+                                                if (m < j) {
+                                                    if (i + speed < r.getNL() && j + speed < r.getNC()) {
+                                                        t << "Estou a correr para a direita e para baixo" << "\n";
+                                                        t << "Estou na posicao " << i << " " << j << "\n";
+                                                        r.getArea()[i + speed][j + speed]->copyNewAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]);
+                                                        r.getArea()[i][j]->removeAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                        t << "Vou para a posicao " << i + speed << " " << j + speed
+                                                          << "\n";
+                                                        animalSpotted = 1;
+                                                    }
+                                                } else if (m > j) {
+                                                    if (i + speed < r.getNL() && j - speed >= 0) {
+                                                        t << "Estou a correr para a esquerda e para baixo" << "\n";
+                                                        t << "Estou na posicao " << i << " " << j << "\n";
+                                                        r.getArea()[i + speed][j - speed]->copyNewAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]);
+                                                        r.getArea()[i][j]->removeAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                        t << "Vou para a posicao " << i + speed << " " << j - speed
+                                                          << "\n";
+                                                        animalSpotted = 1;
+                                                    }
+                                                } else {
+                                                    if (i + speed < r.getNL()) {
+                                                        t << "Estou a correr para a direita" << "\n";
+                                                        t << "Estou na posicao " << i << " " << j << "\n";
+                                                        r.getArea()[i + speed][j]->copyNewAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]);
+                                                        r.getArea()[i][j]->removeAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                        t << "Vou para a posicao " << i + speed << " " << j << "\n";
+                                                        animalSpotted = 1;
+                                                    }
+                                                }
+                                            } else if (l > i) {
+                                                if (m < j) {
+                                                    if (i - speed >= 0 && j + speed < r.getNC()) {
+                                                        t << "Estou a correr para a esquerda e para baixo" << "\n";
+                                                        t << "Estou na posicao " << i << " " << j << "\n";
+                                                        r.getArea()[i - speed][j + speed]->copyNewAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]);
+                                                        r.getArea()[i][j]->removeAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                        t << "Vou para a posicao " << i - speed << " " << j + speed
+                                                          << "\n";
+                                                        animalSpotted = 1;
+                                                    }
+                                                } else if (m > j) {
+                                                    if (i - speed >= 0 && j - speed >= 0) {
+                                                        t << "Estou a correr para a esquerda e para cima" << "\n";
+                                                        t << "Estou na posicao " << i << " " << j << "\n";
+                                                        r.getArea()[i - speed][j - speed]->copyNewAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]);
+                                                        r.getArea()[i][j]->removeAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                        t << "Vou para a posicao " << i - speed << " " << j - speed
+                                                          << "\n";
+                                                        animalSpotted = 1;
+                                                    }
+                                                } else {
+                                                    if (j - speed >= 0) {
+                                                        t << "Estou a correr para a esquerda" << "\n";
+                                                        t << "Estou na posicao " << i << " " << j << "\n";
+                                                        r.getArea()[i][j - speed]->copyNewAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]);
+                                                        r.getArea()[i][j]->removeAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                        t << "Vou para a posicao " << i - speed << " " << j << "\n";
+                                                        animalSpotted = 1;
+                                                    }
+                                                }
+                                            } else {
+                                                if (m < j) {
+                                                    if (j + speed < r.getNC()) {
+                                                        t << "Estou a correr para baixo" << "\n";
+                                                        t << "Estou na posicao " << i << " " << j << "\n";
+                                                        r.getArea()[i][j + speed]->copyNewAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]);
+                                                        r.getArea()[i][j]->removeAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                        t << "Vou para a posicao " << i << " " << j + speed << "\n";
+                                                        animalSpotted = 1;
+                                                    }
+                                                } else if (m > j) {
+                                                    if (j - speed >= 0) {
+                                                        t << "Estou a correr para cima" << "\n";
+                                                        t << "Estou na posicao " << i << " " << j << "\n";
+                                                        r.getArea()[i][j - speed]->copyNewAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]);
+                                                        r.getArea()[i][j]->removeAnimal(
+                                                                r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                        t << "Vou para a posicao " << i << " " << j - speed << "\n";
+                                                        animalSpotted = 1;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (animalSpotted == 1) {
+                                        break;
+                                    }
+                                }
+                            }
+                            if (animalSpotted == 1) {
+                                break;
+                            }
+                        }
+                    }
+
+                    if (eaten == 0 && animalSpotted == 0) {
+                        for (int l = i; l < i + perception; l++) {
+                            for (int m = j; m < j + perception; m++) {
+                                if (i + l < r.getNL() && j + m < r.getNC()) {
+                                    if (r.getArea()[l][m]->getFood() != nullptr &&
+                                        r.getArea()[l][m]->getFood()->getCheiro() == "Erva") {
+                                        //Check if the cell in question is within the animal's perception
+                                        if (l <= i + perception && m <= j + perception) {
+                                            // Check if the cell in question is within the animal's speed
+                                            if (l <= i + speed && m <= j + speed) {
+                                                r.getArea()[i][j]->getAnimals()[k]->setSaude(
+                                                        r.getArea()[i][j]->getAnimals()[k]->getSaude() +
+                                                        r.getArea()[l][m]->getFood()->getValorNutritivo() -
+                                                        r.getArea()[l][m]->getFood()->getToxicidade());
+                                                r.getArea()[i][j]->getAnimals()[k]->setFome(
+                                                        r.getArea()[i][j]->getAnimals()[k]->getFome() -
+                                                        r.getArea()[l][m]->getFood()->getValorNutritivo());
+                                                r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
+                                                r.getArea()[i][j]->removeAnimal(
+                                                        r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                //r.getArea()[i][j]->getAnimals()[k]->Animais::addFoodHistory(r.getArea()[l][m]->getFood());
+                                                r.addDeadElements(r.getArea()[l][m]->getFood()->getId());
+                                                r.getArea()[l][m]->setFood("none", 0);
+                                                eaten = 1;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            if (eaten == 1) {
+                                break;
+                            }
+                        }
+                    }
+
+                    // for cycle to check in the inverse direction of the previous one if eaten is 0
+                    if (eaten == 0 && animalSpotted == 0) {
+                        for (int l = i; l > i - perception; l--) {
+                            for (int m = j; m > j - perception; m--) {
+                                if (l >= 0 && m >= 0) {
+                                    if (r.getArea()[l][m]->getFood() != nullptr &&
+                                        r.getArea()[l][m]->getFood()->getCheiro() == "Erva") {
+                                        //Check if the cell in question is within the animal's perception
+                                        if (l >= i - perception && m >= j - perception) {
+                                            // Check if the cell in question is within the animal's speed
+                                            if (l >= i - speed && m >= j - speed) {
+                                                r.getArea()[i][j]->getAnimals()[k]->setSaude(
+                                                        r.getArea()[i][j]->getAnimals()[k]->getSaude() +
+                                                        r.getArea()[l][m]->getFood()->getValorNutritivo() -
+                                                        r.getArea()[l][m]->getFood()->getToxicidade());
+                                                r.getArea()[i][j]->getAnimals()[k]->setFome(
+                                                        r.getArea()[i][j]->getAnimals()[k]->getFome() -
+                                                        r.getArea()[l][m]->getFood()->getValorNutritivo());
+                                                r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
+                                                r.getArea()[i][j]->removeAnimal(
+                                                        r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                //r.getArea()[i][j]->getAnimals()[k]->Animais::addFoodHistory(r.getArea()[l][m]->getFood());
+                                                r.addDeadElements(r.getArea()[l][m]->getFood()->getId());
+                                                r.getArea()[l][m]->setFood("none", 0);
+                                                eaten = 1;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            if (eaten == 1) {
+                                break;
+                            }
+                        }
+                    }
+                    // If there is no food, move to a random cell limited by his perception and speed
+                    if (eaten == 0 && animalSpotted == 0) {
+                        // Random to choose the direction
+                        int direction = rand() % 2;
+                        int moved = 0;
+
+                        // Move to a random cell limited by his perception and speed in the positive direction
+                        do {
+                            if (direction == 0) {
+                                int l = i + rand() % (speed + 1);
+                                int m = j + rand() % (speed + 1);
+                                if (l < r.getNL() && m < r.getNC()) {
+                                    if (l <= i + perception && m <= j + perception) {
+                                        r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
+                                        r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
+                                        moved = 1;
+                                    }
+                                }
+                            } else {
+                                // Move to a random cell limited by his perception and speed in the negative direction
+                                int l = i - rand() % (speed + 1);
+                                int m = j - rand() % (speed + 1);
+                                if (l >= 0 && m >= 0) {
+                                    if (l >= i - perception && m >= j -
+                                                                    perception) { // Don't know if when i - perception is negative it doesn't segfault
+                                        r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
+                                        r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
+                                        moved = 1;
+                                    }
+                                }
+                            }
+                        } while (moved == 0);
+                    }
+                }
+                /*// If there is no food, move to a random cell limited by his perception and speed
+                if (eaten == 0 && animalSpotted == 0) {
+                    // Random to choose the direction
+                    int direction = rand() % 2;
+                    int moved = 0;
+
+                    // Move to a random cell limited by his perception and speed in the positive direction
+                    do{
+                        if(direction == 0){
+                            int l = i + rand() % (speed + 1);
+                            int m = j + rand() % (speed + 1);
+                            if(i + speed < r.getNL() && j + speed < r.getNC()){
+                                r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
+                                r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
+                                moved = 1;
+                            }else{
+                                direction = 1;
+                            }
+                        }else{
+                            // Move to a random cell limited by his perception and speed in the negative direction
+                            int l = i - rand() % (speed + 1);
+                            int m = j - rand() % (speed + 1);
+                            if (l >= 0 && m >= 0) {
+                                if(i - speed >= 0 && j - speed >= 0){
+                                    r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
+                                    r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
+                                    moved = 1;
+                                }
+                            }else{
+                                direction = 0;
+                            }
+                        }
+                    }while(moved == 0);
+                }
+            }*/
+                if (r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "L") {
+                    int perception = r.getArea()[i][j]->getAnimals()[k]->getPerception();
+                    int speed = r.getArea()[i][j]->getAnimals()[k]->getSpeed();
+                    int eaten = 0, animalSpotted = 0;
+
+                    if (r.getArea()[i][j]->getFood() != nullptr && r.getArea()[i][j]->getAnimals()[k] != nullptr &&
+                        r.getArea()[i][j]->getFood()->getCheiro() == "Carne") {
+                        r.getArea()[i][j]->getAnimals()[k]->setSaude(r.getArea()[i][j]->getAnimals()[k]->getSaude() +
+                                                                     r.getArea()[i][j]->getFood()->getValorNutritivo() -
+                                                                     r.getArea()[i][j]->getFood()->getToxicidade());
+                        r.getArea()[i][j]->getAnimals()[k]->setFome(r.getArea()[i][j]->getAnimals()[k]->getFome() -
+                                                                    r.getArea()[i][j]->getFood()->getValorNutritivo());
+                        r.getArea()[i][j]->getAnimals()[k]->Animais::addFoodHistory(r.getArea()[i][j]->getFood());
+                        r.addDeadElements(r.getArea()[i][j]->getFood()->getId());
+                        r.getArea()[i][j]->setFood("none", 0);
+                        eaten = 1;
+                    }
+
+                    if (eaten == 0 && animalSpotted == 0) {
+                        if (r.getArea()[i][j]->getAnimals().size() > 1) {
+                            for (int l = 0; l < r.getArea()[i][j]->getAnimals().size(); l++) {
+                                if (r.getArea()[i][j]->getAnimals()[l]->getPeso() <
+                                    r.getArea()[i][j]->getAnimals()[k]->getPeso()) {
+                                    t << "Killed animal because it was smaller" << "\n";
+                                    r.addDeadElements(r.getArea()[i][j]->getAnimals()[l]->getId());
+                                    r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[l]->getId());
+                                    // TODO: Create corpse after death
+                                    // Check this later. Animal is being killed but ID not removed.
+                                    t << "Animal killed" << "\n";
+                                    eaten = 1;
+                                    break;
+                                } else if (r.getArea()[i][j]->getAnimals()[l]->getPeso() >
+                                           r.getArea()[i][j]->getAnimals()[k]->getPeso()) {
+                                    // One of the animals dies randomly
+                                    int random = rand() % 2;
+                                    if (random == 0) {
+                                        t << "Killed animal bigger than me" << "\n";
+                                        r.addDeadElements(r.getArea()[i][j]->getAnimals()[l]->getId());
+                                        r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[l]->getId());
+                                        // TODO: Create corpse after death
+                                        t << "Animal killed" << "\n";
+                                        eaten = 1;
+                                        break;
+                                    } else {
+                                        t << "Wolf died" << "\n";
+                                        r.addDeadElements(r.getArea()[i][j]->getAnimals()[k]->getId());
+                                        r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
+                                        // TODO: Create corpse after death
+                                        t << "Animal killed" << "\n";
+                                        eaten = 1;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if (eaten == 0 && animalSpotted == 0) {
+                        // Check if there is another animal in the perception area
+                        for (int l = i - perception; l <= i + perception; l++) {
+                            for (int m = j - perception; m <= j + perception; m++) {
+                                if (l >= 0 && l < r.getNL() && m >= 0 && m < r.getNC()) {
+                                    for (int n = 0; n < r.getArea()[l][m]->getAnimals().size(); n++) {
+                                        // If the Wolf spots another animal in the perception area, it will attack it at a speed of 2 (Or if he is with fome > 15, he will attack it at a speed of 3)
+                                        // Move to the cell where the animal is limited by his speed
+                                        if (r.getArea()[i][j]->getAnimals()[k]->getFome() > 15) {
+                                            r.getArea()[i][j]->getAnimals()[k]->setSpeed(3);
+                                            // Move closer to the animal only choosing the cells that are closer to the animal
+                                            if (l < i && m < j) {
+                                                if (i - speed >= 0 && j - speed >= 0) {
+                                                    r.getArea()[i - speed][j - speed]->copyNewAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]);
+                                                    r.getArea()[i][j]->removeAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                    animalSpotted = 1;
+                                                    break;
+                                                }
+                                            } else if (l < i && m > j) {
+                                                if (i - speed >= 0 && j + speed < r.getNC()) {
+                                                    r.getArea()[i - speed][j + speed]->copyNewAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]);
+                                                    r.getArea()[i][j]->removeAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                    animalSpotted = 1;
+                                                    break;
+                                                }
+
+                                            } else if (l > i && m < j) {
+                                                if (i + speed < r.getNL() && j - speed >= 0) {
+                                                    r.getArea()[i + speed][j - speed]->copyNewAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]);
+                                                    r.getArea()[i][j]->removeAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                    animalSpotted = 1;
+                                                    break;
+                                                }
+                                            } else if (l > i && m > j) {
+                                                if (i + speed < r.getNL() && j + speed < r.getNC()) {
+                                                    r.getArea()[i + speed][j + speed]->copyNewAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]);
+                                                    r.getArea()[i][j]->removeAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                    animalSpotted = 1;
+                                                    break;
+                                                }
+                                            } else if (l < i && m == j) {
+                                                if (i - speed >= 0) {
+                                                    r.getArea()[i - speed][j]->copyNewAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]);
+                                                    r.getArea()[i][j]->removeAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                    animalSpotted = 1;
+                                                    break;
+                                                }
+                                            } else if (l > i && m == j) {
+                                                if (i + speed < r.getNL()) {
+                                                    r.getArea()[i + speed][j]->copyNewAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]);
+                                                    r.getArea()[i][j]->removeAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                    animalSpotted = 1;
+                                                    break;
+                                                }
+                                            } else if (l == i && m < j) {
+                                                if (j - speed >= 0) {
+                                                    r.getArea()[i][j - speed]->copyNewAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]);
+                                                    r.getArea()[i][j]->removeAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                    animalSpotted = 1;
+                                                    break;
+                                                }
+                                            } else if (l == i && m > j) {
+                                                if (j + speed < r.getNC()) {
+                                                    r.getArea()[i][j + speed]->copyNewAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]);
+                                                    r.getArea()[i][j]->removeAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                    animalSpotted = 1;
+                                                    break;
+                                                }
+                                            }
+                                        } else {
+                                            r.getArea()[i][j]->getAnimals()[k]->setSpeed(2);
+                                            // Move closer to the animal only choosing the cells that are closer to the animal
+                                            if (l < i && m < j) {
+                                                if (i - speed >= 0 && j - speed >= 0) {
+                                                    r.getArea()[i - speed][j - speed]->copyNewAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]);
+                                                    r.getArea()[i][j]->removeAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                    animalSpotted = 1;
+                                                    break;
+                                                }
+                                            } else if (l < i && m > j) {
+                                                if (i - speed >= 0 && j + speed < r.getNC()) {
+                                                    r.getArea()[i - speed][j + speed]->copyNewAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]);
+                                                    r.getArea()[i][j]->removeAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                    animalSpotted = 1;
+                                                    break;
+                                                }
+                                            } else if (l > i && m < j) {
+                                                if (i + speed < r.getNL() && j - speed >= 0) {
+                                                    r.getArea()[i + speed][j - speed]->copyNewAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]);
+                                                    r.getArea()[i][j]->removeAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                    animalSpotted = 1;
+                                                    break;
+                                                }
+                                            } else if (l > i && m > j) {
+                                                if (i + speed < r.getNL() && j + speed < r.getNC()) {
+                                                    r.getArea()[i + speed][j + speed]->copyNewAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]);
+                                                    r.getArea()[i][j]->removeAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                    animalSpotted = 1;
+                                                    break;
+                                                }
+                                            } else if (l < i && m == j) {
+                                                if (i - speed >= 0) {
+                                                    r.getArea()[i - speed][j]->copyNewAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]);
+                                                    r.getArea()[i][j]->removeAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                    animalSpotted = 1;
+                                                    break;
+                                                }
+                                            } else if (l > i && m == j) {
+                                                if (i + speed < r.getNL()) {
+                                                    r.getArea()[i + speed][j]->copyNewAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]);
+                                                    r.getArea()[i][j]->removeAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                    animalSpotted = 1;
+                                                    break;
+                                                }
+                                            } else if (l == i && m < j) {
+                                                if (j - speed >= 0) {
+                                                    r.getArea()[i][j - speed]->copyNewAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]);
+                                                    r.getArea()[i][j]->removeAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                    animalSpotted = 1;
+                                                    break;
+                                                }
+                                            } else if (l == i && m > j) {
+                                                if (j + speed < r.getNC()) {
+                                                    r.getArea()[i][j + speed]->copyNewAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]);
+                                                    r.getArea()[i][j]->removeAnimal(
+                                                            r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                    animalSpotted = 1;
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (animalSpotted == 1) {
+                                        break;
+                                    }
+                                }
+                            }
+                            if (animalSpotted == 1) {
+                                break;
+                            }
+                        }
+                    }
+
+                    if (eaten == 0 && animalSpotted == 0) {
+                        for (int l = i; l < i + perception; l++) {
+                            for (int m = j; m < j + perception; m++) {
+                                if (i + l < r.getNL() && j + m < r.getNC()) {
+                                    if (r.getArea()[l][m]->getFood() != nullptr &&
+                                        r.getArea()[l][m]->getFood()->getCheiro() == "Carne") {
+                                        //Check if the cell in question is within the animal's perception
+                                        if (l <= i + perception && m <= j + perception) {
+                                            // Check if the cell in question is within the animal's speed
+                                            if (l <= i + speed && m <= j + speed) {
+                                                r.getArea()[i][j]->getAnimals()[k]->setSaude(
+                                                        r.getArea()[i][j]->getAnimals()[k]->getSaude() +
+                                                        r.getArea()[l][m]->getFood()->getValorNutritivo() -
+                                                        r.getArea()[l][m]->getFood()->getToxicidade());
+                                                r.getArea()[i][j]->getAnimals()[k]->setFome(
+                                                        r.getArea()[i][j]->getAnimals()[k]->getFome() -
+                                                        r.getArea()[l][m]->getFood()->getValorNutritivo());
+                                                r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
+                                                r.getArea()[i][j]->removeAnimal(
+                                                        r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                r.getArea()[i][j]->getAnimals()[k]->Animais::addFoodHistory(
+                                                        r.getArea()[l][m]->getFood());
+                                                r.addDeadElements(r.getArea()[l][m]->getFood()->getId());
+                                                r.getArea()[l][m]->setFood("none", 0);
+                                                eaten = 1;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            if (eaten == 1) {
+                                break;
+                            }
+                        }
+                    }
+
+                    // for cycle to check in the inverse direction of the previous one if eaten is 0
+                    if (eaten == 0 && animalSpotted == 0) {
+                        for (int l = i; l > i - perception; l--) {
+                            for (int m = j; m > j - perception; m--) {
+                                if (l >= 0 && m >= 0) {
+                                    if (r.getArea()[l][m]->getFood() != nullptr &&
+                                        r.getArea()[l][m]->getFood()->getCheiro() == "Carne") {
+                                        //Check if the cell in question is within the animal's perception
+                                        if (l >= i - perception && m >= j - perception) {
+                                            // Check if the cell in question is within the animal's speed
+                                            if (l >= i - speed && m >= j - speed) {
+                                                r.getArea()[i][j]->getAnimals()[k]->setSaude(
+                                                        r.getArea()[i][j]->getAnimals()[k]->getSaude() +
+                                                        r.getArea()[l][m]->getFood()->getValorNutritivo() -
+                                                        r.getArea()[l][m]->getFood()->getToxicidade());
+                                                r.getArea()[i][j]->getAnimals()[k]->setFome(
+                                                        r.getArea()[i][j]->getAnimals()[k]->getFome() -
+                                                        r.getArea()[l][m]->getFood()->getValorNutritivo());
+                                                r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
+                                                r.getArea()[i][j]->removeAnimal(
+                                                        r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                r.getArea()[i][j]->getAnimals()[k]->Animais::addFoodHistory(
+                                                        r.getArea()[l][m]->getFood());
+                                                r.addDeadElements(r.getArea()[l][m]->getFood()->getId());
+                                                r.getArea()[l][m]->setFood("none", 0);
+                                                eaten = 1;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            if (eaten == 1) {
+                                break;
+                            }
+                        }
+                    }
+                    // If there is no food, move to a random cell limited by his perception and speed
+                    if (eaten == 0 && animalSpotted == 0) {
+                        // Random to choose the direction
+                        int direction = rand() % 2;
+                        int moved = 0;
+
+                        // Move to a random cell limited by his perception and speed in the positive direction
+                        do {
+                            if (direction == 0) {
+                                int l = i + rand() % (speed + 1);
+                                int m = j + rand() % (speed + 1);
+                                if (l < r.getNL() && m < r.getNC()) {
+                                    if (l <= i + perception && m <= j + perception) {
+                                        r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
+                                        r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
+                                        moved = 1;
+                                    }
+                                }
+                            } else {
+                                // Move to a random cell limited by his perception and speed in the negative direction
+                                int l = i - rand() % (speed + 1);
+                                int m = j - rand() % (speed + 1);
+                                if (l >= 0 && m >= 0) {
+                                    if (l >= i - perception && m >= j -
+                                                                    perception) { // Don't know if when i - perception is negative it doesn't segfault
+                                        r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
+                                        r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
+                                        moved = 1;
+                                    }
+                                }
+                            }
+                        } while (moved == 0);
+                    }
+                }
+                if (r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "G") {
+                    int perception = r.getArea()[i][j]->getAnimals()[k]->getPerception();
+                    int speed = r.getArea()[i][j]->getAnimals()[k]->getSpeed();
+                    int animalSpotted = 0;
+
+                    if (r.getArea()[i][j]->getAnimals()[k]->getInvisible() != 0) {
+                        r.getArea()[i][j]->getAnimals()[k]->setInvisibleTime(
+                                r.getArea()[i][j]->getAnimals()[k]->getInvisible() - 1);
+                        // If the mother moves, the baby moves with her
+                        // Check where the mother is
+                        for (int l = 0; l < r.getNL(); l++) {
+                            for (int m = 0; m < r.getNC(); m++) {
+                                if (r.getArea()[l][m]->getAnimals().size() != 0) {
+                                    for (int n = 0; n < r.getArea()[l][m]->getAnimals().size(); n++) {
+                                        if (r.getArea()[l][m]->getAnimals()[n]->getId() ==
+                                            r.getArea()[i][j]->getAnimals()[k]->getMotherID()) {
+                                            r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
+                                            r.getArea()[i][j]->removeAnimal(
+                                                    r.getArea()[i][j]->getAnimals()[k]->getId());
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        r.getArea()[i][j]->getAnimals()[k]->setInvisible(false);
+                    }
+                    // If the Canguru has less than 10 instants of life, he always stays maximum 4 cells away from his mother
+                    if (r.getSimulatedTime() - r.getArea()[i][j]->getAnimals()[k]->getBirthInstant() < 10) {
+                        if (r.getArea()[i][j]->getAnimals()[k]->getMotherID() != 0) {
+                            // Check if the are any other animals in his perception, if so, runs to his mother
+                            for (int l = i - perception; l <= i + perception; l++) {
+                                for (int m = j - perception; m <= j + perception; m++) {
+                                    if (l >= 0 && l < r.getNL() && m >= 0 && m < r.getNC()) {
+                                        for (int n = 0; n < r.getArea()[l][m]->getAnimals().size(); n++) {
+                                            // If he sees another animal, he runs to his mother
+                                            if (r.getArea()[l][m]->getAnimals()[n]->getId() !=
+                                                r.getArea()[i][j]->getAnimals()[k]->getMotherID()) {
+                                                animalSpotted = 1;
+                                                speed = 2;
+                                                for (int l = 0; l < r.getNL(); l++) {
+                                                    for (int m = 0; m < r.getNC(); m++) {
+                                                        for (int n = 0;
+                                                             n < r.getArea()[l][m]->getAnimals().size(); n++) {
+                                                            if (r.getArea()[l][m]->getAnimals()[n]->getId() ==
+                                                                r.getArea()[i][j]->getAnimals()[k]->getMotherID()) {
+                                                                // Check if he is already in the same cell as his mother
+                                                                if (l == i && m == j) {
+                                                                    r.getArea()[i][j]->getAnimals()[k]->setInvisible(
+                                                                            true);
+                                                                    r.getArea()[i][j]->getAnimals()[k]->setInvisibleTime(
+                                                                            r.getSimulatedTime());
+                                                                    break;
+                                                                }
+                                                                // Check if the mother is within the Canguru's perception
+                                                                if (l >= i - perception && l <= i + perception &&
+                                                                    m >= j - perception && m <= j + perception) {
+                                                                    // Check if the mother is within the Canguru's speed
+                                                                    if (l >= i - speed && l <= i + speed &&
+                                                                        m >= j - speed && m <= j + speed) {
+                                                                        r.getArea()[l][m]->copyNewAnimal(
+                                                                                r.getArea()[i][j]->getAnimals()[k]);
+                                                                        r.getArea()[i][j]->removeAnimal(
+                                                                                r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                                        animalSpotted = 1;
+                                                                        break;
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                        if (animalSpotted == 1) {
+                                                            break;
+                                                        }
+                                                    }
+                                                    if (animalSpotted == 1) {
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            if (animalSpotted == 1) {
+                                break;
+                            }
+                        } else {
+                            // If the Canguru has no mother (sad :( xD), he can move freely
+                            // Random to choose the direction
+                            int direction = rand() % 2;
+                            int moved = 0;
+
+                            // Move to a random cell limited by his perception and speed in the positive direction
+                            do {
+                                if (direction == 0) {
+                                    int l = i + rand() % (speed + 1);
+                                    int m = j + rand() % (speed + 1);
+                                    if (l < r.getNL() && m < r.getNC()) {
+                                        if (l <= i + perception && m <= j + perception) {
+                                            r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
+                                            r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
+                                            moved = 1;
+                                        }
+                                    }
+                                } else {
+                                    // Move to a random cell limited by his perception and speed in the negative direction
+                                    int l = i - rand() % (speed + 1);
+                                    int m = j - rand() % (speed + 1);
+                                    if (l >= 0 && m >= 0) {
+                                        if (l >= i - perception && m >= j -
+                                                                        perception) { // Don't know if when i - perception is negative it doesn't segfault
+                                            r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
+                                            r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
+                                            moved = 1;
+                                        }
+                                    }
+                                }
+                            } while (moved == 0);
+                        }
+                    }
+                    else {
+                        // If the Canguru has more than 10 instants of life, he can move freely
+                        // Random to choose the direction
+                        int direction = rand() % 2;
+                        int moved = 0;
+
+                        // Move to a random cell limited by his perception and speed in the positive direction
+                        do {
+                            if (direction == 0) {
+                                int l = i + rand() % (speed + 1);
+                                int m = j + rand() % (speed + 1);
+                                if (l < r.getNL() && m < r.getNC()) {
+                                    if (l <= i + perception && m <= j + perception) {
+                                        r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
+                                        r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
+                                        moved = 1;
+                                    }
+                                }
+                            } else {
+                                // Move to a random cell limited by his perception and speed in the negative direction
+                                int l = i - rand() % (speed + 1);
+                                int m = j - rand() % (speed + 1);
+                                if (l >= 0 && m >= 0) {
+                                    if (l >= i - perception && m >= j -
+                                                                    perception) { // Don't know if when i - perception is negative it doesn't segfault
+                                        r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
+                                        r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
+                                        moved = 1;
+                                    }
+                                }
+                            }
+                        } while (moved == 0);
+                    }
+                }
+                if (r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "M") {
+                    // Since this animal is a Sloth, it only eats if food is in the same cell
+                    if (r.getArea()[i][j]->getFood() != nullptr && r.getArea()[i][j]->getAnimals()[k] != nullptr) {
+                        if (r.getArea()[i][j]->getFood()->getCheiro() == "Verdura" ||
+                            r.getArea()[i][j]->getFood()->getCheiro() == "Fruta") {
+                            r.getArea()[i][j]->getAnimals()[k]->setSaude(
+                                    r.getArea()[i][j]->getAnimals()[k]->getSaude() +
+                                    r.getArea()[i][j]->getFood()->getValorNutritivo() -
+                                    r.getArea()[i][j]->getFood()->getToxicidade());
+                            r.getArea()[i][j]->getAnimals()[k]->setFome(r.getArea()[i][j]->getAnimals()[k]->getFome() -
+                                                                        r.getArea()[i][j]->getFood()->getValorNutritivo());
+                            r.getArea()[i][j]->getAnimals()[k]->Animais::addFoodHistory(r.getArea()[i][j]->getFood());
+                            r.addDeadElements(r.getArea()[i][j]->getFood()->getId());
+                            r.getArea()[i][j]->setFood("none", 0);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*// If there is no food, move to a random cell limited by his perception and speed
+                    if (eaten == 0 && animalSpotted == 0) {
+                        // Random to choose the direction
+                        int direction = rand() % 2;
+                        int moved = 0;
+
+                        // Move to a random cell limited by his perception and speed in the positive direction
+                        do{
+                            if(direction == 0){
+                                int l = i + rand() % (speed + 1);
+                                int m = j + rand() % (speed + 1);
+                                if(i + speed < r.getNL() && j + speed < r.getNC()){
+                                    r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
+                                    r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
+                                    moved = 1;
+                                }else{
+                                    direction = 1;
+                                }
                             }else{
                                 // Move to a random cell limited by his perception and speed in the negative direction
                                 int l = i - rand() % (speed + 1);
                                 int m = j - rand() % (speed + 1);
                                 if (l >= 0 && m >= 0) {
-                                    if (l >= i - perception && m >= j - perception) { // Don't know if when i - perception is negative it doesn't segfault
+                                    if(i - speed >= 0 && j - speed >= 0){
                                         r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
                                         r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
                                         moved = 1;
                                     }
+                                }else{
+                                    direction = 0;
                                 }
                             }
                         }while(moved == 0);
@@ -383,19 +1365,19 @@ void Reserva::animalActions(Reserva &r) {
             }
         }
     }
-}
+}*/
 
 const vector<int> &Reserva::getDeadElements() const {
     return deadElements;
 }
 
-void Reserva::foodActions(Reserva &r){
+void Reserva::foodActions(Reserva &r) {
 
     //remover bife quando a sua duraçao chega a 30
-    for(int i=0;i < r.getNL(); i++){
+    for (int i = 0; i < r.getNL(); i++) {
         for (int j = 0; j < r.getNC(); j++) {
-            if(r.getArea()[i][j]->getFood()->getNome() == "b"){
-                if(r.getArea()[i][j]->getFood()->getDuracao() >= 30){
+            if (r.getArea()[i][j]->getFood()->getNome() == "b") {
+                if (r.getArea()[i][j]->getFood()->getDuracao() >= 30) {
                     r.getArea()[i][j]->removeFood(getId());
                 }
             }
@@ -405,18 +1387,17 @@ void Reserva::foodActions(Reserva &r){
     //aparecer outra relva
     for (int i = 0; i < r.getNL(); i++) {
         for (int j = 0; j < r.getNC(); j++) {
-            if(r.getArea()[i][j]->getFood()->getNome() == "r"){
-                if(r.getArea()[i][j]->getFood()->getDuracao() % 75){
-                    if(r.getArea()[i][j]->getFood()->getNome() == "r" ||
-                       r.getArea()[i][j]->getFood()->getNome() == "b" ||
-                       r.getArea()[i][j]->getFood()->getNome() == "p" ||
-                       r.getArea()[i][j]->getFood()->getNome() == "t" ||
-                       r.getArea()[i][j]->getFood()->getNome() == "a" ){
+            if (r.getArea()[i][j]->getFood()->getNome() == "r") {
+                if (r.getArea()[i][j]->getFood()->getDuracao() % 75) {
+                    if (r.getArea()[i][j]->getFood()->getNome() == "r" ||
+                        r.getArea()[i][j]->getFood()->getNome() == "b" ||
+                        r.getArea()[i][j]->getFood()->getNome() == "p" ||
+                        r.getArea()[i][j]->getFood()->getNome() == "t" ||
+                        r.getArea()[i][j]->getFood()->getNome() == "a") {
                         continue;
-                    }
-                    else{
-                        i = r.getNL()*random() % 5 + 4;
-                        j = r.getNC()*random() % 5 + 4;
+                    } else {
+                        i = r.getNL() * random() % 5 + 4;
+                        j = r.getNC() * random() % 5 + 4;
                         r.getArea()[i][j]->adicionaRelva(id);
                     }
                 }
@@ -427,10 +1408,11 @@ void Reserva::foodActions(Reserva &r){
     //diminuir valor nutritivo
     for (int i = 0; i < r.getNL(); i++) {
         for (int j = 0; j < r.getNC(); j++) {
-            if(r.getArea()[i][j]->getFood()->getNome() == "p" ||
-               r.getArea()[i][j]->getFood()->getNome() == "b" ){
-                while(r.getArea()[i][j]->getFood()->getValorNutritivo() < 0){
-                    r.getArea()[i][j]->getFood()->setValotNutritivo(r.getArea()[i][j]->getFood()->getValorNutritivo()-1);
+            if (r.getArea()[i][j]->getFood()->getNome() == "p" ||
+                r.getArea()[i][j]->getFood()->getNome() == "b") {
+                while (r.getArea()[i][j]->getFood()->getValorNutritivo() < 0) {
+                    r.getArea()[i][j]->getFood()->setValotNutritivo(
+                            r.getArea()[i][j]->getFood()->getValorNutritivo() - 1);
                 }
             }
         }
@@ -439,20 +1421,100 @@ void Reserva::foodActions(Reserva &r){
     //aumenta toxicidade
     for (int i = 0; i < r.getNL(); i++) {
         for (int j = 0; j < r.getNC(); ++j) {
-            if(r.getArea()[i][j]->getFood()->getNome() == "t"){
-                while(r.getArea()[i][j]->getFood()->getToxicidade() <= 3){
-                    if(r.getArea()[i][j]->getFood()->getGenerate()-r.getSimulatedTime() == 10 ||
-                       r.getArea()[i][j]->getFood()->getGenerate()-r.getSimulatedTime() == 20 ||
-                       r.getArea()[i][j]->getFood()->getGenerate()-r.getSimulatedTime() == 30){
-                        r.getArea()[i][j]->getFood()->setToxicidade(r.getArea()[i][j]->getFood()->getToxicidade()+1);
+            if (r.getArea()[i][j]->getFood()->getNome() == "t") {
+                while (r.getArea()[i][j]->getFood()->getToxicidade() <= 3) {
+                    if (r.getArea()[i][j]->getFood()->getGenerate() - r.getSimulatedTime() == 10 ||
+                        r.getArea()[i][j]->getFood()->getGenerate() - r.getSimulatedTime() == 20 ||
+                        r.getArea()[i][j]->getFood()->getGenerate() - r.getSimulatedTime() == 30) {
+                        r.getArea()[i][j]->getFood()->setToxicidade(
+                                r.getArea()[i][j]->getFood()->getToxicidade() + 1);
                     }
                 }
-            }
-            else if(r.getArea()[i][j]->getFood()->getNome() == "p"){
-                while(r.getArea()[i][j]->getFood()->getToxicidade() == 2 * 15){
-                    r.getArea()[i][j]->getFood()->setToxicidade(r.getArea()[i][j]->getFood()->getToxicidade()+1);
+            } else if (r.getArea()[i][j]->getFood()->getNome() == "p") {
+                while (r.getArea()[i][j]->getFood()->getToxicidade() == 2 * 15) {
+                    r.getArea()[i][j]->getFood()->setToxicidade(r.getArea()[i][j]->getFood()->getToxicidade() + 1);
                 }
             }
         }
     }
+}
+
+int Reserva::getSCoelho() const {
+    return SCoelho;
+}
+
+int Reserva::getSOvelha() const {
+    return SOvelha;
+}
+
+int Reserva::getSLobo() const {
+    return SLobo;
+}
+
+int Reserva::getSCanguru() const {
+    return SCanguru;
+}
+
+int Reserva::getSPreguica() const {
+    return SPreguica;
+}
+
+int Reserva::getVCoelho() const {
+    return VCoelho;
+}
+
+int Reserva::getVOvelha() const {
+    return VOvelha;
+}
+
+int Reserva::getVLobo() const {
+    return VLobo;
+}
+
+int Reserva::getVCanguru() const {
+    return VCanguru;
+}
+
+int Reserva::getVPreguica() const {
+    return VPreguica;
+}
+
+int Reserva::getFCoelho() const {
+    return FCoelho;
+}
+
+int Reserva::getFOvelha() const {
+    return FOvelha;
+}
+
+int Reserva::getFLobo() const {
+    return FLobo;
+}
+
+int Reserva::getFCanguru() const {
+    return FCanguru;
+}
+
+int Reserva::getFPreguica() const {
+    return FPreguica;
+}
+
+float Reserva::getPCoelho() const {
+    return PCoelho;
+}
+
+float Reserva::getPOvelha() const {
+    return POvelha;
+}
+
+float Reserva::getPLobo() const {
+    return PLobo;
+}
+
+float Reserva::getPCanguru() const {
+    return PCanguru;
+}
+
+float Reserva::getPPreguica() const {
+    return PPreguica;
 }

@@ -46,6 +46,7 @@ public:
     const vector<int> &getDeadElements() const;
     void addDeadElements(int deadElement);
     void animalActions(Reserva &r);
+    void foodActions(Reserva &r);
 
     ~Reserva(); // Destructor
 };

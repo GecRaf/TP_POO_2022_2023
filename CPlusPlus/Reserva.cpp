@@ -392,3 +392,70 @@ const vector<int> &Reserva::getDeadElements() const {
     return deadElements;
 }
 
+void Reserva::foodActions(Reserva &r){
+
+    //remover bife quando a sua duraçao chega a 30
+    for(int i=0;i < r.getNL(); i++){
+        for (int j = 0; j < r.getNC(); j++) {
+            if(r.getArea()[i][j]->getFood()->getNome() == "b"){
+                if(r.getArea()[i][j]->getFood()->getDuracao() >= 30){
+                    r.getArea()[i][j]->removeFood(getId());
+                }
+            }
+        }
+    }
+
+    //aparecer outra relva
+    for (int i = 0; i < r.getNL(); i++) {
+        for (int j = 0; j < r.getNC(); j++) {
+            if(r.getArea()[i][j]->getFood()->getNome() == "r"){
+                if(r.getArea()[i][j]->getFood()->getDuracao() % 75){
+                    if(r.getArea()[i][j]->getFood()->getNome() == "r" ||
+                       r.getArea()[i][j]->getFood()->getNome() == "b" ||
+                       r.getArea()[i][j]->getFood()->getNome() == "p" ||
+                       r.getArea()[i][j]->getFood()->getNome() == "t" ||
+                       r.getArea()[i][j]->getFood()->getNome() == "a" ){
+                        continue;
+                    }
+                    else{
+                        i = r.getNL()*random() % 5 + 4;
+                        j = r.getNC()*random() % 5 + 4;
+                        r.getArea()[i][j]->adicionaRelva(id);
+                    }
+                }
+            }
+        }
+    }
+
+    //diminuir valor nutritivo
+    for (int i = 0; i < r.getNL(); i++) {
+        for (int j = 0; j < r.getNC(); j++) {
+            if(r.getArea()[i][j]->getFood()->getNome() == "p" ||
+               r.getArea()[i][j]->getFood()->getNome() == "b" ){
+                while(r.getArea()[i][j]->getFood()->getValorNutritivo() < 0){
+                    r.getArea()[i][j]->getFood()->setValotNutritivo(r.getArea()[i][j]->getFood()->getValorNutritivo()-1);
+                }
+            }
+        }
+    }
+
+    //aumenta toxicidade
+    for (int i = 0; i < r.getNL(); i++) {
+        for (int j = 0; j < r.getNC(); ++j) {
+            if(r.getArea()[i][j]->getFood()->getNome() == "t"){
+                while(r.getArea()[i][j]->getFood()->getToxicidade() <= 3){
+                    if(r.getArea()[i][j]->getFood()->getGenerate()-r.getSimulatedTime() == 10 ||
+                       r.getArea()[i][j]->getFood()->getGenerate()-r.getSimulatedTime() == 20 ||
+                       r.getArea()[i][j]->getFood()->getGenerate()-r.getSimulatedTime() == 30){
+                        r.getArea()[i][j]->getFood()->setToxicidade(r.getArea()[i][j]->getFood()->getToxicidade()+1);
+                    }
+                }
+            }
+            else if(r.getArea()[i][j]->getFood()->getNome() == "p"){
+                while(r.getArea()[i][j]->getFood()->getToxicidade() == 2 * 15){
+                    r.getArea()[i][j]->getFood()->setToxicidade(r.getArea()[i][j]->getFood()->getToxicidade()+1);
+                }
+            }
+        }
+    }
+}

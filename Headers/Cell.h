@@ -27,6 +27,8 @@ public:
     void setAnimal(string specie, int instant, int id);
     void removeAnimal(int id);
     void copyNewAnimal(Animais *a);
+    void removeFood(int id);
+    void adicionaRelva(int id);
 };
 
 #endif //TPPOO2223_CELL_H

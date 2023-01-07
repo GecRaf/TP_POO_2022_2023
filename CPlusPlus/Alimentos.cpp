@@ -5,18 +5,18 @@
 #include "../Headers/Alimentos.h"
 
 
-Alimentos::Alimentos(Alimentos &alimentos) : nome(alimentos.nome), duracao(alimentos.duracao),
-                                                            valorNutritivo(alimentos.valorNutritivo), toxicidade(alimentos.toxicidade),
-                                                            cheiro(alimentos.cheiro) {
+Alimentos::Alimentos(Alimentos *alimentos) : nome(alimentos->nome), duracao(alimentos->duracao),
+                                                            valorNutritivo(alimentos->valorNutritivo), toxicidade(alimentos->toxicidade),
+                                                            cheiro(alimentos->cheiro) {
     //AnimaisMortos = alimentos.AnimaisMortos;
 }
 
-void Alimentos::operator=(Alimentos &alimentos) {
-    nome = alimentos.nome;
-    duracao = alimentos.duracao;
-    valorNutritivo = alimentos.valorNutritivo;
-    toxicidade = alimentos.toxicidade;
-    cheiro = alimentos.cheiro;
+void Alimentos::operator=(Alimentos *alimentos) {
+    nome = alimentos->nome;
+    duracao = alimentos->duracao;
+    valorNutritivo = alimentos->valorNutritivo;
+    toxicidade = alimentos->toxicidade;
+    cheiro = alimentos->cheiro;
    // AnimaisMortos = alimentos.AnimaisMortos;
 }
 

@@ -938,7 +938,13 @@ void Interface::increaseSimulatedTime(Reserva &r, int instances, int interval) {
 }
 
 int Interface::checkID(Reserva &r, int id) {
-    if(r.getRawId() >= id && r.getRawId() != 0) return 0;
+    if(r.getRawId() >= id && r.getRawId() != 0){
+        for(int i = 0; i < r.getDeadElements().size(); i++){
+            if(r.getDeadElements()[i] == id)
+                return -1;
+        }
+        return 0;
+    }
 }
 
 void Interface::createAnimal(Reserva &r, string specie, int line, int column) {
@@ -1027,13 +1033,12 @@ void Interface::showIdInfo(Reserva &r, int id) {
     Terminal &t = Terminal::instance();
     for(int i = 0; i < r.getNL(); i++){
         for(int j = 0; j < r.getNC(); j++){
-
             if(r.getArea()[i][j]->getFood() != nullptr && r.getArea()[i][j]->getFood()->getId() == id ){
                 t << r.getArea()[i][j]->getFoodString(r.getArea()[i][j]);
             }else{
                 for(int k = 0; k < r.getArea()[i][j]->getAnimals().size(); k++){
                     if(r.getArea()[i][j]->getAnimals()[k] != nullptr && r.getArea()[i][j]->getAnimals()[k]->getId() == id){
-                        t << r.getArea()[i][j]->getAnimals()[k]->getInfo();
+                        t << "\n\t[~] Coordinates: (" << i << "," << j << ")\n"<< r.getArea()[i][j]->getAnimals()[k]->getInfo();
                     }
                 }
             }

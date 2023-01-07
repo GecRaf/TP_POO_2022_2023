@@ -30,7 +30,7 @@ public:
     int getFome() const {return fome;}
     float getPeso() const {return peso;}
     string getEspecie() const{return especie;}
-    void addFoodHistory(Alimentos &food);
+    void addFoodHistory(Alimentos *food);
     bool FicaVivo(int simulatedTime);
     void aumentaFome(int simulatedTime);
     void diminuiFome(int simulatedTime);
@@ -88,7 +88,7 @@ private:
     // Quando chega à mãe, fica 5 instantes na bolsa da mãe. (Fica parado 5 instantes, basicamente)
     // Ao fim de 20 instantes é adulto e passa a ter 20kg.
 public:
-    Canguru(int id,int b,int v, int f): Animais(id,b,v,f,10,"G",20, true, 7,1){};
+    Canguru(int id,int b,int v, int f, int mID): Animais(id,b,v,f,10,"G",20, true, 7,1){};
 };
 
 class Preguica : public Animais {

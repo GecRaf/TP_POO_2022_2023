@@ -104,10 +104,14 @@ void Animais::setVida(int vida) {
 }
 
 void Animais::setSaude(int saude) {
+    if(saude > 100)
+        saude = 100;
     Animais::saude = saude;
 }
 
 void Animais::setFome(int fome) {
+    if(fome < 0)
+        fome = 0;
     Animais::fome = fome;
 }
 
@@ -115,11 +119,11 @@ void Animais::setPeso(float peso) {
     Animais::peso = peso;
 }
 
-void Animais::addFoodHistory(Alimentos &food) {
+void Animais::addFoodHistory(Alimentos *food) {
     Alimentos* tmp = new Alimentos(food);
     if(::realloc(foodHistory, sizeof(Alimentos)*foodHistorySize+1) != nullptr){
         foodHistorySize++;
-        foodHistory[foodHistorySize-1] = *tmp;
+        foodHistory[foodHistorySize-1] = tmp;
     }
     //TODO: Test this later
 }
@@ -134,17 +138,25 @@ int Animais::getId() const {
 
 string Animais::getInfo() {
     string info;
-    info += "\t\t[~] Specie: " + especie + "\n";
-    info += "\t[~] Weight" + to_string(peso) + "\n";
+    info += "\t[~] Specie: " + especie + "\n";
+    info += "\t[~] Weight: " + to_string(peso) + "\n";
     info += "\t[~] Health: " + to_string(saude) + "\n",
     info += "\t[~] Life: " + to_string(vida) + "\n";
     info += "\t[~] Hunger: " + to_string(fome) + "\n";
+    //Display food history
+    if(foodHistory != nullptr){
+        info += "\t[~] Food History: ";
+        for(int i = 0; i < foodHistorySize; i++){
+            info += foodHistory[i].getNome() + " ";
+        }
+        info += "\n";
+    }
     return info;
 }
 
-void Animais::feed(int id,string foodType, int nutritionPoints, int toxicityPoints){
-    Alimentos* tmp = new Alimentos(id, foodType, 30, nutritionPoints, toxicityPoints, "User");
-    addFoodHistory(*tmp);
+void Animais::feed(int idFood,string foodType, int nutritionPoints, int toxicityPoints){
+    Alimentos* tmp = new Alimentos(idFood, foodType, 30, nutritionPoints, toxicityPoints, "User");
+    //addFoodHistory(*tmp); // TODO: Test this later
     setSaude(getSaude() + nutritionPoints - toxicityPoints);
     setFome(getFome() - nutritionPoints);
     // TODO: Test this later

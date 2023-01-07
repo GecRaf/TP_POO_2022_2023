@@ -213,6 +213,10 @@ void Reserva::setName(const string &name) {
     Reserva::name = name;
 }
 
+void Reserva::addDeadElements(int deadElement) {
+    deadElements.push_back(deadElement);
+}
+
 void Reserva::animalActions(Reserva &r) {
     // Start by increasing the fome of all animals
     for (int i = 0; i < r.getNL(); i++) {
@@ -271,40 +275,120 @@ void Reserva::animalActions(Reserva &r) {
         }
     }
 
-    // Animal movement
-    // Every animal moves each time the function is called
-    // The animal can move to any of the adjacent cells limited by his perception
-    // But he can only move velocidade cells per time
-
     for (int i = 0; i < r.getNL(); i++) {
         for (int j = 0; j < r.getNC(); j++) {
             for (int k = 0; k < r.getArea()[i][j]->getAnimals().size(); k++) {
-                // Check adjacent cells for food
-                // If there is food, move to that cell
-                // If there is no food, move to a random cell
-                int eaten = 0;
-                for (int l = i; l < r.getArea()[i][j]->getAnimals()[k]->getPerception(); l++) {
-                    for (int m = j; m < r.getArea()[i][j]->getAnimals()[k]->getPerception(); m++) {
-                        if (i + l < r.getNL() && j + m < r.getNC()) {
-                            if (r.getArea()[i + l][j + m]->getFood() != nullptr) {
-                                r.getArea()[i + l][j + m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
-                                r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
-                                r.getArea()[i + l][j + m]->getAnimals()[r.getArea()[i + l][j + m]->getAnimals().size() -
-                                                                        1]->setFome(0);
-                                r.getArea()[i + l][j + m]->getAnimals()[r.getArea()[i + l][j + m]->getAnimals().size() -
-                                                                        1]->setSpeed(1);
-                                r.getArea()[i + l][j + m]->getAnimals()[r.getArea()[i + l][j + m]->getAnimals().size() -
-                                                                        1]->setVida(
-                                        r.getArea()[i + l][j + m]->getAnimals()[
-                                                r.getArea()[i + l][j + m]->getAnimals().size() - 1]->getVida() + 1);
-                                r.getArea()[i + l][j + m]->setFood("none", 0);
-                                eaten = 1;
+                if(r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "C"){
+                    int perception = r.getArea()[i][j]->getAnimals()[k]->getPerception();
+                    int speed = r.getArea()[i][j]->getAnimals()[k]->getSpeed();
+                    int eaten = 0;
+
+                    if(r.getArea()[i][j]->getFood() != nullptr && r.getArea()[i][j]->getAnimals()[k] != nullptr && r.getArea()[i][j]->getFood()->getCheiro() == "Verdura"){
+                            r.getArea()[i][j]->getAnimals()[k]->setSaude(r.getArea()[i][j]->getAnimals()[k]->getSaude() + r.getArea()[i][j]->getFood()->getValorNutritivo() - r.getArea()[i][j]->getFood()->getToxicidade());
+                            r.getArea()[i][j]->getAnimals()[k]->setFome(r.getArea()[i][j]->getAnimals()[k]->getFome() - r.getArea()[i][j]->getFood()->getValorNutritivo());
+                            //r.getArea()[i][j]->getAnimals()[k]->Animais::addFoodHistory(r.getArea()[i][j]->getFood());
+                            r.addDeadElements(r.getArea()[i][j]->getFood()->getId());
+                            r.getArea()[i][j]->setFood("none", 0);
+                            eaten = 1;
+                    }
+
+                    if(eaten == 0){
+                        for (int l = i; l < i + perception; l++) {
+                            for (int m = j; m < j + perception; m++) {
+                                if(i + l < r.getNL() && j + m < r.getNC()){
+                                    if(r.getArea()[l][m]->getFood() != nullptr && r.getArea()[l][m]->getFood()->getCheiro() == "Verdura"){
+                                        //Check if the cell in question is within the animal's perception
+                                        if(l <= i + perception && m <= j + perception){
+                                            // Check if the cell in question is within the animal's speed
+                                            if(l <= i + speed && m <= j + speed){
+                                                r.getArea()[i][j]->getAnimals()[k]->setSaude(r.getArea()[i][j]->getAnimals()[k]->getSaude() + r.getArea()[l][m]->getFood()->getValorNutritivo() - r.getArea()[l][m]->getFood()->getToxicidade());
+                                                r.getArea()[i][j]->getAnimals()[k]->setFome(r.getArea()[i][j]->getAnimals()[k]->getFome() - r.getArea()[l][m]->getFood()->getValorNutritivo());
+                                                r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
+                                                r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                //r.getArea()[i][j]->getAnimals()[k]->Animais::addFoodHistory(r.getArea()[l][m]->getFood());
+                                                r.addDeadElements(r.getArea()[l][m]->getFood()->getId());
+                                                r.getArea()[l][m]->setFood("none", 0);
+                                                eaten = 1;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            if(eaten == 1){
                                 break;
                             }
                         }
+                    }
+
+                    // for cycle to check in the inverse direction of the previous one if eaten is 0
+                    if (eaten == 0) {
+                        for(int l = i; l > i - perception; l--) {
+                            for (int m = j; m > j - perception; m--) {
+                                if (l >= 0 && m >= 0) {
+                                    if (r.getArea()[l][m]->getFood() != nullptr && r.getArea()[l][m]->getFood()->getCheiro() == "Verdura") {
+                                        //Check if the cell in question is within the animal's perception
+                                        if (l >= i - perception && m >= j - perception) {
+                                            // Check if the cell in question is within the animal's speed
+                                            if (l >= i - speed && m >= j - speed) {
+                                                r.getArea()[i][j]->getAnimals()[k]->setSaude(r.getArea()[i][j]->getAnimals()[k]->getSaude() + r.getArea()[l][m]->getFood()->getValorNutritivo() - r.getArea()[l][m]->getFood()->getToxicidade());
+                                                r.getArea()[i][j]->getAnimals()[k]->setFome(r.getArea()[i][j]->getAnimals()[k]->getFome() - r.getArea()[l][m]->getFood()->getValorNutritivo());
+                                                r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
+                                                r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
+                                                //r.getArea()[i][j]->getAnimals()[k]->Animais::addFoodHistory(r.getArea()[l][m]->getFood());
+                                                r.addDeadElements(r.getArea()[l][m]->getFood()->getId());
+                                                r.getArea()[l][m]->setFood("none", 0);
+                                                eaten = 1;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            if (eaten == 1) {
+                                break;
+                            }
+                        }
+                    }
+                    // If there is no food, move to a random cell limited by his perception and speed
+                    if (eaten == 0) {
+                        // Random to choose the direction
+                        int direction = rand() % 2;
+                        int moved = 0;
+
+                        // Move to a random cell limited by his perception and speed in the positive direction
+                        do{
+                            if(direction == 0){
+                                int l = i + rand() % (speed + 1);
+                                int m = j + rand() % (speed + 1);
+                                if (l < r.getNL() && m < r.getNC()) {
+                                    if (l <= i + perception && m <= j + perception) {
+                                        r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
+                                        r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
+                                        moved = 1;
+                                    }
+                                }
+                            }else{
+                                // Move to a random cell limited by his perception and speed in the negative direction
+                                int l = i - rand() % (speed + 1);
+                                int m = j - rand() % (speed + 1);
+                                if (l >= 0 && m >= 0) {
+                                    if (l >= i - perception && m >= j - perception) { // Don't know if when i - perception is negative it doesn't segfault
+                                        r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
+                                        r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
+                                        moved = 1;
+                                    }
+                                }
+                            }
+                        }while(moved == 0);
                     }
                 }
             }
         }
     }
 }
+
+const vector<int> &Reserva::getDeadElements() const {
+    return deadElements;
+}
+

@@ -18,7 +18,7 @@ private:
     int generate;
 public:
     Alimentos(int id,string n,int d,int vn,int t,string c):id(id),nome(n),duracao(d),valorNutritivo(vn),toxicidade(t),cheiro(c){}
-    Alimentos(Alimentos &alimentos);
+    Alimentos(Alimentos *alimentos);
     string getNome() const{return nome;}
     string getCheiro() const{return cheiro;}
     int getDuracao() const{return duracao;}
@@ -26,8 +26,8 @@ public:
     int getToxicidade() const {return toxicidade;}
     //void aumentaToxicidade(Animais a,Reserva r, int simulatedTime);
     void diminuiValorNutritivo();
-    void operator= (Alimentos &alimentos);
-    Alimentos(Alimentos *pAlimentos);
+    void operator= (Alimentos *alimentos);
+    //Alimentos(Alimentos *pAlimentos);
     int getId() const;
     //void AddRelva(string &type,Reserva &r);
     void setToxicidade(int toxicidade);

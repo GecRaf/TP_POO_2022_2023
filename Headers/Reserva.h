@@ -18,6 +18,7 @@ private:
     string name;                                                //Name of the reserve [Storage Name]
     vector<Reserva *> history;                                  // Vector to store game states
     vector< vector<Cell*>> area;                                // Vector to store the cells
+    vector<int> deadElements;                                   // Vector to store the dead elements
 public:
 
     Reserva()=default;                                          // Default constructor, applies predefined size
@@ -42,6 +43,8 @@ public:
     void addHistory(Reserva *r);
     const vector<Reserva *> &getHistory() const;
     const vector<vector<Cell *>> &getArea() const;
+    const vector<int> &getDeadElements() const;
+    void addDeadElements(int deadElement);
     void animalActions(Reserva &r);
 
     ~Reserva(); // Destructor

@@ -23,7 +23,7 @@ void Cell::setAnimal(string specie, int instant, int id) { //TODO: Apply default
     }else if(specie == "l") {
         animais.push_back(new Lobo(id,instant,100, 0));
     }else if(specie == "g") {
-        animais.push_back(new Canguru(id,instant,100, 0));
+        animais.push_back(new Canguru(id,instant,100, 0, 0));
     }else if(specie == "m"){
         animais.push_back(new Preguica(id,instant,100, 0));
     }
@@ -100,7 +100,7 @@ string Cell::getInfo(Cell *c) {
 string Cell::getAnimais(Cell *c){
     string info;
     if(c->animais.size() == 0) {
-        return info = "Empty";
+        return info = "\t[~] Empty";
     }
     for (int i = 0; i < animais.size(); i++) {
         info += "\t\t[~] Specie: " + animais[i]->getEspecie() + "\n";
@@ -121,7 +121,7 @@ string Cell::getFoodString(Cell *c) {
         info += "\t[~] Toxicity: " + to_string(food->getToxicidade()) + "\n";
         info += "\t[~] Smell: " + food->getCheiro() + "\n";
     }else{
-        return info += "Empty\n";
+        return info += "\t[~] Empty\n";
     }
     return info;
 }

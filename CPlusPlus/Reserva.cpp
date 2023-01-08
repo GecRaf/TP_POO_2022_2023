@@ -124,7 +124,15 @@ Reserva::Reserva(Reserva &Reserva) : NL(Reserva.NL), NC(Reserva.NC), topLeftCorn
     }
 }
 
-Reserva::~Reserva() {}
+Reserva::~Reserva() {
+    for (int i = 0; i < NL; i++) {
+        for (int j = 0; j < NC; j++) {
+            delete area[i][j];
+        }
+        area[i].clear();
+    }
+    area.clear();
+}
 
 int Reserva::getNL() const {
     return NL;

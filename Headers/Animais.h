@@ -32,11 +32,6 @@ public:
     string getEspecie() const{return especie;}
     void addFoodHistory(Alimentos *food);
     bool FicaVivo(int simulatedTime);
-    void aumentaFome(int simulatedTime);
-    void diminuiFome(int simulatedTime);
-    void aumentaSaude();
-    void diminuiSaude(int simulatedTime);
-    void aumentaPeso(int simulatedTime);
     void feed(int id, string foodType, int nutritionPoints, int toxicityPoints);
     int getBirthInstant() const;
     int getId() const;

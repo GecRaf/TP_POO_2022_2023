@@ -514,41 +514,6 @@ void Reserva::animalActions(Reserva &r) {
                         } while (moved == 0);
                     }
                 }
-                /*// If there is no food, move to a random cell limited by his perception and speed
-                if (eaten == 0 && animalSpotted == 0) {
-                    // Random to choose the direction
-                    int direction = rand() % 2;
-                    int moved = 0;
-
-                    // Move to a random cell limited by his perception and speed in the positive direction
-                    do{
-                        if(direction == 0){
-                            int l = i + rand() % (speed + 1);
-                            int m = j + rand() % (speed + 1);
-                                if(i + speed < r.getNL() && j + speed < r.getNC()){
-                                    r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
-                                    r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
-                                    moved = 1;
-                                }else{
-                                    direction = 1;
-                                }
-                        }else{
-                            // Move to a random cell limited by his perception and speed in the negative direction
-                            int l = i - rand() % (speed + 1);
-                            int m = j - rand() % (speed + 1);
-                            if (l >= 0 && m >= 0) {
-                                if(i - speed >= 0 && j - speed >= 0){
-                                    r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
-                                    r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
-                                    moved = 1;
-                                }
-                            }else{
-                                direction = 0;
-                            }
-                        }
-                    }while(moved == 0);
-                }
-            }*/
                 if (r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "O") {
                     int perception = r.getArea()[i][j]->getAnimals()[k]->getPerception();
                     int speed = r.getArea()[i][j]->getAnimals()[k]->getSpeed();
@@ -793,41 +758,6 @@ void Reserva::animalActions(Reserva &r) {
                         } while (moved == 0);
                     }
                 }
-                /*// If there is no food, move to a random cell limited by his perception and speed
-                if (eaten == 0 && animalSpotted == 0) {
-                    // Random to choose the direction
-                    int direction = rand() % 2;
-                    int moved = 0;
-
-                    // Move to a random cell limited by his perception and speed in the positive direction
-                    do{
-                        if(direction == 0){
-                            int l = i + rand() % (speed + 1);
-                            int m = j + rand() % (speed + 1);
-                            if(i + speed < r.getNL() && j + speed < r.getNC()){
-                                r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
-                                r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
-                                moved = 1;
-                            }else{
-                                direction = 1;
-                            }
-                        }else{
-                            // Move to a random cell limited by his perception and speed in the negative direction
-                            int l = i - rand() % (speed + 1);
-                            int m = j - rand() % (speed + 1);
-                            if (l >= 0 && m >= 0) {
-                                if(i - speed >= 0 && j - speed >= 0){
-                                    r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
-                                    r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
-                                    moved = 1;
-                                }
-                            }else{
-                                direction = 0;
-                            }
-                        }
-                    }while(moved == 0);
-                }
-            }*/
                 if (r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "L") {
                     int perception = r.getArea()[i][j]->getAnimals()[k]->getPerception();
                     int speed = r.getArea()[i][j]->getAnimals()[k]->getSpeed();
@@ -1343,46 +1273,6 @@ void Reserva::animalActions(Reserva &r) {
         }
     }
 }
-
-/*// If there is no food, move to a random cell limited by his perception and speed
-                    if (eaten == 0 && animalSpotted == 0) {
-                        // Random to choose the direction
-                        int direction = rand() % 2;
-                        int moved = 0;
-
-                        // Move to a random cell limited by his perception and speed in the positive direction
-                        do{
-                            if(direction == 0){
-                                int l = i + rand() % (speed + 1);
-                                int m = j + rand() % (speed + 1);
-                                if(i + speed < r.getNL() && j + speed < r.getNC()){
-                                    r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
-                                    r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
-                                    moved = 1;
-                                }else{
-                                    direction = 1;
-                                }
-                            }else{
-                                // Move to a random cell limited by his perception and speed in the negative direction
-                                int l = i - rand() % (speed + 1);
-                                int m = j - rand() % (speed + 1);
-                                if (l >= 0 && m >= 0) {
-                                    if(i - speed >= 0 && j - speed >= 0){
-                                        r.getArea()[l][m]->copyNewAnimal(r.getArea()[i][j]->getAnimals()[k]);
-                                        r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
-                                        moved = 1;
-                                    }
-                                }else{
-                                    direction = 0;
-                                }
-                            }
-                        }while(moved == 0);
-                    }
-                }
-            }
-        }
-    }
-}*/
 
 const vector<int> &Reserva::getDeadElements() const {
     return deadElements;

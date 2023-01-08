@@ -24,7 +24,6 @@ int Alimentos::getId() const {
     return id;
 }
 
-
 void Alimentos::setToxicidade(int t) {
     Alimentos::toxicidade = t;
 }

@@ -25,8 +25,6 @@ public:
     int getValorNutritivo() const{return valorNutritivo;}
     int getToxicidade() const {return toxicidade;}
     int getGenerate()const {return generate;}
-    //void aumentaToxicidade(Animais a,Reserva r, int simulatedTime);
-    void diminuiValorNutritivo();
     void operator= (Alimentos *alimentos);
     //Alimentos(Alimentos *pAlimentos);
     int getId() const;

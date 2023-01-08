@@ -142,6 +142,16 @@ bool Animais::getInvisible() const {
     return false;
 }
 
+bool Animais::getHasChild()const{
+    return false;
+}
+void Animais::setChildBd(int childBd){
+
+}
+int Animais::getChildBd() const {
+    return 0;
+}
+
 void Animais::setInvisible(bool invisible) {
 
 }

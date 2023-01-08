@@ -51,6 +51,10 @@ public:
     virtual void setInvisible(bool invisible);
     virtual int getInvisibleTime() const;
     virtual void setInvisibleTime(int invisibleTime);
+    virtual bool getHasChild()const;
+    virtual int getChildBd()const;
+    virtual void setChildBd(int childBd);
+    virtual int getProbabilidade()const;
 };
 
 class Coelho : public Animais {
@@ -58,8 +62,13 @@ private:
     // A cada instante aumenta a fome em 1.
     // Se fome > 10, perde 1 de saude e move-se de 1 a 3 celulas.
     // Se fome > 20, perde 2 de saude e move-se de 1 a 4 celulas.
+    int probabilidade;
 public:
     Coelho(int id,int b,int s = 20, int v = 100,int f = 0, float p = random() % 4 + 1):Animais(id,b,v,f, p,"C",s, true, 4,random() % 2 + 1){};//PESO NUMERO RAND ENTRE 1 E 4
+    int getProbabilidade(){
+        probabilidade = rand() % 101;
+        return probabilidade;
+    }
 };
 
 class Ovelha : public Animais {
@@ -76,8 +85,13 @@ private:
     // A cada instante aumenta a fome em 2.
     // Se fome > 15, perde 1 de saude e move-se de 2 celulas de cada vez.
     // Se fome > 25, perde 2 de saude a cada instante.
+    int hasChild;
+    int childBd;
 public:
-    Lobo(int id,int b,int s = 25, int v = 100, int f = 0, float p = 15): Animais(id,b,v,f,p,"L",s, true, 5, 1){};
+    Lobo(int id,int b,int s = 25, int v = 40, int f = 0, float p = 15): Animais(id,b,v,f,p,"L",s, true, 5, 1){childBd = random() % (5 + v + 1);};
+    bool getHasChild() {return hasChild;}
+    int getChildBd() {return childBd;}
+    void setHasChild(int childBD){childBd = childBD;}
 };
 
 class Canguru : public Animais {

@@ -369,7 +369,7 @@ void Interface::commandReader(Reserva &r, string fileCommand) {
             int column = -1;
             iss >> type;
 
-            if (type == "r" || type == "t" || type == "p" || type == "b" || type == "f") {
+            if (type == "r" || type == "t" || type == "p" || type == "b" || type == "a") {
                 iss >> line;
                 if (line == -1) {
                     // No line argument was given, so places food in a random coordinates
@@ -883,10 +883,10 @@ void Interface::commandReader(Reserva &r, string fileCommand) {
             // Show the list of commands
             t << "\n";
             t << "\t\t[~] List of commands:" << "\n";
-            t << "\t[-] animal <specie: c/o/l/g/p> <line> <column> or animal <specie: c/o/l/g/p>" << "\n";
+            t << "\t[-] animal <specie: c/o/l/g/m> <line> <column> or animal <specie: c/o/l/g/m>" << "\n";
             t << "\t[-] kill <line> <column>" << "\n";
             t << "\t[-] killid <id>" << "\n";
-            t << "\t[-] food <type: r/t/b/f> <line> <column> or food <type: r/t/b/f>" << "\n";
+            t << "\t[-] food <type: r/t/b/a> <line> <column> or food <type: r/t/b/a>" << "\n";
             t << "\t[-] feed <line> <column> <nutrition points> <toxicity points>" << "\n";
             t << "\t[-] feedid <id> <nutrition points> <toxicity points>" << "\n";
             t << "\t[-] nofood <line> <column> or nofood <ID>" << "\n";
@@ -915,6 +915,7 @@ void Interface::increaseSimulatedTime(Reserva &r, int instances, int interval) {
     if(instances == 1){
         r.setSimulatedTime(r.getSimulatedTime() + 1);
         r.animalActions(r);
+        r.foodActions(r);
         showMatrix(r);
     }
     else {
@@ -922,6 +923,7 @@ void Interface::increaseSimulatedTime(Reserva &r, int instances, int interval) {
             for(int i = 0; i < instances; i++){
                 r.setSimulatedTime(r.getSimulatedTime() + 1);
                 r.animalActions(r);
+                r.foodActions(r);
                 showMatrix(r);
             }
         }
@@ -929,6 +931,7 @@ void Interface::increaseSimulatedTime(Reserva &r, int instances, int interval) {
             for(int i = 0; i < instances; i++){
                 r.setSimulatedTime(r.getSimulatedTime() + 1);
                 r.animalActions(r);
+                r.foodActions(r);
                 showMatrix(r);
                 sleep(interval);
             }

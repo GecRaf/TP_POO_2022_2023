@@ -203,7 +203,16 @@ void Reserva::addDeadElements(int deadElement) {
 void Reserva::animalActions(Reserva &r) {
     Terminal &t = Terminal::instance();
 
-    // TODO: Call function ficaVivo()?
+    for (int i = 0; i < r.getNL(); i++) {
+        for (int j = 0; j < r.getNC(); j++) {
+            for (int k = 0; k < r.getArea()[i][j]->getAnimals().size(); k++) {
+                if(!r.getArea()[i][j]->getAnimals()[k]->FicaVivo(r.getSimulatedTime())){
+                    r.addDeadElements(r.getArea()[i][j]->getAnimals()[k]->getId());
+                    r.getArea()[i][j]->removeAnimal(r.getArea()[i][j]->getAnimals()[k]->getId());
+                }
+            }
+        }
+    }
 
     // Start by increasing the fome of all animals
     for (int i = 0; i < r.getNL(); i++) {
@@ -1381,43 +1390,62 @@ const vector<int> &Reserva::getDeadElements() const {
 
 void Reserva::foodActions(Reserva &r) {
 
+    Terminal &t = Terminal::instance();
+
     //remover bife quando a sua duraçao chega a 30
     for (int i = 0; i < r.getNL(); i++) {
         for (int j = 0; j < r.getNC(); j++) {
-            if (r.getArea()[i][j]->getFood()->getNome() == "b") {
+            if (r.getArea()[i][j]->getFood() != nullptr  && r.getArea()[i][j]->getFood()->getNome() == "B") {
                 if (r.getArea()[i][j]->getFood()->getDuracao() >= 30) {
-                    r.getArea()[i][j]->removeFood(getId());
+                    r.addDeadElements(r.getArea()[i][j]->getFood()->getId());
+                    r.getArea()[i][j]->setFood("none",0);
                 }
             }
         }
     }
 
+    int moved = 0;
     //aparecer outra relva
     for (int i = 0; i < r.getNL(); i++) {
         for (int j = 0; j < r.getNC(); j++) {
-            if (r.getArea()[i][j]->getFood()->getNome() == "r") {
-                if (r.getArea()[i][j]->getFood()->getDuracao() % 75) {
-                    if (r.getArea()[i][j]->getFood()->getNome() == "r" ||
-                        r.getArea()[i][j]->getFood()->getNome() == "b" ||
-                        r.getArea()[i][j]->getFood()->getNome() == "p" ||
-                        r.getArea()[i][j]->getFood()->getNome() == "t" ||
-                        r.getArea()[i][j]->getFood()->getNome() == "a") {
-                        continue;
-                    } else {
-                        i = r.getNL() * random() % 5 + 4;
-                        j = r.getNC() * random() % 5 + 4;
-                        r.getArea()[i][j]->adicionaRelva(id);
-                    }
+            if (r.getArea()[i][j]->getFood() != nullptr && r.getArea()[i][j]->getFood()->getNome() == "R") {
+                if (r.getArea()[i][j]->getFood()->getDuracao() == 5) {
+                    int direction = rand() % 2;
+                    // Move to a random cell limited by his perception and speed in the positive direction
+                    do {
+                        if (direction == 0) {
+                            int x = i + random() % 5 + 4;
+                            int y = j + random() % 5 + 4;
+                            if (x < r.getNL() && y < r.getNC()) {
+                                if (r.getArea()[x][y]->getFood() == nullptr) {
+                                    r.getArea()[x][y]->adicionaRelva(r.getId());
+                                }
+                                moved = 1;
+                            }
+                        }else{
+                            int x = i - random() % 5 + 4;
+                            int y = j - random() % 5 + 4;
+                            if (x < r.getNL() && y < r.getNC()) {
+                                if (r.getArea()[x][y]->getFood() == nullptr) {
+                                    r.getArea()[x][y]->adicionaRelva(r.getId());
+                                }
+                                moved = 1;
+                            }
+                        }
+                    }while (moved == 0);
                 }
             }
+        }
+        if(moved == 1){
+            break;
         }
     }
 
     //diminuir valor nutritivo
     for (int i = 0; i < r.getNL(); i++) {
         for (int j = 0; j < r.getNC(); j++) {
-            if (r.getArea()[i][j]->getFood()->getNome() == "p" ||
-                r.getArea()[i][j]->getFood()->getNome() == "b") {
+            if (r.getArea()[i][j]->getFood() != nullptr && (r.getArea()[i][j]->getFood()->getNome() == "P" ||
+                r.getArea()[i][j]->getFood()->getNome() == "B")) {
                 while (r.getArea()[i][j]->getFood()->getValorNutritivo() < 0) {
                     r.getArea()[i][j]->getFood()->setValotNutritivo(
                             r.getArea()[i][j]->getFood()->getValorNutritivo() - 1);
@@ -1425,11 +1453,10 @@ void Reserva::foodActions(Reserva &r) {
             }
         }
     }
-
     //aumenta toxicidade
     for (int i = 0; i < r.getNL(); i++) {
         for (int j = 0; j < r.getNC(); ++j) {
-            if (r.getArea()[i][j]->getFood()->getNome() == "t") {
+            if (r.getArea()[i][j]->getFood() != nullptr && r.getArea()[i][j]->getFood()->getNome() == "T") {
                 while (r.getArea()[i][j]->getFood()->getToxicidade() <= 3) {
                     if (r.getArea()[i][j]->getFood()->getGenerate() - r.getSimulatedTime() == 10 ||
                         r.getArea()[i][j]->getFood()->getGenerate() - r.getSimulatedTime() == 20 ||
@@ -1438,9 +1465,22 @@ void Reserva::foodActions(Reserva &r) {
                                 r.getArea()[i][j]->getFood()->getToxicidade() + 1);
                     }
                 }
-            } else if (r.getArea()[i][j]->getFood()->getNome() == "p") {
+            } else if (r.getArea()[i][j]->getFood() != nullptr && r.getArea()[i][j]->getFood()->getNome() == "P") {
                 while (r.getArea()[i][j]->getFood()->getToxicidade() == 2 * 15) {
                     r.getArea()[i][j]->getFood()->setToxicidade(r.getArea()[i][j]->getFood()->getToxicidade() + 1);
+                }
+            }
+        }
+    }
+
+    for (int i = 0; i < r.getNL(); i++) {
+        for (int j = 0; j < r.getNC(); j++) {
+            if (r.getArea()[i][j]->getFood() != nullptr) {
+                if(r.getArea()[i][j]->getFood()->getDuracao() == 0){
+                    r.addDeadElements(r.getArea()[i][j]->getFood()->getId());
+                    r.getArea()[i][j]->setFood("none",0);
+                }else{
+                    r.getArea()[i][j]->getFood()->setDuracao(r.getArea()[i][j]->getFood()->getDuracao() - 1);
                 }
             }
         }

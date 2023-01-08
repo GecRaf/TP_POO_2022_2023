@@ -33,6 +33,7 @@ public:
     //void AddRelva(string &type,Reserva &r);
     void setToxicidade(int toxicidade);
     void setValotNutritivo(int vn);
+    void setDuracao(int duracao);
     void elimina(Alimentos &alimento);
 };
 
@@ -58,7 +59,7 @@ public:
 
 class Bife : public Alimentos {
 public:
-    Bife(int id):Alimentos(id,"B",30,10,2,{"Carne", "Ketchup"}){};
+    Bife(int id):Alimentos(id,"B",30,10,2,"Carne"){};
     //Duração: 30. Passados estes instantes desaparece.
     //A cada instante diminui o seu valor nutritivo em 1 unidade até chegar a zero.
 

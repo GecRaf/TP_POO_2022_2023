@@ -170,12 +170,6 @@ void Cell::removeAnimal(int id) {
     }
 }
 
-void Cell::removeFood(int id){
-    if (food->getId() == id){
-        delete food;
-    }
-}
-
 void Cell::adicionaRelva(int id) {
-    new Relva(id);
+   this->food = new Relva(id);
 }

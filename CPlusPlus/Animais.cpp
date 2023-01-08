@@ -10,15 +10,14 @@ using namespace term;
 Animais::Animais(Animais &a) : id(a.id), vida(a.vida), peso(a.peso), especie(a.especie), saude(a.saude), fome(a.fome), vivo(a.vivo){}
 
 bool Animais::FicaVivo(int simulatedTime) {
-    //TODO: Call this function every instant
     if (getEspecie() == "C"){
-        if(getSaude() == 0 || birthInstant - simulatedTime == 30){
+        if(getSaude() == 0 || simulatedTime - birthInstant  == 30){
             setVida(0);
             return false;
         }
     }
     else if(getEspecie() == "O"){
-        if (getSaude() == 0 || birthInstant - simulatedTime == 35){
+        if (getSaude() == 0 || simulatedTime - birthInstant== 35){
             setVida(0);
             return false;
         }
@@ -42,65 +41,6 @@ bool Animais::FicaVivo(int simulatedTime) {
         }
     }
     return true;
-}
-
-void Animais::aumentaFome(int simulatedTime) {
-    if (getEspecie() == "C"){
-        if(simulatedTime+1){
-            setFome(getFome()+1);
-        }
-    }
-    else if(getEspecie() == "O"){
-        if(simulatedTime + 1){
-            setFome(getFome()+1);
-        }
-    }
-    else if(getEspecie() == "L"){
-        if(simulatedTime + 1){
-            setFome(getFome()+2);
-        }
-    }
-}
-
-void Animais::aumentaSaude() {}
-
-void Animais::diminuiSaude(int simulatedTime) {
-    if (getEspecie() == "C"){
-        if(getFome() > 10){
-            setSaude(getSaude() - 1);
-        }
-        else if(getFome() > 20){
-            setSaude(getSaude() - 2);
-        }
-    }
-    else if (getEspecie() == "O"){
-        if(getFome() > 15){
-            setSaude(getSaude() - 1);
-        }
-        else if(getFome() > 20){
-            setSaude(getSaude() - 2);
-        }
-    }
-    else if (getEspecie() == "L"){
-        if(getFome() > 15){
-            setSaude(getSaude() - 1);
-        }
-        else if(getFome() > 25){
-            setSaude(getSaude() - 2);
-        }
-    }
-    else if(getEspecie() == "G"){
-        if (!FicaVivo(simulatedTime)){
-            setSaude(0);
-        }
-    }
-}
-
-void Animais::aumentaPeso(int simulatedTime) {
-    if(getEspecie() == "G"){
-        if (simulatedTime >= 20)
-            setPeso(20);
-    }
 }
 
 void Animais::setVida(int vida) {

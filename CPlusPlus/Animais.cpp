@@ -163,3 +163,7 @@ int Animais::getInvisibleTime() const {
 void Animais::setInvisibleTime(int invisibleTime) {
 
 }
+
+int Animais::getProbabilidade() const {
+    return 0;
+}

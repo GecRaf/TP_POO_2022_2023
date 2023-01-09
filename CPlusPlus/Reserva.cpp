@@ -208,12 +208,12 @@ void Reserva::animalActions(Reserva &r) {
             for (int k = 0; k < r.getArea()[i][j]->getAnimals().size(); k++) {
                 if(!r.getArea()[i][j]->getAnimals()[k]->FicaVivo(r.getSimulatedTime())){
                     if(r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "O"){
-                        r.getArea()[i][j]->setFood("O",r.getId());
+                        r.getArea()[i][j]->setFood("p",r.getId());
                         r.getArea()[i][j]->getFood()->setToxicidade(0);
                         r.getArea()[i][j]->getFood()->setValotNutritivo(r.getArea()[i][j]->getAnimals()[k]->getPeso());
                     }
                     else if(r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "G"){
-                        r.getArea()[i][j]->setFood("G",r.getId());
+                        r.getArea()[i][j]->setFood("p",r.getId());
                         r.getArea()[i][j]->getFood()->setToxicidade(5);
                         r.getArea()[i][j]->getFood()->setValotNutritivo(15);
                     }
@@ -239,6 +239,7 @@ void Reserva::animalActions(Reserva &r) {
             }
         }
     }
+
 
     // Now, check again all animals and see how much fome they have
     for (int i = 0; i < r.getNL(); i++) {
@@ -277,6 +278,7 @@ void Reserva::animalActions(Reserva &r) {
             }
         }
     }
+
 
     for (int i = 0; i < r.getNL(); i++) {
         for (int j = 0; j < r.getNC(); j++) {
@@ -1311,30 +1313,34 @@ void Reserva::foodActions(Reserva &r) {
         for (int j = 0; j < r.getNC(); j++) {
             if (r.getArea()[i][j]->getFood() != nullptr && r.getArea()[i][j]->getFood()->getNome() == "R") {
                 if (r.getArea()[i][j]->getFood()->getDuracao() == 5) {
-                    int direction = rand() % 2;
                     // Move to a random cell limited by his perception and speed in the positive direction
                     do {
+                        int direction = rand() % 2;
                         if (direction == 0) {
-                            int x = i + random() % 5 + 4;
-                            int y = j + random() % 5 + 4;
+                            // Random between 4 and 8
+                            int x = i + rand() % 5 + 3;
+                            int y = j + rand() % 5 + 3;
                             if (x < r.getNL() && y < r.getNC()) {
                                 if (r.getArea()[x][y]->getFood() == nullptr) {
-                                    r.getArea()[x][y]->adicionaRelva(r.getId());
+                                    r.getArea()[x][y]->setFood("r", r.getId());
+                                    moved = 1;
                                 }
-                                moved = 1;
                             }
                         }else{
-                            int x = i - random() % 5 + 4;
-                            int y = j - random() % 5 + 4;
-                            if (x < r.getNL() && y < r.getNC()) {
+                            int x = i - rand() % 5 + 3;
+                            int y = j - rand() % 5 + 3;
+                            if (x >= 0 && y >= 0 && x < r.getNL() && y < r.getNC()) {
                                 if (r.getArea()[x][y]->getFood() == nullptr) {
-                                    r.getArea()[x][y]->adicionaRelva(r.getId());
+                                    r.getArea()[x][y]->setFood("r", r.getId());
+                                    moved = 1;
                                 }
-                                moved = 1;
                             }
                         }
                     }while (moved == 0);
                 }
+            }
+            if(moved == 1){
+                break;
             }
         }
         if(moved == 1){
@@ -1354,6 +1360,7 @@ void Reserva::foodActions(Reserva &r) {
             }
         }
     }
+
     //aumenta toxicidade
     for (int i = 0; i < r.getNL(); i++) {
         for (int j = 0; j < r.getNC(); ++j) {
@@ -1388,7 +1395,7 @@ void Reserva::foodActions(Reserva &r) {
     }
 }
 
-void nascerAnimais(Reserva & r) {
+void Reserva::growAnimals(Reserva & r) {
     int moved = 0;
     //faz nascer ovelha
     for (int i = 0; i < r.getNL(); i++) {
@@ -1396,20 +1403,19 @@ void nascerAnimais(Reserva & r) {
             for (int k = 0; k < r.getArea()[i][j]->getAnimals().size(); k++) {
                 if (r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "O") {
                     if (r.getSimulatedTime() - r.getArea()[i][j]->getAnimals()[k]->getBirthInstant() == 15) {
-                        int direction = rand() % 2;
-                        // Move to a random cell limited by his perception and speed in the positive direction
                         do {
+                            int direction = rand() % 2;
                             if (direction == 0) {
-                                int x = i + random() % 12 + 1;
-                                int y = j + random() % 12 + 1;
+                                int x = i + rand() % 12 + 1;
+                                int y = j + rand() % 12 + 1;
                                 if (x < r.getNL() && y < r.getNC()) {
                                     r.getArea()[x][y]->setAnimal("0",r.getSimulatedTime(),r.getId(),r.getArea()[i][j]->getAnimals()[k]->getSaude(),0,0,0);
                                     moved = 1;
                                 }
                             } else {
-                                int x = i + random() % 12 + 1;
-                                int y = j + random() % 12 + 1;
-                                if (x < r.getNL() && y < r.getNC()) {
+                                int x = i - rand() % 12 + 1;
+                                int y = j - rand() % 12 + 1;
+                                if (x >= 0 && y >= 0 && x < r.getNL() && y < r.getNC()) {
                                     r.getArea()[x][y]->setAnimal("0",r.getSimulatedTime(),r.getId(),r.getArea()[i][j]->getAnimals()[k]->getSaude(),0,0,0);
                                     moved = 1;
                                 }
@@ -1417,7 +1423,16 @@ void nascerAnimais(Reserva & r) {
                         }while(moved == 0);
                     }
                 }
+                if(moved == 1){
+                    break;
+                }
             }
+            if(moved == 1){
+                break;
+            }
+        }
+        if(moved == 1){
+            break;
         }
     }
 
@@ -1427,20 +1442,19 @@ void nascerAnimais(Reserva & r) {
             for (int k = 0; k < r.getArea()[i][j]->getAnimals().size(); k++) {
                 if (r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "G") {
                     if (r.getSimulatedTime() - r.getArea()[i][j]->getAnimals()[k]->getBirthInstant() == 30) {
-                        int direction = rand() % 2;
-
                         do {
+                            int direction = rand() % 2;
                             if (direction == 0) {
-                                int x = i + random() % 3 + 1;
-                                int y = j + random() % 3 + 1;
+                                int x = i + rand() % 3 + 1;
+                                int y = j + rand() % 3 + 1;
                                 if (x < r.getNL() && y < r.getNC()) {
                                     r.getArea()[x][y]->setAnimal("G",r.getSimulatedTime(),r.getId(),0,0,0,0);
                                     moved = 1;
                                 }
                             } else {
-                                int x = i + random() % 3 + 1;
-                                int y = j + random() % 3 + 1;
-                                if (x < r.getNL() && y < r.getNC()) {
+                                int x = i - rand() % 3 + 1;
+                                int y = j - rand() % 3 + 1;
+                                if (x >= 0 && y >= 0 && x < r.getNL() && y < r.getNC()) {
                                     r.getArea()[x][y]->setAnimal("G",r.getSimulatedTime(),r.getId(),0,0,0,0);
                                     moved = 1;
                                 }
@@ -1448,7 +1462,16 @@ void nascerAnimais(Reserva & r) {
                         }while(moved == 0);
                     }
                 }
+                if(moved == 1){
+                    break;
+                }
             }
+            if(moved == 1){
+                break;
+            }
+        }
+        if(moved == 1){
+            break;
         }
     }
     //faz nascer lobo
@@ -1458,20 +1481,19 @@ void nascerAnimais(Reserva & r) {
                 if (r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "L") {
                     if (!r.getArea()[i][j]->getAnimals()[k]->getHasChild()) {
                        if(r.getArea()[i][j]->getAnimals()[k]->getBirthInstant() == r.getArea()[i][j]->getAnimals()[k]->getChildBd()) {//esta mal
-                           int direction = rand() % 2;
-
                            do {
+                               int direction = rand() % 2;
                                if (direction == 0) {
-                                   int x = i + random() % 15 + 1;
-                                   int y = j + random() % 15 + 1;
+                                   int x = i + rand() % 15 + 1;
+                                   int y = j + rand() % 15 + 1;
                                    if (x < r.getNL() && y < r.getNC()) {
                                        r.getArea()[x][y]->setAnimal("L", r.getSimulatedTime(), r.getId(), 0, 0, 0, 0);
                                        moved = 1;
                                    }
                                } else {
-                                   int x = i + random() % 15 + 1;
-                                   int y = j + random() % 15 + 1;
-                                   if (x < r.getNL() && y < r.getNC()) {
+                                   int x = i - rand() % 15 + 1;
+                                   int y = j - rand() % 15 + 1;
+                                   if (x >= 0 && y >= 0 && x < r.getNL() && y < r.getNC()) {
                                        r.getArea()[x][y]->setAnimal("L", r.getSimulatedTime(), r.getId(), 0, 0, 0, 0);
                                        moved = 1;
                                    }
@@ -1480,7 +1502,16 @@ void nascerAnimais(Reserva & r) {
                        }
                     }
                 }
+                if(moved == 1){
+                    break;
+                }
             }
+            if(moved == 1){
+                break;
+            }
+        }
+        if(moved == 1){
+            break;
         }
     }
     //faz nascer um coelho
@@ -1489,20 +1520,19 @@ void nascerAnimais(Reserva & r) {
             for (int k = 0; k < r.getArea()[i][j]->getAnimals().size(); k++) {
                 if (r.getArea()[i][j]->getAnimals()[k]->getEspecie() == "C") {
                     if (r.getSimulatedTime() - r.getArea()[i][j]->getAnimals()[k]->getBirthInstant() == 8 && r.getArea()[i][j]->getAnimals()[k]->getProbabilidade() <= 50) {
-                        int direction = rand() % 2;
-
                         do {
+                            int direction = rand() % 2;
                             if (direction == 0) {
-                                int x = i + random() % 10 + 1;
-                                int y = j + random() % 10 + 1;
+                                int x = i + rand() % 10 + 1;
+                                int y = j + rand() % 10 + 1;
                                 if (x < r.getNL() && y < r.getNC()) {
                                     r.getArea()[x][y]->setAnimal("C",r.getSimulatedTime(),r.getId(),0,0,0,0);
                                     moved = 1;
                                 }
                             } else {
-                                int x = i + random() % 10 + 1;
-                                int y = j + random() % 10 + 1;
-                                if (x < r.getNL() && y < r.getNC()) {
+                                int x = i - rand() % 10 + 1;
+                                int y = j - rand() % 10 + 1;
+                                if (x >= 0 && y >= 0 && x < r.getNL() && y < r.getNC()) {
                                     r.getArea()[x][y]->setAnimal("C",r.getSimulatedTime(),r.getId(),0,0,0,0);
                                     moved = 1;
                                 }
@@ -1510,7 +1540,16 @@ void nascerAnimais(Reserva & r) {
                         }while(moved == 0);
                     }
                 }
+                if(moved == 1){
+                    break;
+                }
             }
+            if(moved == 1){
+                break;
+            }
+        }
+        if(moved == 1){
+            break;
         }
     }
 }

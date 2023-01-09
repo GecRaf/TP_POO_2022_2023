@@ -912,10 +912,12 @@ void Interface::commandReader(Reserva &r, string fileCommand) {
 }
 
 void Interface::increaseSimulatedTime(Reserva &r, int instances, int interval) {
+    Terminal &t = Terminal::instance();
     if(instances == 1){
         r.setSimulatedTime(r.getSimulatedTime() + 1);
         r.animalActions(r);
         r.foodActions(r);
+        r.growAnimals(r);
         showMatrix(r);
     }
     else {
@@ -924,6 +926,7 @@ void Interface::increaseSimulatedTime(Reserva &r, int instances, int interval) {
                 r.setSimulatedTime(r.getSimulatedTime() + 1);
                 r.animalActions(r);
                 r.foodActions(r);
+                r.growAnimals(r);
                 showMatrix(r);
             }
         }
@@ -932,6 +935,7 @@ void Interface::increaseSimulatedTime(Reserva &r, int instances, int interval) {
                 r.setSimulatedTime(r.getSimulatedTime() + 1);
                 r.animalActions(r);
                 r.foodActions(r);
+                r.growAnimals(r);
                 showMatrix(r);
                 sleep(interval);
             }
@@ -947,6 +951,8 @@ int Interface::checkID(Reserva &r, int id) {
         }
         return 0;
     }
+    else
+        return -1;
 }
 
 void Interface::createAnimal(Reserva &r, string specie, int line, int column) {

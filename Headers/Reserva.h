@@ -71,6 +71,7 @@ public:
     void addDeadElements(int deadElement);
     void animalActions(Reserva &r);
     void foodActions(Reserva &r);
+    void growAnimals(Reserva &r);
     int getSCoelho() const;
     int getSOvelha() const;
     int getSLobo() const;
